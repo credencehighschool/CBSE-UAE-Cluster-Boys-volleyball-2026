@@ -130,24 +130,52 @@ body{
   color:#7cfc00;
 }
 
+.championship-strip{
+  max-width:1240px;
+  margin:28px auto 0;
+  padding:28px;
+  background:linear-gradient(90deg,var(--deep),var(--blue),var(--red));
+  color:white;
+  border-radius:28px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  text-align:center;
+  box-shadow:0 12px 32px rgba(0,0,0,.20);
+}
+
+.championship-strip p{
+  color:var(--gold);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1.3px;
+  font-size:12px;
+  margin-bottom:6px;
+}
+
+.championship-strip h2{
+  font-size:24px;
+}
+
 .register-hero{
   max-width:1240px;
   margin:28px auto 0;
   padding:30px;
   border-radius:28px;
-  background:linear-gradient(135deg,var(--navy),var(--blue));
-  color:white;
+  background:white;
+  color:var(--navy);
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:24px;
-  box-shadow:0 12px 35px rgba(0,0,0,.18);
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+  border-left:8px solid var(--blue);
 }
 
 .register-content p,
 .section-heading p,
 .small-title{
-  color:var(--gold);
+  color:var(--sky);
   text-transform:uppercase;
   letter-spacing:1.5px;
   font-size:13px;
@@ -162,7 +190,7 @@ body{
 }
 
 .register-content span{
-  color:#eaf3ff;
+  color:var(--muted);
   font-size:16px;
 }
 
@@ -175,13 +203,14 @@ body{
   border-radius:40px;
   font-weight:950;
   white-space:nowrap;
-  box-shadow:0 7px 18px rgba(0,0,0,.25);
+  box-shadow:0 7px 18px rgba(0,0,0,.20);
   transition:.25s;
 }
 
 .main-btn:hover{
   transform:translateY(-3px);
-  background:#fff;
+  background:var(--navy);
+  color:white;
 }
 
 .section{
@@ -193,10 +222,6 @@ body{
 .section-heading{
   text-align:center;
   margin-bottom:36px;
-}
-
-.section-heading p{
-  color:var(--sky);
 }
 
 .section-heading h2{
@@ -234,107 +259,28 @@ body{
   font-weight:900;
 }
 
-.date-grid,
-.info-grid,
-.download-grid,
-.updates-grid{
-  display:grid;
-  gap:20px;
-  margin-top:36px;
-}
-
-.date-grid{
-  grid-template-columns:repeat(3,1fr);
-}
-
-.info-grid,
 .download-grid{
-  grid-template-columns:repeat(4,1fr);
-}
-
-.updates-grid{
+  display:grid;
   grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
-.date-card,
-.info-card,
-.download-card,
-.update-card{
+.download-card{
   background:white;
   border-radius:24px;
   padding:26px;
   box-shadow:0 8px 24px rgba(0,0,0,.08);
   border-top:5px solid var(--blue);
-}
-
-.date-number{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:var(--gold);
-  color:var(--navy);
-  font-weight:950;
-  margin-bottom:14px;
-}
-
-.date-card h3,
-.info-card h3,
-.update-card h3{
-  color:var(--navy);
-  font-size:21px;
-  margin-bottom:10px;
-}
-
-.date-card p,
-.info-card p,
-.update-card p,
-.venue-box p,
-.gallery-placeholder p{
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.55;
-}
-
-.info-icon{
-  font-size:38px;
-  margin-bottom:12px;
-}
-
-.championship-strip{
-  max-width:1240px;
-  margin:0 auto;
-  padding:28px;
-  background:linear-gradient(90deg,var(--deep),var(--blue),var(--red));
-  color:white;
-  border-radius:28px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  text-align:center;
-  box-shadow:0 12px 32px rgba(0,0,0,.20);
-}
-
-.championship-strip p{
-  color:var(--gold);
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:1.3px;
-  font-size:12px;
-  margin-bottom:6px;
-}
-
-.championship-strip h2{
-  font-size:24px;
-}
-
-.download-card{
   display:block;
   text-align:center;
   text-decoration:none;
   color:var(--navy);
   transition:.25s;
+}
+
+.download-card.featured{
+  border-top-color:var(--gold);
+  background:linear-gradient(180deg,#ffffff,#fff9d8);
 }
 
 .download-card:hover{
@@ -361,6 +307,39 @@ body{
   padding-top:30px;
 }
 
+.updates-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.update-card{
+  background:white;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  border-left:7px solid var(--blue);
+  text-decoration:none;
+  color:var(--navy);
+  transition:.25s;
+}
+
+.update-card:hover{
+  transform:translateY(-4px);
+}
+
+.update-card h3{
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.update-card p,
+.venue-box p{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.55;
+}
+
 .venue-box{
   background:white;
   border-radius:28px;
@@ -382,24 +361,15 @@ body{
   font-size:70px;
 }
 
-.gallery-placeholder{
-  background:white;
-  border-radius:28px;
-  padding:40px 22px;
-  text-align:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
-  border:2px dashed rgba(0,87,184,.25);
-}
-
-.gallery-placeholder div{
-  font-size:60px;
-  margin-bottom:12px;
-}
-
-.gallery-placeholder h3{
-  color:var(--navy);
-  font-size:26px;
-  margin-bottom:8px;
+.venue-btn{
+  margin-top:18px;
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  text-decoration:none;
+  padding:12px 26px;
+  border-radius:30px;
+  font-weight:900;
 }
 
 .contact-section{
@@ -456,22 +426,27 @@ body{
     flex-direction:column;
   }
 
+  .championship-strip,
   .register-hero{
     margin-left:22px;
     margin-right:22px;
-    flex-direction:column;
-    text-align:center;
   }
 
-  .date-grid,
-  .updates-grid,
   .championship-strip{
     grid-template-columns:1fr;
   }
 
-  .info-grid,
+  .register-hero{
+    flex-direction:column;
+    text-align:center;
+  }
+
   .download-grid{
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .updates-grid{
+    grid-template-columns:1fr;
   }
 
   .venue-box{
@@ -507,9 +482,22 @@ body{
     padding:10px 0;
   }
 
+  .championship-strip{
+    margin-left:16px;
+    margin-right:16px;
+    padding:22px;
+    border-radius:20px;
+  }
+
+  .championship-strip h2{
+    font-size:20px;
+  }
+
   .register-hero{
     padding:22px;
     border-radius:20px;
+    margin-left:16px;
+    margin-right:16px;
   }
 
   .register-content h1{
@@ -544,15 +532,8 @@ body{
     font-size:12px;
   }
 
-  .info-grid,
   .download-grid{
     grid-template-columns:1fr;
-  }
-
-  .championship-strip{
-    margin-left:16px;
-    margin-right:16px;
-    border-radius:20px;
   }
 
   .contact-card{

@@ -1,31 +1,27 @@
-CBSE UAE Cluster Boys Volleyball Championship 2026-27 Website
+UPDATED WEBSITE CHANGES INCLUDED
 
-FILES TO UPLOAD TO GITHUB:
-1. index.html
-2. style.css
-3. script.js
-4. images folder
-5. downloads folder
+Changes made:
+- Registration text corrected because button is beside the text, not below.
+- Countdown unchanged.
+- Removed Acceptance Form / Entry Form / Championship Dates cards below countdown.
+- Removed About Event section and all event information cards.
+- Moved Hosted by / Categories / Year strip just below moving banner.
+- Categories changed to Boys U-14 | U-17 | U-19.
+- Downloads changed to:
+  1. Invitation
+  2. Step by Step Guideline to Team Registration Portal
+  3. Instructions and Guidelines of the Competition
+  4. FIVB Website
+  5. VFI Website
+  6. FIVB Rules
+- Removed Acceptance Form and Entry Form download buttons.
+- Championship Updates now has Fixtures and Results only.
+- Official Notice removed.
+- Venue section modified with venue map button placeholder.
 
-IMPORTANT:
-The cover image already has the championship title. 
-So this website does NOT place another title on top of the image.
-
-REGISTRATION WEB APP:
-The Register Your School button is already linked to:
-https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec
-
-HOW TO UPDATE GITHUB:
-1. Open your GitHub repository.
-2. Click Add file > Upload files.
-3. Upload index.html, style.css, script.js, images folder, and downloads folder.
-4. Click Commit changes.
-5. Wait 1 minute and refresh your GitHub Pages website.
-
-TO REPLACE OLD WEBSITE:
-Upload these files and allow GitHub to replace the old files.
-
-TO CHANGE REGISTRATION LINK LATER:
-Open index.html and search for:
-Register Your School
-Then replace the href link with your new Apps Script web app URL.
+Upload/replace these files in GitHub:
+- index.html
+- style.css
+- script.js
+- images folder
+- downloads folder
