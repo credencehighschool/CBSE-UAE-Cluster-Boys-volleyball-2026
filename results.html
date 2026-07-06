@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Results</title><style>
+:root{
+  --blue:#0057ff;
+  --dark:#020b20;
+  --navy:#061433;
+  --lime:#d7ff00;
+  --soft:#f3f7ff;
+  --muted:#5c6e86;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft);color:var(--navy)}
+.header{background:var(--dark);color:white;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{background:var(--lime);color:var(--dark);width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px}
+.brand strong{display:block;font-size:18px}
+.brand span{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:#dce9ff;font-weight:700}
+.nav a{color:white;text-decoration:none;margin-left:16px;font-size:13px;text-transform:uppercase;font-weight:950}
+.nav a:hover{color:var(--lime)}
+.hero{background:var(--dark)}
+.hero img{width:100%;height:auto;display:block}
+.news{display:flex;background:linear-gradient(90deg,var(--dark),var(--blue),var(--dark));color:white}
+.news-title{background:var(--lime);color:var(--dark);padding:14px 24px;white-space:nowrap;text-transform:uppercase;font-weight:950}
+.news marquee{padding:14px 0;font-weight:900}
+.news strong{color:var(--lime)}
+.section{max-width:1250px;margin:auto;padding:65px 22px}
+.title{text-align:center;margin-bottom:34px}
+.title small{color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;font-size:13px;font-weight:950}
+.title h2{font-size:40px;margin-top:8px}
+.btn{display:inline-block;background:var(--lime);color:var(--dark);text-decoration:none;padding:14px 28px;border-radius:14px;font-weight:950;text-transform:uppercase;box-shadow:0 8px 20px rgba(0,0,0,.20);border:none;cursor:pointer}
+.btn:hover{background:var(--blue);color:white}
+.card{background:white;border-radius:26px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,.09)}
+.footer{background:var(--dark);color:white;text-align:center;padding:28px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}
+@media(max-width:800px){.header{flex-direction:column;text-align:center}.nav a{margin:0 7px;font-size:11px}.news{display:block}.news-title{text-align:center}.title h2{font-size:29px}.section{padding:50px 16px}}
+.locked{max-width:850px;margin:70px auto;text-align:center}.lock{font-size:80px;color:var(--lime);margin-bottom:20px}</style></head><body><header class="header"><div class="brand"><div class="brand-icon">🔒</div><div><strong>Results Locked</strong><span>Owner will open during championship</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="live-scores.html">Live Scores</a></nav></header><section class="locked card"><div class="lock">🔒</div><h1>Results Locked</h1><p style="font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin-top:12px;">Final results will be published by the owner during the championship.</p></section></body></html>

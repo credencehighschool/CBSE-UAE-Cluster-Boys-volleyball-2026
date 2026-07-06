@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Scores</title>
+<style>
+
+:root{
+  --blue:#0057ff;
+  --dark:#020b20;
+  --navy:#061433;
+  --lime:#d7ff00;
+  --soft:#f3f7ff;
+  --muted:#5c6e86;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft);color:var(--navy)}
+.header{background:var(--dark);color:white;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{background:var(--lime);color:var(--dark);width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px}
+.brand strong{display:block;font-size:18px}
+.brand span{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:#dce9ff;font-weight:700}
+.nav a{color:white;text-decoration:none;margin-left:16px;font-size:13px;text-transform:uppercase;font-weight:950}
+.nav a:hover{color:var(--lime)}
+.hero{background:var(--dark)}
+.hero img{width:100%;height:auto;display:block}
+.news{display:flex;background:linear-gradient(90deg,var(--dark),var(--blue),var(--dark));color:white}
+.news-title{background:var(--lime);color:var(--dark);padding:14px 24px;white-space:nowrap;text-transform:uppercase;font-weight:950}
+.news marquee{padding:14px 0;font-weight:900}
+.news strong{color:var(--lime)}
+.section{max-width:1250px;margin:auto;padding:65px 22px}
+.title{text-align:center;margin-bottom:34px}
+.title small{color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;font-size:13px;font-weight:950}
+.title h2{font-size:40px;margin-top:8px}
+.btn{display:inline-block;background:var(--lime);color:var(--dark);text-decoration:none;padding:14px 28px;border-radius:14px;font-weight:950;text-transform:uppercase;box-shadow:0 8px 20px rgba(0,0,0,.20);border:none;cursor:pointer}
+.btn:hover{background:var(--blue);color:white}
+.card{background:white;border-radius:26px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,.09)}
+.footer{background:var(--dark);color:white;text-align:center;padding:28px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}
+@media(max-width:800px){.header{flex-direction:column;text-align:center}.nav a{margin:0 7px;font-size:11px}.news{display:block}.news-title{text-align:center}.title h2{font-size:29px}.section{padding:50px 16px}}
+
+.hero-live{padding:48px 6%;background:linear-gradient(135deg,var(--blue),var(--dark));color:white;text-align:center}
+.hero-live small{color:var(--lime);text-transform:uppercase;letter-spacing:1.5px;font-weight:950}
+.hero-live h1{font-size:44px;margin-top:8px}
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.match{background:white;border-radius:28px;padding:26px;box-shadow:0 10px 26px rgba(0,0,0,.10);border-top:7px solid var(--blue)}
+.match-top{display:flex;justify-content:space-between;gap:12px;margin-bottom:18px;align-items:center}
+.category{background:var(--blue);color:white;padding:8px 14px;border-radius:40px;font-size:13px;font-weight:950}
+.status{background:var(--lime);color:var(--dark);padding:8px 14px;border-radius:40px;font-size:12px;font-weight:950;text-transform:uppercase}
+.meta{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin-bottom:18px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;text-align:center}
+.team strong{display:block;font-size:20px;color:var(--navy)}
+.team span{display:block;margin-top:8px;font-size:44px;color:var(--blue)}
+.vs{background:var(--dark);color:var(--lime);border-radius:16px;padding:14px 18px;font-size:22px;font-weight:950}
+.sets,.winner{margin-top:16px;font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:800;text-align:center}
+@media(max-width:800px){.score-grid{grid-template-columns:1fr}.teams{grid-template-columns:1fr}.hero-live h1{font-size:30px}}
+</style>
+</head>
+<body>
+<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>Live Scores</strong><span>CBSE UAE Cluster Boys Volleyball Championship</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="admin.html">Owner Admin</a></nav></header>
+<section class="hero-live"><small>Championship Centre</small><h1>Live Match Scores</h1></section>
+<section class="section"><div id="scores" class="score-grid"><div class="card">Loading live scores...</div></div></section>
+<footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
+<script>
+const API_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+async function loadScores(){
+  const container = document.getElementById("scores");
+  if(API_URL.includes("PASTE_YOUR")){
+    container.innerHTML = '<div class="card">Please paste your Apps Script Web App URL inside live-scores.html.</div>';
+    return;
+  }
+  try{
+    const res = await fetch(API_URL + "?action=getScores&cache=" + Date.now());
+    const data = await res.json();
+    const matches = data.scores || [];
+    if(matches.length === 0){
+      container.innerHTML = '<div class="card">No live scores published yet.</div>';
+      return;
+    }
+    container.innerHTML = matches.map(m => `
+      <article class="match">
+        <div class="match-top"><span class="category">${m.category || ""}</span><span class="status">${m.status || "Scheduled"}</span></div>
+        <div class="meta">${m.date || ""} · ${m.court || ""} · ${m.time || ""}</div>
+        <div class="teams">
+          <div class="team"><strong>${m.teamA || ""}</strong><span>${m.scoreA || "0"}</span></div>
+          <div class="vs">VS</div>
+          <div class="team"><strong>${m.teamB || ""}</strong><span>${m.scoreB || "0"}</span></div>
+        </div>
+        <div class="sets">Set Scores: ${m.sets || "To be updated"}</div>
+        <div class="winner">Winner: ${m.winner || "To be updated"}</div>
+      </article>`).join("");
+  }catch(e){
+    container.innerHTML = '<div class="card">Unable to load live scores. Please check the Apps Script URL.</div>';
+  }
+}
+loadScores();
+setInterval(loadScores,15000);
+</script>
+</body>
+</html>
