@@ -8,7 +8,6 @@ Upload all files and folders to GitHub:
 - downloads/
 
 Your registration web app button is already linked to:
-https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec
 
 To update document links:
 1. Upload PDFs into the downloads folder.
