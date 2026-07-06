@@ -1,15 +1,23 @@
-CBSE UAE Cluster Boys Volleyball Championship 2026-27 Website
+PRO WEBSITE VERSION - NO GOOGLE SHEETS CHANGES
 
-Upload all files and folders to GitHub:
+This version does not touch Google Sheets.
+It only links to your existing registration web app:
+https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec
+
+Important change:
+The cover image already contains the championship title, so the website no longer places a big title on top of the cover.
+Only a professional bottom panel is shown:
+"Hosted by Credence High School, Dubai"
+
+Upload these to GitHub:
 - index.html
 - style.css
 - script.js
 - images/cover.png
-- downloads/
+- downloads folder
 
-Your registration web app button is already linked to:
+Then enable GitHub Pages:
+Settings > Pages > Deploy from branch > main > /root
 
-To update document links:
-1. Upload PDFs into the downloads folder.
-2. In index.html, replace href="#" with:
-   downloads/your-file-name.pdf
+To change the registration link later:
+Open index.html and replace the URL inside href="..."
