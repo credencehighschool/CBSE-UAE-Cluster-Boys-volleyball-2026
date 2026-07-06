@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Knockout Bracket</title>
+<title>Owner Admin Login</title>
 <style>
 
 :root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
@@ -113,175 +113,311 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 }
 
 
-.locked-tile{
-  opacity:.95;
-  cursor:not-allowed;
-  border-top-color:var(--lime)!important;
-  background:linear-gradient(180deg,#ffffff,#f7fbff);
+.live-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#ff1744;
+  border-radius:50%;
+  margin-right:7px;
+  animation:pulse 1s infinite;
 }
-.locked-tile:hover{
-  transform:none!important;
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(255,23,68,.7)}
+  70%{box-shadow:0 0 0 12px rgba(255,23,68,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,23,68,0)}
 }
-.locked-tile span{
-  color:var(--blue);
-}
-
-.phase2-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.phase2-card{
+.match-card-pro{
   background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 10px 28px rgba(0,0,0,.10);
-  text-align:center;
-  text-decoration:none;
-  color:var(--navy);
+  border-radius:30px;
+  padding:28px;
+  box-shadow:0 12px 32px rgba(0,0,0,.10);
   border-top:8px solid var(--blue);
-  transition:.25s;
 }
-.phase2-card:hover{transform:translateY(-5px)}
-.phase2-card.gold{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}
-.phase2-card span{font-size:48px;display:block;margin-bottom:14px}
-.phase2-card strong{font-size:21px;display:block;margin-bottom:8px}
-.phase2-card small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.bracket-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  align-items:start;
+.match-card-pro.live{
+  border-top-color:#ff1744;
 }
-.bracket-column h3{
-  background:var(--dark);
-  color:white;
-  border-radius:16px;
-  padding:14px;
-  text-align:center;
+.match-head-pro{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
   margin-bottom:16px;
+  flex-wrap:wrap;
 }
-.bracket-match{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 8px 22px rgba(0,0,0,.10);
-  border-left:7px solid var(--lime);
-  margin-bottom:18px;
-}
-.bracket-match small{
-  color:var(--blue);
+.match-label{
+  background:var(--blue);
+  color:white;
+  padding:9px 15px;
+  border-radius:40px;
+  font-size:12px;
   font-weight:950;
   text-transform:uppercase;
 }
-.bracket-team{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:12px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:850;
-  color:var(--navy);
+.match-status{
+  background:var(--lime);
+  color:var(--dark);
+  padding:9px 15px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:950;
+  text-transform:uppercase;
 }
-.bracket-score{
-  background:var(--blue);
+.match-status.live{
+  background:#ff1744;
   color:white;
-  border-radius:10px;
-  padding:4px 10px;
 }
-.medal-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.medal-card{
-  background:white;
-  border-radius:30px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-}
-.medal-card .medal{
-  font-size:64px;
-  display:block;
-  margin-bottom:12px;
-}
-.medal-card h3{
-  color:var(--blue);
-  font-size:26px;
-  margin-bottom:8px;
-}
-.medal-card p{
+.match-meta-pro{
   font-family:'Segoe UI',Arial,sans-serif;
   color:var(--muted);
   font-weight:800;
+  margin-bottom:18px;
 }
-.awards-grid{
+.score-board{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.award-card{
-  background:white;
-  border-radius:26px;
-  padding:28px;
+  grid-template-columns:1fr auto 1fr;
+  gap:18px;
+  align-items:center;
   text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,.10);
-  border-top:7px solid var(--lime);
 }
-.award-card span{
-  display:block;
-  font-size:44px;
-  margin-bottom:12px;
+.score-team{
+  background:#f7faff;
+  border-radius:22px;
+  padding:18px;
 }
-.award-card h3{
-  color:var(--navy);
+.score-team h3{
   font-size:21px;
-  margin-bottom:8px;
+  color:var(--navy);
+  margin-bottom:10px;
 }
-.award-card p{
+.score-team strong{
+  display:block;
+  color:var(--blue);
+  font-size:54px;
+  line-height:1;
+}
+.score-vs{
+  background:var(--dark);
+  color:var(--lime);
+  padding:16px 18px;
+  border-radius:18px;
+  font-size:24px;
+  font-weight:950;
+}
+.set-strip{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.set-pill{
+  background:#eef4ff;
+  color:var(--navy);
+  border-radius:30px;
+  padding:9px 13px;
   font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
+  font-size:13px;
+  font-weight:900;
+}
+.current-set{
+  margin-top:16px;
+  text-align:center;
+  color:#ff1744;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.match-winner{
+  margin-top:14px;
+  text-align:center;
+  color:var(--blue);
+  font-weight:950;
+}
+.admin-mobile-note{
+  background:#eaf2ff;
+  border-left:7px solid var(--blue);
+  padding:15px;
+  border-radius:16px;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#374151;
   font-weight:750;
-  line-height:1.5;
+  margin-bottom:18px;
 }
-@media(max-width:900px){
-  .phase2-grid,.bracket-grid,.medal-grid,.awards-grid{grid-template-columns:1fr}
+.set-input-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
 }
+@media(max-width:800px){
+  .score-board{grid-template-columns:1fr}
+  .score-vs{width:90px;margin:auto}
+  .set-input-grid{grid-template-columns:1fr}
+  .match-card-pro{padding:20px}
+}
+
+.login-wrap{min-height:calc(100vh - 90px);display:flex;align-items:center;justify-content:center;padding:40px 18px;background:linear-gradient(135deg,var(--dark),var(--blue))}
+.login-card{width:100%;max-width:480px;background:white;border-radius:30px;padding:34px;box-shadow:0 18px 45px rgba(0,0,0,.35);border-top:8px solid var(--lime)}
+.login-card h1{font-size:32px;color:var(--navy);margin-bottom:8px}
+.login-card p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin-bottom:20px}
+.login-error{color:#b00020;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;margin-top:12px}
+#dashboard{display:none}
+.logout-btn{background:#ffffff;color:var(--blue);border:2px solid var(--blue);margin-left:10px}
 </style>
 </head>
 <body>
-<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
+<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
+
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <small class="small-title">Private Owner Access</small>
+    <h1>Admin Login</h1>
+    <p>Enter the owner username and password to open the championship dashboard.</p>
+    <label>Username</label><input id="loginUser" type="text" placeholder="Enter username">
+    <label>Password</label><input id="loginPass" type="password" placeholder="Enter password">
+    <button class="btn" onclick="login()">Login</button>
+    <div id="loginMsg" class="login-error"></div>
+  </div>
+</div>
+
+<div id="dashboard">
 <section class="section">
-  <div class="title"><small>Knockout Stage</small><h2>Semi-finals & Finals Bracket</h2><p class="muted">Updated from the owner admin dashboard.</p></div>
-  <div id="bracket" class="bracket-grid"><div class="card">Loading bracket...</div></div>
+  <div class="title"><small>Mobile Admin Dashboard</small><h2>Phase 1 Match Control</h2></div>
+  <div class="admin-mobile-note">Use this panel from your phone during the championship. Tournament Overview is for admin record only. Public Fixtures, Live Scores and Standings remain locked until you decide to open them.</div>
+  <div class="card"><label>Admin Password</label><input id="password" type="password" placeholder="Enter owner password again for saving changes"></div><br>
+  <div class="tabs">
+    <button class="tab active" onclick="show('overview')">Tournament Overview</button>
+    <button class="tab" onclick="show('match')">Match Score</button>
+    <button class="tab" onclick="show('notice')">Notice</button>
+    <button class="tab" onclick="show('galleryp')">Gallery</button>
+    <button class="tab" onclick="show('bracketp')">Bracket</button>
+    <button class="tab" onclick="show('medalp')">Medal Tally</button>
+    <button class="tab" onclick="show('awardp')">Awards</button>
+  </div>
+
+  
+  <div id="overview" class="panel active card">
+    <div class="admin-form">
+      <div><label>Participating Schools</label><input id="participatingSchools" placeholder="Example: 32"></div>
+      <div><label>Total Athletes</label><input id="totalAthletes" placeholder="Example: 384"></div>
+      <div><label>Total Teams</label><input id="totalTeams" placeholder="Example: 96"></div>
+      <div><label>Championship Title</label><input id="championshipTitle" placeholder="CBSE UAE Cluster Boys Volleyball Championship"></div>
+      <div class="full"><label>Short Note</label><textarea id="overviewNote" placeholder="Brief tournament note for admin records"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="save('saveOverview')">Save Tournament Overview</button>
+  </div>
+
+  <div id="match" class="panel card">
+    <div class="admin-form">
+      <div><label>Match ID</label><input id="matchId" placeholder="M001"></div>
+      <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Semi Final</option><option>Boys U-17 Semi Final</option><option>Boys U-19 Semi Final</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
+      <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div>
+      <div><label>Current Set</label><select id="currentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select></div>
+      <div><label>Date</label><input id="date" placeholder="Saturday, 19 September 2026"></div>
+      <div><label>Time</label><input id="time" placeholder="8:30 AM"></div>
+      <div><label>Court</label><input id="court" placeholder="Court 1"></div>
+      <div><label>Team A</label><input id="teamA"></div>
+      <div><label>Team B</label><input id="teamB"></div>
+      <div><label>Sets Won Team A</label><input id="scoreA" placeholder="0"></div>
+      <div><label>Sets Won Team B</label><input id="scoreB" placeholder="0"></div>
+      <div class="full"><label>Set-by-set Scores</label>
+        <div class="set-input-grid">
+          <input id="set1" placeholder="Set 1: 25-18">
+          <input id="set2" placeholder="Set 2: 22-25">
+          <input id="set3" placeholder="Set 3: 25-20">
+          <input id="set4" placeholder="Set 4">
+          <input id="set5" placeholder="Set 5">
+        </div>
+      </div>
+      <div class="full"><label>Winner</label><input id="winner" placeholder="Winning school / To be updated"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveMatchPhase1')">Save Match</button>
+  </div>
+
+  <div id="notice" class="panel card">
+    <div class="admin-form">
+      <div><label>Notice ID</label><input id="nId" placeholder="N001"></div>
+      <div><label>Title</label><input id="nTitle"></div>
+      <div class="full"><label>Message</label><textarea id="nMessage"></textarea></div>
+    </div><br><button class="btn" onclick="save('saveNotice')">Save Notice</button>
+  </div>
+
+  <div id="galleryp" class="panel card">
+    <div class="admin-form">
+      <div><label>Gallery ID</label><input id="gId" placeholder="G001"></div>
+      <div><label>Image URL</label><input id="gUrl"></div>
+      <div class="full"><label>Caption</label><input id="gCaption"></div>
+    </div><br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
+  </div>
+
+  
+  <div id="bracketp" class="panel card">
+    <div class="admin-form">
+      <div><label>Bracket Match ID</label><input id="bId" placeholder="SF-U14-1"></div>
+      <div><label>Category</label><select id="bCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+      <div><label>Stage</label><select id="bStage"><option>Semi Final</option><option>Final</option><option>Third Place</option></select></div>
+      <div><label>Team A</label><input id="bTeamA"></div>
+      <div><label>Score A</label><input id="bScoreA" placeholder="0"></div>
+      <div><label>Team B</label><input id="bTeamB"></div>
+      <div><label>Score B</label><input id="bScoreB" placeholder="0"></div>
+      <div><label>Winner</label><input id="bWinner"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveBracket')">Save Bracket Match</button>
+  </div>
+
+  <div id="medalp" class="panel card">
+    <div class="admin-form">
+      <div><label>Medal ID</label><input id="mId" placeholder="U14-GOLD"></div>
+      <div><label>Category</label><select id="mCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+      <div><label>Position</label><select id="mPosition"><option>Champion</option><option>Runner-up</option><option>Third Place</option></select></div>
+      <div><label>School</label><input id="mSchool"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveMedal')">Save Medal</button>
+  </div>
+
+  <div id="awardp" class="panel card">
+    <div class="admin-form">
+      <div><label>Award ID</label><input id="aId" placeholder="BEST-PLAYER-U14"></div>
+      <div><label>Icon</label><input id="aIcon" placeholder="⭐"></div>
+      <div><label>Award Name</label><input id="aAward" placeholder="Best Player"></div>
+      <div><label>Student Name</label><input id="aStudent"></div>
+      <div><label>School</label><input id="aSchool"></div>
+      <div><label>Category</label><select id="aCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Overall</option></select></div>
+    </div>
+    <br><button class="btn" onclick="save('saveAward')">Save Award</button>
+  </div>
+
+  <p id="msg" class="muted" style="margin-top:18px"></p>
 </section>
-<footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
+</div>
+<footer class="footer">Owner Admin Panel</footer>
 <script>
-const API="https://script.google.com/macros/s/AKfycbzopk8FtUzxLSngOjRvkJE4FLAX0hWRGddRSmaqLzQpFFvfGGTMP5wwPcmuS7qqtKMgmA/exec";
-function matchCard(m){
-  return `<div class="bracket-match">
-    <small>${m.category||''} · ${m.stage||''}</small>
-    <div class="bracket-team"><span>${m.teamA||'TBD'}</span><b class="bracket-score">${m.scoreA||'0'}</b></div>
-    <div class="bracket-team"><span>${m.teamB||'TBD'}</span><b class="bracket-score">${m.scoreB||'0'}</b></div>
-    <p class="muted" style="margin-top:10px">Winner: <b>${m.winner||'To be updated'}</b></p>
-  </div>`;
+const API="https://script.google.com/macros/s/AKfycbwEdyF69r2abBucFVSNK68SGn6ytFvfu7S-LteRmNv3Oa58IOHCoRiFt3E5KAYp57hrhQ/exec";
+const OWNER_USERNAME="admin";
+function login(){
+  const user=loginUser.value.trim(), pass=loginPass.value.trim();
+  if(user!==OWNER_USERNAME){loginMsg.innerText="Invalid username.";return}
+  if(!pass){loginMsg.innerText="Please enter password.";return}
+  password.value=pass; sessionStorage.setItem("cbseAdminLoggedIn","yes"); sessionStorage.setItem("cbseAdminPass",pass);
+  loginScreen.style.display="none"; dashboard.style.display="block";
 }
-async function load(){
-  try{
-    const r=await fetch(API+"?action=bracket&cache="+Date.now());
-    const d=await r.json();
-    const rows=d.bracket||[];
-    const semi=rows.filter(x=>String(x.stage).toLowerCase().includes('semi'));
-    const final=rows.filter(x=>String(x.stage).toLowerCase()==='final');
-    const third=rows.filter(x=>String(x.stage).toLowerCase().includes('third'));
-    bracket.innerHTML=`
-      <div class="bracket-column"><h3>Semi-finals</h3>${semi.map(matchCard).join('')||'<div class="card">Semi-finals TBD</div>'}</div>
-      <div class="bracket-column"><h3>Final</h3>${final.map(matchCard).join('')||'<div class="card">Final TBD</div>'}</div>
-      <div class="bracket-column"><h3>Third Place</h3>${third.map(matchCard).join('')||'<div class="card">Third Place TBD</div>'}</div>`;
-  }catch(e){bracket.innerHTML='<div class="card">Unable to load bracket.</div>';}
+function logout(){sessionStorage.clear();location.reload()}
+window.addEventListener("load",()=>{if(sessionStorage.getItem("cbseAdminLoggedIn")==="yes"){password.value=sessionStorage.getItem("cbseAdminPass")||"";loginScreen.style.display="none";dashboard.style.display="block";}});
+function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+function v(id){return document.getElementById(id).value.trim()}
+async function save(action){
+  let data={action,password:v('password')};
+  if(action==='saveOverview')Object.assign(data,{participatingSchools:v('participatingSchools'),totalAthletes:v('totalAthletes'),totalTeams:v('totalTeams'),championshipTitle:v('championshipTitle'),overviewNote:v('overviewNote')});
+  if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
+  if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
+  if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
+  if(action==='saveBracket')Object.assign(data,{id:v('bId'),category:v('bCategory'),stage:v('bStage'),teamA:v('bTeamA'),scoreA:v('bScoreA'),teamB:v('bTeamB'),scoreB:v('bScoreB'),winner:v('bWinner')});
+  if(action==='saveMedal')Object.assign(data,{id:v('mId'),category:v('mCategory'),position:v('mPosition'),school:v('mSchool')});
+  if(action==='saveAward')Object.assign(data,{id:v('aId'),icon:v('aIcon'),award:v('aAward'),student:v('aStudent'),school:v('aSchool'),category:v('aCategory')});
+  msg.innerText='Saving...';
+  try{const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});const res=await r.json();msg.innerText=res.message||'Saved.';}
+  catch(e){msg.innerText='Unable to save. Please check Apps Script deployment.';}
 }
-load();setInterval(load,30000);
 </script>
 </body>
 </html>
