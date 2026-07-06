@@ -51,3 +51,30 @@ LOGIN FIX APPLIED:
 - Admin page now shows Username and Password login first.
 - Default username is: admin
 - Password is the password set in Code.gs under ADMIN_PASSWORD.
+
+
+DIRECT LINKS UPDATE APPLIED:
+1. Fixtures page now has 3 category fixture download buttons:
+   - U-14 Boys
+   - U-17 Boys
+   - U-19 Boys
+
+2. Fixture PDF links are pasted directly in fixtures.html:
+   PASTE_U14_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE
+   PASTE_U17_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE
+   PASTE_U19_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE
+
+3. Downloads are pasted directly in index.html:
+   PASTE_INVITATION_PDF_DRIVE_LINK_HERE
+   PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE
+
+4. Venue/location link is pasted directly in index.html:
+   PASTE_GOOGLE_MAP_LOCATION_LINK_HERE
+
+5. Championship stats are pasted directly in index.html:
+   PARTICIPATING_SCHOOLS
+   TOTAL_ATHLETES
+   TOTAL_TEAMS
+
+6. Admin dashboard no longer manages Downloads or Venue.
+   Admin still manages Matches, Live Scores, Standings, Notices and Gallery.
