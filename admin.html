@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Owner Admin Login</title>
 <style>
 
@@ -32,73 +31,240 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 @media(max-width:900px){.header{flex-direction:column;text-align:center}.nav a{margin:0 6px;font-size:11px}.news{display:block}.news-title{text-align:center}.grid3,.grid2,.quick-info,.gallery-grid{grid-template-columns:1fr}.registration{flex-direction:column;text-align:center;margin-left:16px;margin-right:16px}.quick-info{margin-left:16px;margin-right:16px}.teams{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.btn{width:100%;text-align:center}.title h2{font-size:29px}}
 
 
-.login-wrap{
-  min-height:calc(100vh - 90px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px 18px;
-  background:linear-gradient(135deg,var(--dark),var(--blue));
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
 }
-
-.login-card{
-  width:100%;
-  max-width:480px;
+.stat-card{
+  background:linear-gradient(135deg,var(--navy),var(--dark));
+  color:white;
+  border-radius:26px;
+  padding:28px;
+  text-align:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);
+  border-bottom:7px solid var(--lime);
+}
+.stat-card strong{
+  display:block;
+  color:var(--lime);
+  font-size:42px;
+  margin-bottom:8px;
+}
+.stat-card span{
+  font-family:'Segoe UI',Arial,sans-serif;
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:.5px;
+}
+.fixture-category{
   background:white;
-  border-radius:30px;
-  padding:34px;
-  box-shadow:0 18px 45px rgba(0,0,0,.35);
-  border-top:8px solid var(--lime);
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+  border-left:9px solid var(--lime);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
 }
-
-.login-card h1{
-  font-size:32px;
+.fixture-category h3{
+  font-size:28px;
   color:var(--navy);
   margin-bottom:8px;
 }
-
-.login-card p{
+.fixture-category p{
   font-family:'Segoe UI',Arial,sans-serif;
   color:var(--muted);
   font-weight:700;
-  margin-bottom:20px;
 }
-
-.login-card input{
-  margin-bottom:15px;
+.fixture-btn{
+  display:inline-block;
+  background:var(--blue);
+  color:white;
+  text-decoration:none;
+  padding:14px 26px;
+  border-radius:14px;
+  font-weight:950;
+  text-transform:uppercase;
+  white-space:nowrap;
 }
-
-.login-error{
-  color:#b00020;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:800;
-  margin-top:12px;
+.fixture-btn:hover{
+  background:var(--lime);
+  color:var(--dark);
 }
-
-#dashboard{
-  display:none;
-}
-
-.logout-btn{
-  background:#ffffff;
-  color:var(--blue);
-  border:2px solid var(--blue);
-  margin-left:10px;
-}
-
-.admin-note{
+.direct-note{
   background:#fff9d8;
   border-left:7px solid var(--lime);
-  padding:14px;
-  border-radius:16px;
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:26px;
   font-family:'Segoe UI',Arial,sans-serif;
   color:#374151;
   font-weight:700;
-  margin-bottom:20px;
 }
+@media(max-width:900px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .fixture-category{flex-direction:column;text-align:center}
+}
+@media(max-width:560px){
+  .stats-grid{grid-template-columns:1fr}
+}
+
+
+.live-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#ff1744;
+  border-radius:50%;
+  margin-right:7px;
+  animation:pulse 1s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(255,23,68,.7)}
+  70%{box-shadow:0 0 0 12px rgba(255,23,68,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,23,68,0)}
+}
+.match-card-pro{
+  background:white;
+  border-radius:30px;
+  padding:28px;
+  box-shadow:0 12px 32px rgba(0,0,0,.10);
+  border-top:8px solid var(--blue);
+}
+.match-card-pro.live{
+  border-top-color:#ff1744;
+}
+.match-head-pro{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+.match-label{
+  background:var(--blue);
+  color:white;
+  padding:9px 15px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:950;
+  text-transform:uppercase;
+}
+.match-status{
+  background:var(--lime);
+  color:var(--dark);
+  padding:9px 15px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:950;
+  text-transform:uppercase;
+}
+.match-status.live{
+  background:#ff1744;
+  color:white;
+}
+.match-meta-pro{
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:var(--muted);
+  font-weight:800;
+  margin-bottom:18px;
+}
+.score-board{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:18px;
+  align-items:center;
+  text-align:center;
+}
+.score-team{
+  background:#f7faff;
+  border-radius:22px;
+  padding:18px;
+}
+.score-team h3{
+  font-size:21px;
+  color:var(--navy);
+  margin-bottom:10px;
+}
+.score-team strong{
+  display:block;
+  color:var(--blue);
+  font-size:54px;
+  line-height:1;
+}
+.score-vs{
+  background:var(--dark);
+  color:var(--lime);
+  padding:16px 18px;
+  border-radius:18px;
+  font-size:24px;
+  font-weight:950;
+}
+.set-strip{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.set-pill{
+  background:#eef4ff;
+  color:var(--navy);
+  border-radius:30px;
+  padding:9px 13px;
+  font-family:'Segoe UI',Arial,sans-serif;
+  font-size:13px;
+  font-weight:900;
+}
+.current-set{
+  margin-top:16px;
+  text-align:center;
+  color:#ff1744;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.match-winner{
+  margin-top:14px;
+  text-align:center;
+  color:var(--blue);
+  font-weight:950;
+}
+.admin-mobile-note{
+  background:#eaf2ff;
+  border-left:7px solid var(--blue);
+  padding:15px;
+  border-radius:16px;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#374151;
+  font-weight:750;
+  margin-bottom:18px;
+}
+.set-input-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+@media(max-width:800px){
+  .score-board{grid-template-columns:1fr}
+  .score-vs{width:90px;margin:auto}
+  .set-input-grid{grid-template-columns:1fr}
+  .match-card-pro{padding:20px}
+}
+
+.login-wrap{min-height:calc(100vh - 90px);display:flex;align-items:center;justify-content:center;padding:40px 18px;background:linear-gradient(135deg,var(--dark),var(--blue))}
+.login-card{width:100%;max-width:480px;background:white;border-radius:30px;padding:34px;box-shadow:0 18px 45px rgba(0,0,0,.35);border-top:8px solid var(--lime)}
+.login-card h1{font-size:32px;color:var(--navy);margin-bottom:8px}
+.login-card p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin-bottom:20px}
+.login-error{color:#b00020;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;margin-top:12px}
+#dashboard{display:none}
+.logout-btn{background:#ffffff;color:var(--blue);border:2px solid var(--blue);margin-left:10px}
 </style>
 </head>
-
 <body>
 <header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
 
@@ -107,13 +273,8 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
     <small class="small-title">Private Owner Access</small>
     <h1>Admin Login</h1>
     <p>Enter the owner username and password to open the championship dashboard.</p>
-
-    <label>Username</label>
-    <input id="loginUser" type="text" placeholder="Enter username">
-
-    <label>Password</label>
-    <input id="loginPass" type="password" placeholder="Enter password">
-
+    <label>Username</label><input id="loginUser" type="text" placeholder="Enter username">
+    <label>Password</label><input id="loginPass" type="password" placeholder="Enter password">
     <button class="btn" onclick="login()">Login</button>
     <div id="loginMsg" class="login-error"></div>
   </div>
@@ -121,60 +282,53 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 
 <div id="dashboard">
 <section class="section">
-  <div class="title">
-    <small>Private Owner Dashboard</small>
-    <h2>Championship Admin Panel</h2>
-  </div>
-
-  <div class="admin-note">
-    You are logged in as owner. Use this dashboard to update fixtures, live scores, standings, notices, downloads, gallery and venue.
-    <button class="btn logout-btn" onclick="logout()">Logout</button>
-  </div>
-
-  <div class="card">
-    <label>Admin Password</label>
-    <input id="password" type="password" placeholder="Enter owner password again for saving changes">
-  </div>
-  <br>
-
+  <div class="title"><small>Mobile Admin Dashboard</small><h2>Phase 1 Match Control</h2></div>
+  <div class="admin-mobile-note">Use this panel from your phone during the championship. Tournament Overview is for admin record only. Public Fixtures, Live Scores and Standings remain locked until you decide to open them.</div>
+  <div class="card"><label>Admin Password</label><input id="password" type="password" placeholder="Enter owner password again for saving changes"></div><br>
   <div class="tabs">
-    <button class="tab active" onclick="show('match')">Match</button>
-    <button class="tab" onclick="show('standing')">Standings</button>
+    <button class="tab active" onclick="show('overview')">Tournament Overview</button>
+    <button class="tab" onclick="show('match')">Match Score</button>
     <button class="tab" onclick="show('notice')">Notice</button>
-    <button class="tab" onclick="show('download')">Download</button>
     <button class="tab" onclick="show('galleryp')">Gallery</button>
-    <button class="tab" onclick="show('venuep')">Venue</button>
   </div>
 
-  <div id="match" class="panel active card">
+  
+  <div id="overview" class="panel active card">
+    <div class="admin-form">
+      <div><label>Participating Schools</label><input id="participatingSchools" placeholder="Example: 32"></div>
+      <div><label>Total Athletes</label><input id="totalAthletes" placeholder="Example: 384"></div>
+      <div><label>Total Teams</label><input id="totalTeams" placeholder="Example: 96"></div>
+      <div><label>Championship Title</label><input id="championshipTitle" placeholder="CBSE UAE Cluster Boys Volleyball Championship"></div>
+      <div class="full"><label>Short Note</label><textarea id="overviewNote" placeholder="Brief tournament note for admin records"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="save('saveOverview')">Save Tournament Overview</button>
+  </div>
+
+  <div id="match" class="panel card">
     <div class="admin-form">
       <div><label>Match ID</label><input id="matchId" placeholder="M001"></div>
-      <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
+      <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Semi Final</option><option>Boys U-17 Semi Final</option><option>Boys U-19 Semi Final</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
       <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div>
+      <div><label>Current Set</label><select id="currentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select></div>
       <div><label>Date</label><input id="date" placeholder="Saturday, 19 September 2026"></div>
       <div><label>Time</label><input id="time" placeholder="8:30 AM"></div>
       <div><label>Court</label><input id="court" placeholder="Court 1"></div>
       <div><label>Team A</label><input id="teamA"></div>
       <div><label>Team B</label><input id="teamB"></div>
-      <div><label>Score A</label><input id="scoreA" placeholder="0"></div>
-      <div><label>Score B</label><input id="scoreB" placeholder="0"></div>
-      <div class="full"><label>Set Scores</label><input id="sets" placeholder="25-18 · 23-25 · 25-19"></div>
-      <div class="full"><label>Winner</label><input id="winner"></div>
+      <div><label>Sets Won Team A</label><input id="scoreA" placeholder="0"></div>
+      <div><label>Sets Won Team B</label><input id="scoreB" placeholder="0"></div>
+      <div class="full"><label>Set-by-set Scores</label>
+        <div class="set-input-grid">
+          <input id="set1" placeholder="Set 1: 25-18">
+          <input id="set2" placeholder="Set 2: 22-25">
+          <input id="set3" placeholder="Set 3: 25-20">
+          <input id="set4" placeholder="Set 4">
+          <input id="set5" placeholder="Set 5">
+        </div>
+      </div>
+      <div class="full"><label>Winner</label><input id="winner" placeholder="Winning school / To be updated"></div>
     </div>
-    <br><button class="btn" onclick="save('saveMatch')">Save Match</button>
-  </div>
-
-  <div id="standing" class="panel card">
-    <div class="admin-form">
-      <div><label>Category</label><input id="sCategory" placeholder="Boys U-14"></div>
-      <div><label>Team</label><input id="sTeam"></div>
-      <div><label>Played</label><input id="sPlayed"></div>
-      <div><label>Won</label><input id="sWon"></div>
-      <div><label>Lost</label><input id="sLost"></div>
-      <div><label>Sets</label><input id="sSets" placeholder="6-2"></div>
-      <div><label>Points</label><input id="sPoints"></div>
-    </div>
-    <br><button class="btn" onclick="save('saveStanding')">Save Standing</button>
+    <br><button class="btn" onclick="save('saveMatchPhase1')">Save Match</button>
   </div>
 
   <div id="notice" class="panel card">
@@ -182,19 +336,7 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
       <div><label>Notice ID</label><input id="nId" placeholder="N001"></div>
       <div><label>Title</label><input id="nTitle"></div>
       <div class="full"><label>Message</label><textarea id="nMessage"></textarea></div>
-    </div>
-    <br><button class="btn" onclick="save('saveNotice')">Save Notice</button>
-  </div>
-
-  <div id="download" class="panel card">
-    <div class="admin-form">
-      <div><label>Download ID</label><input id="dId" placeholder="D001"></div>
-      <div><label>Icon</label><input id="dIcon" placeholder="📄"></div>
-      <div><label>Title</label><input id="dTitle"></div>
-      <div><label>URL</label><input id="dUrl"></div>
-      <div class="full"><label>Note</label><input id="dNote"></div>
-    </div>
-    <br><button class="btn" onclick="save('saveDownload')">Save Download</button>
+    </div><br><button class="btn" onclick="save('saveNotice')">Save Notice</button>
   </div>
 
   <div id="galleryp" class="panel card">
@@ -202,101 +344,36 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
       <div><label>Gallery ID</label><input id="gId" placeholder="G001"></div>
       <div><label>Image URL</label><input id="gUrl"></div>
       <div class="full"><label>Caption</label><input id="gCaption"></div>
-    </div>
-    <br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
-  </div>
-
-  <div id="venuep" class="panel card">
-    <div class="admin-form">
-      <div><label>Venue Title</label><input id="vTitle" placeholder="Championship Venue"></div>
-      <div><label>Map URL</label><input id="vMap"></div>
-      <div class="full"><label>Venue Details</label><textarea id="vDetails"></textarea></div>
-    </div>
-    <br><button class="btn" onclick="save('saveVenue')">Save Venue</button>
+    </div><br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
   </div>
 
   <p id="msg" class="muted" style="margin-top:18px"></p>
 </section>
 </div>
-
 <footer class="footer">Owner Admin Panel</footer>
-
 <script>
 const API="https://script.google.com/macros/s/AKfycbzopk8FtUzxLSngOjRvkJE4FLAX0hWRGddRSmaqLzQpFFvfGGTMP5wwPcmuS7qqtKMgmA/exec";
-
-// Change only the username here if needed.
-// Password is checked against the same password in Code.gs when saving.
-const OWNER_USERNAME = "admin";
-
+const OWNER_USERNAME="admin";
 function login(){
-  const user = document.getElementById("loginUser").value.trim();
-  const pass = document.getElementById("loginPass").value.trim();
-
-  if(user !== OWNER_USERNAME){
-    document.getElementById("loginMsg").innerText = "Invalid username.";
-    return;
-  }
-
-  if(!pass){
-    document.getElementById("loginMsg").innerText = "Please enter password.";
-    return;
-  }
-
-  document.getElementById("password").value = pass;
-  sessionStorage.setItem("cbseAdminLoggedIn","yes");
-  sessionStorage.setItem("cbseAdminPass",pass);
-
-  document.getElementById("loginScreen").style.display = "none";
-  document.getElementById("dashboard").style.display = "block";
+  const user=loginUser.value.trim(), pass=loginPass.value.trim();
+  if(user!==OWNER_USERNAME){loginMsg.innerText="Invalid username.";return}
+  if(!pass){loginMsg.innerText="Please enter password.";return}
+  password.value=pass; sessionStorage.setItem("cbseAdminLoggedIn","yes"); sessionStorage.setItem("cbseAdminPass",pass);
+  loginScreen.style.display="none"; dashboard.style.display="block";
 }
-
-function logout(){
-  sessionStorage.removeItem("cbseAdminLoggedIn");
-  sessionStorage.removeItem("cbseAdminPass");
-  location.reload();
-}
-
-window.addEventListener("load", () => {
-  if(sessionStorage.getItem("cbseAdminLoggedIn") === "yes"){
-    document.getElementById("password").value = sessionStorage.getItem("cbseAdminPass") || "";
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-  }
-});
-
-function show(id){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
-}
-
+function logout(){sessionStorage.clear();location.reload()}
+window.addEventListener("load",()=>{if(sessionStorage.getItem("cbseAdminLoggedIn")==="yes"){password.value=sessionStorage.getItem("cbseAdminPass")||"";loginScreen.style.display="none";dashboard.style.display="block";}});
+function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
 function v(id){return document.getElementById(id).value.trim()}
-
 async function save(action){
-  if(API.includes("PASTE")){
-    msg.innerText="Paste Apps Script URL in admin.html first.";
-    return;
-  }
-
   let data={action,password:v('password')};
-
-  if(action==='saveMatch')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),sets:v('sets'),winner:v('winner')});
-  if(action==='saveStanding')Object.assign(data,{category:v('sCategory'),team:v('sTeam'),played:v('sPlayed'),won:v('sWon'),lost:v('sLost'),sets:v('sSets'),points:v('sPoints')});
+  if(action==='saveOverview')Object.assign(data,{participatingSchools:v('participatingSchools'),totalAthletes:v('totalAthletes'),totalTeams:v('totalTeams'),championshipTitle:v('championshipTitle'),overviewNote:v('overviewNote')});
+  if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
   if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
-  if(action==='saveDownload')Object.assign(data,{id:v('dId'),icon:v('dIcon'),title:v('dTitle'),url:v('dUrl'),note:v('dNote')});
   if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
-  if(action==='saveVenue')Object.assign(data,{title:v('vTitle'),details:v('vDetails'),mapUrl:v('vMap')});
-
   msg.innerText='Saving...';
-
-  try{
-    const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});
-    const res=await r.json();
-    msg.innerText=res.message||'Saved.';
-  }catch(e){
-    msg.innerText='Unable to save. Please check Apps Script deployment.';
-  }
+  try{const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});const res=await r.json();msg.innerText=res.message||'Saved.';}
+  catch(e){msg.innerText='Unable to save. Please check Apps Script deployment.';}
 }
 </script>
 </body>
