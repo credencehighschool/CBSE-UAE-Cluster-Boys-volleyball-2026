@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Knockout Bracket</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fixtures | CBSE UAE Cluster Boys Volleyball Championship</title>
 <style>
+
 
 :root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -126,162 +128,153 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
   color:var(--blue);
 }
 
-.phase2-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+
+.fixture-page{
+  max-width:1050px;
+  margin:auto;
+  padding:65px 22px;
 }
-.phase2-card{
+
+.fixture-list{
+  display:grid;
+  gap:24px;
+}
+
+.fixture-row{
   background:white;
   border-radius:28px;
   padding:30px;
   box-shadow:0 10px 28px rgba(0,0,0,.10);
-  text-align:center;
-  text-decoration:none;
-  color:var(--navy);
-  border-top:8px solid var(--blue);
-  transition:.25s;
-}
-.phase2-card:hover{transform:translateY(-5px)}
-.phase2-card.gold{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}
-.phase2-card span{font-size:48px;display:block;margin-bottom:14px}
-.phase2-card strong{font-size:21px;display:block;margin-bottom:8px}
-.phase2-card small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.bracket-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  align-items:start;
-}
-.bracket-column h3{
-  background:var(--dark);
-  color:white;
-  border-radius:16px;
-  padding:14px;
-  text-align:center;
-  margin-bottom:16px;
-}
-.bracket-match{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 8px 22px rgba(0,0,0,.10);
-  border-left:7px solid var(--lime);
-  margin-bottom:18px;
-}
-.bracket-match small{
-  color:var(--blue);
-  font-weight:950;
-  text-transform:uppercase;
-}
-.bracket-team{
+  border-left:10px solid var(--lime);
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-top:12px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:850;
+  gap:25px;
+}
+
+.fixture-row h3{
+  font-size:30px;
   color:var(--navy);
-}
-.bracket-score{
-  background:var(--blue);
-  color:white;
-  border-radius:10px;
-  padding:4px 10px;
-}
-.medal-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.medal-card{
-  background:white;
-  border-radius:30px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-}
-.medal-card .medal{
-  font-size:64px;
-  display:block;
-  margin-bottom:12px;
-}
-.medal-card h3{
-  color:var(--blue);
-  font-size:26px;
   margin-bottom:8px;
 }
-.medal-card p{
+
+.fixture-row p{
   font-family:'Segoe UI',Arial,sans-serif;
   color:var(--muted);
-  font-weight:800;
-}
-.awards-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.award-card{
-  background:white;
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,.10);
-  border-top:7px solid var(--lime);
-}
-.award-card span{
-  display:block;
-  font-size:44px;
-  margin-bottom:12px;
-}
-.award-card h3{
-  color:var(--navy);
-  font-size:21px;
-  margin-bottom:8px;
-}
-.award-card p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:750;
+  font-weight:700;
   line-height:1.5;
 }
-@media(max-width:900px){
-  .phase2-grid,.bracket-grid,.medal-grid,.awards-grid{grid-template-columns:1fr}
+
+.download-fixture-btn{
+  background:var(--blue);
+  color:white;
+  text-decoration:none;
+  padding:15px 28px;
+  border-radius:14px;
+  font-weight:950;
+  text-transform:uppercase;
+  white-space:nowrap;
+  display:inline-block;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
 }
+
+.download-fixture-btn:hover{
+  background:var(--lime);
+  color:var(--dark);
+}
+
+.edit-note{
+  background:#fff9d8;
+  border-left:7px solid var(--lime);
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:28px;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#374151;
+  font-weight:750;
+}
+
+@media(max-width:760px){
+  .fixture-row{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .download-fixture-btn{
+    width:100%;
+    text-align:center;
+  }
+}
+
 </style>
+<script src="config.js"></script>
 </head>
+
 <body>
-<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
-<section class="section">
-  <div class="title"><small>Knockout Stage</small><h2>Semi-finals & Finals Bracket</h2><p class="muted">Updated from the owner admin dashboard.</p></div>
-  <div id="bracket" class="bracket-grid"><div class="card">Loading bracket...</div></div>
+<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
+
+<section class="fixture-page">
+
+  <div class="title">
+    <small>Official Fixtures</small>
+    <h2>Category-wise Fixtures</h2>
+    <p class="muted">Click the download button beside each category to download the official fixture PDF.</p>
+  </div>
+
+  <div class="edit-note">
+    Replace the placeholder Drive links in this file with your actual public PDF links.
+  </div>
+
+  <div class="fixture-list">
+
+    <div class="fixture-row">
+      <div>
+        <h3>U-14 Boys</h3>
+        <p>Official fixture for the Boys U-14 category.</p>
+      </div>
+      <a class="download-fixture-btn"
+         href="#" id="u14Fixture"
+         target="_blank">
+         Click here to download fixture
+      </a>
+    </div>
+
+    <div class="fixture-row">
+      <div>
+        <h3>U-17 Boys</h3>
+        <p>Official fixture for the Boys U-17 category.</p>
+      </div>
+      <a class="download-fixture-btn"
+         href="#" id="u17Fixture"
+         target="_blank">
+         Click here to download fixture
+      </a>
+    </div>
+
+    <div class="fixture-row">
+      <div>
+        <h3>U-19 Boys</h3>
+        <p>Official fixture for the Boys U-19 category.</p>
+      </div>
+      <a class="download-fixture-btn"
+         href="#" id="u19Fixture"
+         target="_blank">
+         Click here to download fixture
+      </a>
+    </div>
+
+  </div>
+
 </section>
-<footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
+
+<footer class="footer">
+  CBSE UAE Cluster Boys Volleyball Championship 2026–27
+</footer>
+
 <script>
-const API="https://script.google.com/macros/s/AKfycbwEdyF69r2abBucFVSNK68SGn6ytFvfu7S-LteRmNv3Oa58IOHCoRiFt3E5KAYp57hrhQ/exec";
-function matchCard(m){
-  return `<div class="bracket-match">
-    <small>${m.category||''} · ${m.stage||''}</small>
-    <div class="bracket-team"><span>${m.teamA||'TBD'}</span><b class="bracket-score">${m.scoreA||'0'}</b></div>
-    <div class="bracket-team"><span>${m.teamB||'TBD'}</span><b class="bracket-score">${m.scoreB||'0'}</b></div>
-    <p class="muted" style="margin-top:10px">Winner: <b>${m.winner||'To be updated'}</b></p>
-  </div>`;
-}
-async function load(){
-  try{
-    const r=await fetch(API+"?action=bracket&cache="+Date.now());
-    const d=await r.json();
-    const rows=d.bracket||[];
-    const semi=rows.filter(x=>String(x.stage).toLowerCase().includes('semi'));
-    const final=rows.filter(x=>String(x.stage).toLowerCase()==='final');
-    const third=rows.filter(x=>String(x.stage).toLowerCase().includes('third'));
-    bracket.innerHTML=`
-      <div class="bracket-column"><h3>Semi-finals</h3>${semi.map(matchCard).join('')||'<div class="card">Semi-finals TBD</div>'}</div>
-      <div class="bracket-column"><h3>Final</h3>${final.map(matchCard).join('')||'<div class="card">Final TBD</div>'}</div>
-      <div class="bracket-column"><h3>Third Place</h3>${third.map(matchCard).join('')||'<div class="card">Third Place TBD</div>'}</div>`;
-  }catch(e){bracket.innerHTML='<div class="card">Unable to load bracket.</div>';}
-}
-load();setInterval(load,30000);
+document.getElementById("u14Fixture").href = SITE_CONFIG.fixtures.u14;
+document.getElementById("u17Fixture").href = SITE_CONFIG.fixtures.u17;
+document.getElementById("u19Fixture").href = SITE_CONFIG.fixtures.u19;
 </script>
 </body>
 </html>

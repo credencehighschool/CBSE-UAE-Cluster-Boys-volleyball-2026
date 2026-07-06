@@ -251,6 +251,7 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 }
 
 </style>
+<script src="config.js"></script>
 </head>
 <body>
 <header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
@@ -276,7 +277,7 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
     <h1>Register Your School for the Championship</h1>
     <p>Schools willing to participate may complete the online registration process.</p>
   </div>
-  <a class="btn" href="https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec" target="_blank">Register Your School</a>
+  <a class="btn" href="#" id="registrationBtn" target="_blank">Register Your School</a>
 </section>
 
 <section class="section">
@@ -334,26 +335,11 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 <footer class="footer">© 2026 Credence High School, Dubai · CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
 
 <script>
-const API="https://script.google.com/macros/s/AKfycbwEdyF69r2abBucFVSNK68SGn6ytFvfu7S-LteRmNv3Oa58IOHCoRiFt3E5KAYp57hrhQ/exec";
+const API=getApiUrl();
 
-/* ===== EDIT ONLY THESE DIRECT LINKS WHEN READY ===== */
-const DIRECT_DOWNLOADS = [
-  { icon:"📩", title:"Invitation", note:"Click to download invitation", url:"PASTE_INVITATION_PDF_DRIVE_LINK_HERE" },
-  { icon:"📝", title:"Step by Step Guideline to Team Registration Portal", note:"Open registration portal", url:"https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec" },
-  { icon:"📘", title:"Instructions and Guidelines of the Competition", note:"Click to download guidelines", url:"PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE" },
-  { icon:"🌐", title:"FIVB Website", note:"Official international volleyball website", url:"https://www.fivb.com/" },
-  { icon:"🇮🇳", title:"VFI Website", note:"Volleyball Federation of India", url:"https://volleyballindia.com/" },
-  { icon:"📖", title:"FIVB Rules", note:"Official rules of the game", url:"https://www.fivb.com/volleyball/the-game/rules-of-the-game/" }
-];
+/* Phase 3: values are now loaded from config.js */
 
-const VENUE_TITLE = "Championship Venue";
-const VENUE_DETAILS = "Indoor stadiums in Dubai Emirate. Final venue details and Google Map location will be updated soon.";
-const VENUE_MAP_LINK = "PASTE_GOOGLE_MAP_LOCATION_LINK_HERE";
-
-
-/* =============================================== */
-
-const targetDate = new Date("September 19, 2026 07:00:00").getTime();
+const targetDate = new Date(SITE_CONFIG.championshipStart).getTime();
 
 function tick(){
   const n=Date.now(),d=targetDate-n;
@@ -367,21 +353,30 @@ tick();
 setInterval(tick,1000);
 
 function loadDirectContent(){
+  const regBtn = document.getElementById("registrationBtn");
+  if(regBtn) regBtn.href = SITE_CONFIG.registrationUrl;
 
-  downloads.innerHTML = DIRECT_DOWNLOADS.map(d=>`
-    <a class="card tile" href="${d.url}" target="_blank">
-      <span>${d.icon}</span>
-      <strong>${d.title}</strong>
-      <small>${d.note}</small>
-    </a>
-  `).join("");
+  const links = document.querySelectorAll('a[href*="AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA"]');
+  links.forEach(a => a.href = SITE_CONFIG.registrationUrl);
 
-  venue.innerHTML = `
-    <h2>${VENUE_TITLE}</h2>
-    <p class="muted">${VENUE_DETAILS}</p>
-    <br>
-    <a class="btn" href="${VENUE_MAP_LINK}" target="_blank">Open Location Map</a>
-  `;
+  if(document.getElementById("downloads")){
+    downloads.innerHTML = SITE_CONFIG.downloads.map(d=>`
+      <a class="card tile" href="${d.url}" target="_blank">
+        <span>${d.icon}</span>
+        <strong>${d.title}</strong>
+        <small>${d.note}</small>
+      </a>
+    `).join("");
+  }
+
+  if(document.getElementById("venue")){
+    venue.innerHTML = `
+      <h2>${SITE_CONFIG.venue.title}</h2>
+      <p class="muted">${SITE_CONFIG.venue.details}</p>
+      <br>
+      <a class="btn" href="${SITE_CONFIG.venue.mapUrl}" target="_blank">Open Location Map</a>
+    `;
+  }
 }
 loadDirectContent();
 
@@ -390,9 +385,9 @@ async function loadNotices(){
   try{
     const r=await fetch(API+"?action=all&cache="+Date.now());
     const data=await r.json();
-    ticker.innerHTML=(data.notices||[]).map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ") || "🏆 Important updates will appear here.";
+    ticker.innerHTML=(data.notices||[]).map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ") || `🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
   }catch(e){
-    ticker.innerHTML="🏆 Important updates will appear here.";
+    ticker.innerHTML=`🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
   }
 }
 loadNotices();

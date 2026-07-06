@@ -256,6 +256,7 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
   .match-card-pro{padding:20px}
 }
 </style>
+<script src="config.js"></script>
 </head>
 <body>
 <header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
@@ -269,7 +270,7 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 </section>
 <footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
 <script>
-const API="https://script.google.com/macros/s/AKfycbwEdyF69r2abBucFVSNK68SGn6ytFvfu7S-LteRmNv3Oa58IOHCoRiFt3E5KAYp57hrhQ/exec";
+const API=getApiUrl();
 function statusClass(s){return String(s||'').toLowerCase()==='live'?'live':''}
 function renderMatch(m){
   const isLive = String(m.status||'').toLowerCase()==='live';
