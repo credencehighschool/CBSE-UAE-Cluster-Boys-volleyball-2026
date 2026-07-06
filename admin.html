@@ -1,4 +1,11 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Owner Admin</title><style>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Owner Admin Login</title>
+<style>
+
 :root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -23,20 +30,274 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 .contact{background:linear-gradient(135deg,var(--dark),var(--blue));padding:70px 24px}.contact-card{max-width:820px;margin:auto;text-align:center;border-top:8px solid var(--lime)}.contact-card h2{font-size:34px;margin:8px 0}.contact-card h3{color:var(--blue);font-size:26px}.contact-card p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin:8px 0}.contact-card a{color:var(--blue);font-weight:950}
 .footer{background:var(--dark);color:white;text-align:center;padding:28px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}
 @media(max-width:900px){.header{flex-direction:column;text-align:center}.nav a{margin:0 6px;font-size:11px}.news{display:block}.news-title{text-align:center}.grid3,.grid2,.quick-info,.gallery-grid{grid-template-columns:1fr}.registration{flex-direction:column;text-align:center;margin-left:16px;margin-right:16px}.quick-info{margin-left:16px;margin-right:16px}.teams{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.btn{width:100%;text-align:center}.title h2{font-size:29px}}
-</style></head><body><header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header><section class="section"><div class="title"><small>Private Owner Dashboard</small><h2>Championship Admin Panel</h2></div>
-<div class="card"><label>Admin Password</label><input id="password" type="password" placeholder="Enter owner password"></div><br>
-<div class="tabs"><button class="tab active" onclick="show('match')">Match</button><button class="tab" onclick="show('standing')">Standings</button><button class="tab" onclick="show('notice')">Notice</button><button class="tab" onclick="show('download')">Download</button><button class="tab" onclick="show('galleryp')">Gallery</button><button class="tab" onclick="show('venuep')">Venue</button></div>
-<div id="match" class="panel active card"><div class="admin-form"><div><label>Match ID</label><input id="matchId" placeholder="M001"></div><div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div><div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div><div><label>Date</label><input id="date" placeholder="Saturday, 19 September 2026"></div><div><label>Time</label><input id="time" placeholder="8:30 AM"></div><div><label>Court</label><input id="court" placeholder="Court 1"></div><div><label>Team A</label><input id="teamA"></div><div><label>Team B</label><input id="teamB"></div><div><label>Score A</label><input id="scoreA" placeholder="0"></div><div><label>Score B</label><input id="scoreB" placeholder="0"></div><div class="full"><label>Set Scores</label><input id="sets" placeholder="25-18 · 23-25 · 25-19"></div><div class="full"><label>Winner</label><input id="winner"></div></div><br><button class="btn" onclick="save('saveMatch')">Save Match</button></div>
-<div id="standing" class="panel card"><div class="admin-form"><div><label>Category</label><input id="sCategory" placeholder="Boys U-14"></div><div><label>Team</label><input id="sTeam"></div><div><label>Played</label><input id="sPlayed"></div><div><label>Won</label><input id="sWon"></div><div><label>Lost</label><input id="sLost"></div><div><label>Sets</label><input id="sSets" placeholder="6-2"></div><div><label>Points</label><input id="sPoints"></div></div><br><button class="btn" onclick="save('saveStanding')">Save Standing</button></div>
-<div id="notice" class="panel card"><div class="admin-form"><div><label>Notice ID</label><input id="nId" placeholder="N001"></div><div><label>Title</label><input id="nTitle"></div><div class="full"><label>Message</label><textarea id="nMessage"></textarea></div></div><br><button class="btn" onclick="save('saveNotice')">Save Notice</button></div>
-<div id="download" class="panel card"><div class="admin-form"><div><label>Download ID</label><input id="dId" placeholder="D001"></div><div><label>Icon</label><input id="dIcon" placeholder="📄"></div><div><label>Title</label><input id="dTitle"></div><div><label>URL</label><input id="dUrl"></div><div class="full"><label>Note</label><input id="dNote"></div></div><br><button class="btn" onclick="save('saveDownload')">Save Download</button></div>
-<div id="galleryp" class="panel card"><div class="admin-form"><div><label>Gallery ID</label><input id="gId" placeholder="G001"></div><div><label>Image URL</label><input id="gUrl"></div><div class="full"><label>Caption</label><input id="gCaption"></div></div><br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button></div>
-<div id="venuep" class="panel card"><div class="admin-form"><div><label>Venue Title</label><input id="vTitle" placeholder="Championship Venue"></div><div><label>Map URL</label><input id="vMap"></div><div class="full"><label>Venue Details</label><textarea id="vDetails"></textarea></div></div><br><button class="btn" onclick="save('saveVenue')">Save Venue</button></div>
-<p id="msg" class="muted" style="margin-top:18px"></p>
-</section><footer class="footer">Owner Admin Panel</footer>
+
+
+.login-wrap{
+  min-height:calc(100vh - 90px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 18px;
+  background:linear-gradient(135deg,var(--dark),var(--blue));
+}
+
+.login-card{
+  width:100%;
+  max-width:480px;
+  background:white;
+  border-radius:30px;
+  padding:34px;
+  box-shadow:0 18px 45px rgba(0,0,0,.35);
+  border-top:8px solid var(--lime);
+}
+
+.login-card h1{
+  font-size:32px;
+  color:var(--navy);
+  margin-bottom:8px;
+}
+
+.login-card p{
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:var(--muted);
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.login-card input{
+  margin-bottom:15px;
+}
+
+.login-error{
+  color:#b00020;
+  font-family:'Segoe UI',Arial,sans-serif;
+  font-weight:800;
+  margin-top:12px;
+}
+
+#dashboard{
+  display:none;
+}
+
+.logout-btn{
+  background:#ffffff;
+  color:var(--blue);
+  border:2px solid var(--blue);
+  margin-left:10px;
+}
+
+.admin-note{
+  background:#fff9d8;
+  border-left:7px solid var(--lime);
+  padding:14px;
+  border-radius:16px;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#374151;
+  font-weight:700;
+  margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
+
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <small class="small-title">Private Owner Access</small>
+    <h1>Admin Login</h1>
+    <p>Enter the owner username and password to open the championship dashboard.</p>
+
+    <label>Username</label>
+    <input id="loginUser" type="text" placeholder="Enter username">
+
+    <label>Password</label>
+    <input id="loginPass" type="password" placeholder="Enter password">
+
+    <button class="btn" onclick="login()">Login</button>
+    <div id="loginMsg" class="login-error"></div>
+  </div>
+</div>
+
+<div id="dashboard">
+<section class="section">
+  <div class="title">
+    <small>Private Owner Dashboard</small>
+    <h2>Championship Admin Panel</h2>
+  </div>
+
+  <div class="admin-note">
+    You are logged in as owner. Use this dashboard to update fixtures, live scores, standings, notices, downloads, gallery and venue.
+    <button class="btn logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="card">
+    <label>Admin Password</label>
+    <input id="password" type="password" placeholder="Enter owner password again for saving changes">
+  </div>
+  <br>
+
+  <div class="tabs">
+    <button class="tab active" onclick="show('match')">Match</button>
+    <button class="tab" onclick="show('standing')">Standings</button>
+    <button class="tab" onclick="show('notice')">Notice</button>
+    <button class="tab" onclick="show('download')">Download</button>
+    <button class="tab" onclick="show('galleryp')">Gallery</button>
+    <button class="tab" onclick="show('venuep')">Venue</button>
+  </div>
+
+  <div id="match" class="panel active card">
+    <div class="admin-form">
+      <div><label>Match ID</label><input id="matchId" placeholder="M001"></div>
+      <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
+      <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div>
+      <div><label>Date</label><input id="date" placeholder="Saturday, 19 September 2026"></div>
+      <div><label>Time</label><input id="time" placeholder="8:30 AM"></div>
+      <div><label>Court</label><input id="court" placeholder="Court 1"></div>
+      <div><label>Team A</label><input id="teamA"></div>
+      <div><label>Team B</label><input id="teamB"></div>
+      <div><label>Score A</label><input id="scoreA" placeholder="0"></div>
+      <div><label>Score B</label><input id="scoreB" placeholder="0"></div>
+      <div class="full"><label>Set Scores</label><input id="sets" placeholder="25-18 · 23-25 · 25-19"></div>
+      <div class="full"><label>Winner</label><input id="winner"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveMatch')">Save Match</button>
+  </div>
+
+  <div id="standing" class="panel card">
+    <div class="admin-form">
+      <div><label>Category</label><input id="sCategory" placeholder="Boys U-14"></div>
+      <div><label>Team</label><input id="sTeam"></div>
+      <div><label>Played</label><input id="sPlayed"></div>
+      <div><label>Won</label><input id="sWon"></div>
+      <div><label>Lost</label><input id="sLost"></div>
+      <div><label>Sets</label><input id="sSets" placeholder="6-2"></div>
+      <div><label>Points</label><input id="sPoints"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveStanding')">Save Standing</button>
+  </div>
+
+  <div id="notice" class="panel card">
+    <div class="admin-form">
+      <div><label>Notice ID</label><input id="nId" placeholder="N001"></div>
+      <div><label>Title</label><input id="nTitle"></div>
+      <div class="full"><label>Message</label><textarea id="nMessage"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="save('saveNotice')">Save Notice</button>
+  </div>
+
+  <div id="download" class="panel card">
+    <div class="admin-form">
+      <div><label>Download ID</label><input id="dId" placeholder="D001"></div>
+      <div><label>Icon</label><input id="dIcon" placeholder="📄"></div>
+      <div><label>Title</label><input id="dTitle"></div>
+      <div><label>URL</label><input id="dUrl"></div>
+      <div class="full"><label>Note</label><input id="dNote"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveDownload')">Save Download</button>
+  </div>
+
+  <div id="galleryp" class="panel card">
+    <div class="admin-form">
+      <div><label>Gallery ID</label><input id="gId" placeholder="G001"></div>
+      <div><label>Image URL</label><input id="gUrl"></div>
+      <div class="full"><label>Caption</label><input id="gCaption"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
+  </div>
+
+  <div id="venuep" class="panel card">
+    <div class="admin-form">
+      <div><label>Venue Title</label><input id="vTitle" placeholder="Championship Venue"></div>
+      <div><label>Map URL</label><input id="vMap"></div>
+      <div class="full"><label>Venue Details</label><textarea id="vDetails"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="save('saveVenue')">Save Venue</button>
+  </div>
+
+  <p id="msg" class="muted" style="margin-top:18px"></p>
+</section>
+</div>
+
+<footer class="footer">Owner Admin Panel</footer>
+
 <script>
-const API="PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+const API="https://script.google.com/macros/s/AKfycbzopk8FtUzxLSngOjRvkJE4FLAX0hWRGddRSmaqLzQpFFvfGGTMP5wwPcmuS7qqtKMgmA/exec";
+
+// Change only the username here if needed.
+// Password is checked against the same password in Code.gs when saving.
+const OWNER_USERNAME = "admin";
+
+function login(){
+  const user = document.getElementById("loginUser").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
+
+  if(user !== OWNER_USERNAME){
+    document.getElementById("loginMsg").innerText = "Invalid username.";
+    return;
+  }
+
+  if(!pass){
+    document.getElementById("loginMsg").innerText = "Please enter password.";
+    return;
+  }
+
+  document.getElementById("password").value = pass;
+  sessionStorage.setItem("cbseAdminLoggedIn","yes");
+  sessionStorage.setItem("cbseAdminPass",pass);
+
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+}
+
+function logout(){
+  sessionStorage.removeItem("cbseAdminLoggedIn");
+  sessionStorage.removeItem("cbseAdminPass");
+  location.reload();
+}
+
+window.addEventListener("load", () => {
+  if(sessionStorage.getItem("cbseAdminLoggedIn") === "yes"){
+    document.getElementById("password").value = sessionStorage.getItem("cbseAdminPass") || "";
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+  }
+});
+
+function show(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
 function v(id){return document.getElementById(id).value.trim()}
-async function save(action){if(API.includes("PASTE")){msg.innerText="Paste Apps Script URL in admin.html first.";return}let data={action,password:v('password')};if(action==='saveMatch')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),sets:v('sets'),winner:v('winner')});if(action==='saveStanding')Object.assign(data,{category:v('sCategory'),team:v('sTeam'),played:v('sPlayed'),won:v('sWon'),lost:v('sLost'),sets:v('sSets'),points:v('sPoints')});if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});if(action==='saveDownload')Object.assign(data,{id:v('dId'),icon:v('dIcon'),title:v('dTitle'),url:v('dUrl'),note:v('dNote')});if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});if(action==='saveVenue')Object.assign(data,{title:v('vTitle'),details:v('vDetails'),mapUrl:v('vMap')});msg.innerText='Saving...';const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});const res=await r.json();msg.innerText=res.message||'Saved.'}
-</script></body></html>
+
+async function save(action){
+  if(API.includes("PASTE")){
+    msg.innerText="Paste Apps Script URL in admin.html first.";
+    return;
+  }
+
+  let data={action,password:v('password')};
+
+  if(action==='saveMatch')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),sets:v('sets'),winner:v('winner')});
+  if(action==='saveStanding')Object.assign(data,{category:v('sCategory'),team:v('sTeam'),played:v('sPlayed'),won:v('sWon'),lost:v('sLost'),sets:v('sSets'),points:v('sPoints')});
+  if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
+  if(action==='saveDownload')Object.assign(data,{id:v('dId'),icon:v('dIcon'),title:v('dTitle'),url:v('dUrl'),note:v('dNote')});
+  if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
+  if(action==='saveVenue')Object.assign(data,{title:v('vTitle'),details:v('vDetails'),mapUrl:v('vMap')});
+
+  msg.innerText='Saving...';
+
+  try{
+    const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});
+    const res=await r.json();
+    msg.innerText=res.message||'Saved.';
+  }catch(e){
+    msg.innerText='Unable to save. Please check Apps Script deployment.';
+  }
+}
+</script>
+</body>
+</html>

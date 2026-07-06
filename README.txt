@@ -43,3 +43,11 @@ https://script.google.com/macros/s/AKfycbzopk8FtUzxLSngOjRvkJE4FLAX0hWRGddRSmaqL
 
 These files are now connected to your Apps Script Web App.
 Upload/replace the HTML files in GitHub.
+
+
+LOGIN FIX APPLIED:
+- Fixtures page no longer opens admin dashboard.
+- Admin dashboard opens only through admin.html / Admin tab.
+- Admin page now shows Username and Password login first.
+- Default username is: admin
+- Password is the password set in Code.gs under ADMIN_PASSWORD.
