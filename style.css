@@ -1,0 +1,345 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#f4f7fb;
+  color:#12213a;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 7%;
+  background:rgba(3,18,45,0.95);
+  color:white;
+  backdrop-filter:blur(10px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.ball{
+  font-size:34px;
+}
+
+.brand strong{
+  display:block;
+  font-size:18px;
+}
+
+.brand small{
+  color:#d6e7ff;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:22px;
+  font-weight:700;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:#ffd700;
+}
+
+.hero{
+  min-height:680px;
+  background:url("images/cover.png") center/cover no-repeat;
+  position:relative;
+}
+
+.hero-overlay{
+  min-height:680px;
+  background:linear-gradient(90deg,rgba(0,16,46,0.82),rgba(0,0,0,0.20),rgba(0,16,46,0.55));
+  display:flex;
+  align-items:center;
+  padding:0 7%;
+}
+
+.hero-content{
+  max-width:760px;
+  color:white;
+}
+
+.host{
+  display:inline-block;
+  background:rgba(255,215,0,0.95);
+  color:#061a3a;
+  padding:10px 22px;
+  border-radius:30px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:58px;
+  line-height:1.05;
+  text-transform:uppercase;
+  text-shadow:3px 3px 12px rgba(0,0,0,0.75);
+}
+
+.hero h2{
+  font-size:64px;
+  color:#ffd700;
+  margin:8px 0 24px;
+  text-shadow:3px 3px 12px rgba(0,0,0,0.75);
+}
+
+.hero-buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  border-radius:40px;
+  padding:15px 32px;
+  font-weight:900;
+  letter-spacing:.4px;
+  transition:.25s;
+}
+
+.primary{
+  background:#0077ff;
+  color:white;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+
+.secondary{
+  background:white;
+  color:#061a3a;
+}
+
+.gold{
+  background:#ffd700;
+  color:#061a3a;
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.ticker{
+  background:linear-gradient(90deg,#5b0018,#001f3f,#5b0018);
+  color:white;
+  padding:14px 0;
+  font-size:20px;
+  font-weight:800;
+  box-shadow:0 5px 18px rgba(0,0,0,.25);
+}
+
+.ticker span{
+  color:#7CFC00;
+}
+
+.countdown-section{
+  padding:45px 7%;
+  text-align:center;
+  background:white;
+}
+
+.countdown-section h2{
+  font-size:34px;
+  margin-bottom:25px;
+}
+
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.countdown div{
+  min-width:130px;
+  background:#061a3a;
+  color:white;
+  border-radius:18px;
+  padding:22px 18px;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
+.countdown strong{
+  display:block;
+  font-size:42px;
+  color:#ffd700;
+}
+
+.countdown small{
+  font-weight:800;
+}
+
+.section{
+  padding:70px 7%;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title p{
+  color:#0077ff;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.section-title h2{
+  font-size:38px;
+  color:#061a3a;
+}
+
+.about-grid,.download-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.card,.download-card,.venue-card,.contact-card,.update-box{
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.card h3{
+  margin-bottom:12px;
+  color:#061a3a;
+}
+
+.dark{
+  background:linear-gradient(135deg,#061a3a,#0057b8);
+  color:white;
+}
+
+.dark .section-title h2,
+.dark .section-title p{
+  color:white;
+}
+
+.center{
+  text-align:center;
+}
+
+.center-text{
+  max-width:850px;
+  margin:0 auto 25px;
+  text-align:center;
+  font-size:18px;
+}
+
+.download-card{
+  display:block;
+  text-decoration:none;
+  color:#061a3a;
+  text-align:center;
+  transition:.25s;
+}
+
+.download-card:hover{
+  transform:translateY(-5px);
+}
+
+.download-card span{
+  display:block;
+  font-size:42px;
+  margin-bottom:12px;
+}
+
+.download-card strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.download-card small{
+  color:#52647c;
+}
+
+.update-box,.venue-card,.contact-card{
+  max-width:850px;
+  margin:auto;
+  text-align:center;
+}
+
+.contact-card a{
+  color:#0057b8;
+  font-weight:800;
+}
+
+footer{
+  background:#061a3a;
+  color:white;
+  text-align:center;
+  padding:28px 7%;
+}
+
+@media(max-width:900px){
+  .topbar{
+    display:block;
+    text-align:center;
+  }
+
+  nav{
+    margin-top:12px;
+  }
+
+  nav a{
+    margin:0 8px;
+    font-size:13px;
+  }
+
+  .hero,.hero-overlay{
+    min-height:520px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .hero h2{
+    font-size:42px;
+  }
+
+  .about-grid,.download-grid{
+    grid-template-columns:1fr;
+  }
+
+  .ticker{
+    font-size:15px;
+  }
+}
+
+@media(max-width:520px){
+  .hero,.hero-overlay{
+    min-height:430px;
+  }
+
+  .hero-content{
+    text-align:center;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .section-title h2{
+    font-size:28px;
+  }
+}
