@@ -36,3 +36,10 @@ Use your password and update matches, scores, standings, notices, downloads, gal
 
 Registration portal linked:
 https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec
+
+
+CONNECTED WEB APP URL:
+https://script.google.com/macros/s/AKfycbzopk8FtUzxLSngOjRvkJE4FLAX0hWRGddRSmaqLzQpFFvfGGTMP5wwPcmuS7qqtKMgmA/exec
+
+These files are now connected to your Apps Script Web App.
+Upload/replace the HTML files in GitHub.
