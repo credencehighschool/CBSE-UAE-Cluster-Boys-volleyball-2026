@@ -266,7 +266,7 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 </style>
 </head>
 <body>
-<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
+<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
 
 <div id="loginScreen" class="login-wrap">
   <div class="login-card">
@@ -290,6 +290,9 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
     <button class="tab" onclick="show('match')">Match Score</button>
     <button class="tab" onclick="show('notice')">Notice</button>
     <button class="tab" onclick="show('galleryp')">Gallery</button>
+    <button class="tab" onclick="show('bracketp')">Bracket</button>
+    <button class="tab" onclick="show('medalp')">Medal Tally</button>
+    <button class="tab" onclick="show('awardp')">Awards</button>
   </div>
 
   
@@ -347,6 +350,43 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
     </div><br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
   </div>
 
+  
+  <div id="bracketp" class="panel card">
+    <div class="admin-form">
+      <div><label>Bracket Match ID</label><input id="bId" placeholder="SF-U14-1"></div>
+      <div><label>Category</label><select id="bCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+      <div><label>Stage</label><select id="bStage"><option>Semi Final</option><option>Final</option><option>Third Place</option></select></div>
+      <div><label>Team A</label><input id="bTeamA"></div>
+      <div><label>Score A</label><input id="bScoreA" placeholder="0"></div>
+      <div><label>Team B</label><input id="bTeamB"></div>
+      <div><label>Score B</label><input id="bScoreB" placeholder="0"></div>
+      <div><label>Winner</label><input id="bWinner"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveBracket')">Save Bracket Match</button>
+  </div>
+
+  <div id="medalp" class="panel card">
+    <div class="admin-form">
+      <div><label>Medal ID</label><input id="mId" placeholder="U14-GOLD"></div>
+      <div><label>Category</label><select id="mCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+      <div><label>Position</label><select id="mPosition"><option>Champion</option><option>Runner-up</option><option>Third Place</option></select></div>
+      <div><label>School</label><input id="mSchool"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveMedal')">Save Medal</button>
+  </div>
+
+  <div id="awardp" class="panel card">
+    <div class="admin-form">
+      <div><label>Award ID</label><input id="aId" placeholder="BEST-PLAYER-U14"></div>
+      <div><label>Icon</label><input id="aIcon" placeholder="⭐"></div>
+      <div><label>Award Name</label><input id="aAward" placeholder="Best Player"></div>
+      <div><label>Student Name</label><input id="aStudent"></div>
+      <div><label>School</label><input id="aSchool"></div>
+      <div><label>Category</label><select id="aCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Overall</option></select></div>
+    </div>
+    <br><button class="btn" onclick="save('saveAward')">Save Award</button>
+  </div>
+
   <p id="msg" class="muted" style="margin-top:18px"></p>
 </section>
 </div>
@@ -371,6 +411,9 @@ async function save(action){
   if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
   if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
   if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
+  if(action==='saveBracket')Object.assign(data,{id:v('bId'),category:v('bCategory'),stage:v('bStage'),teamA:v('bTeamA'),scoreA:v('bScoreA'),teamB:v('bTeamB'),scoreB:v('bScoreB'),winner:v('bWinner')});
+  if(action==='saveMedal')Object.assign(data,{id:v('mId'),category:v('mCategory'),position:v('mPosition'),school:v('mSchool')});
+  if(action==='saveAward')Object.assign(data,{id:v('aId'),icon:v('aIcon'),award:v('aAward'),student:v('aStudent'),school:v('aSchool'),category:v('aCategory')});
   msg.innerText='Saving...';
   try{const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});const res=await r.json();msg.innerText=res.message||'Saved.';}
   catch(e){msg.innerText='Unable to save. Please check Apps Script deployment.';}
