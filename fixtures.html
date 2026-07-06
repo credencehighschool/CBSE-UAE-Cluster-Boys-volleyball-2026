@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Fixtures</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fixtures | CBSE UAE Cluster Boys Volleyball Championship</title>
 <style>
+
 
 :root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -113,193 +115,160 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 }
 
 
-.live-dot{
-  display:inline-block;
-  width:10px;
-  height:10px;
-  background:#ff1744;
-  border-radius:50%;
-  margin-right:7px;
-  animation:pulse 1s infinite;
+.locked-tile{
+  opacity:.95;
+  cursor:not-allowed;
+  border-top-color:var(--lime)!important;
+  background:linear-gradient(180deg,#ffffff,#f7fbff);
 }
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(255,23,68,.7)}
-  70%{box-shadow:0 0 0 12px rgba(255,23,68,0)}
-  100%{box-shadow:0 0 0 0 rgba(255,23,68,0)}
+.locked-tile:hover{
+  transform:none!important;
 }
-.match-card-pro{
+.locked-tile span{
+  color:var(--blue);
+}
+
+
+.fixture-page{
+  max-width:1050px;
+  margin:auto;
+  padding:65px 22px;
+}
+
+.fixture-list{
+  display:grid;
+  gap:24px;
+}
+
+.fixture-row{
   background:white;
-  border-radius:30px;
-  padding:28px;
-  box-shadow:0 12px 32px rgba(0,0,0,.10);
-  border-top:8px solid var(--blue);
-}
-.match-card-pro.live{
-  border-top-color:#ff1744;
-}
-.match-head-pro{
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+  border-left:10px solid var(--lime);
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:12px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:25px;
 }
-.match-label{
-  background:var(--blue);
-  color:white;
-  padding:9px 15px;
-  border-radius:40px;
-  font-size:12px;
-  font-weight:950;
-  text-transform:uppercase;
+
+.fixture-row h3{
+  font-size:30px;
+  color:var(--navy);
+  margin-bottom:8px;
 }
-.match-status{
-  background:var(--lime);
-  color:var(--dark);
-  padding:9px 15px;
-  border-radius:40px;
-  font-size:12px;
-  font-weight:950;
-  text-transform:uppercase;
-}
-.match-status.live{
-  background:#ff1744;
-  color:white;
-}
-.match-meta-pro{
+
+.fixture-row p{
   font-family:'Segoe UI',Arial,sans-serif;
   color:var(--muted);
-  font-weight:800;
-  margin-bottom:18px;
+  font-weight:700;
+  line-height:1.5;
 }
-.score-board{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  gap:18px;
-  align-items:center;
-  text-align:center;
-}
-.score-team{
-  background:#f7faff;
-  border-radius:22px;
-  padding:18px;
-}
-.score-team h3{
-  font-size:21px;
-  color:var(--navy);
-  margin-bottom:10px;
-}
-.score-team strong{
-  display:block;
-  color:var(--blue);
-  font-size:54px;
-  line-height:1;
-}
-.score-vs{
-  background:var(--dark);
-  color:var(--lime);
-  padding:16px 18px;
-  border-radius:18px;
-  font-size:24px;
-  font-weight:950;
-}
-.set-strip{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:18px;
-}
-.set-pill{
-  background:#eef4ff;
-  color:var(--navy);
-  border-radius:30px;
-  padding:9px 13px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-size:13px;
-  font-weight:900;
-}
-.current-set{
-  margin-top:16px;
-  text-align:center;
-  color:#ff1744;
+
+.download-fixture-btn{
+  background:var(--blue);
+  color:white;
+  text-decoration:none;
+  padding:15px 28px;
+  border-radius:14px;
   font-weight:950;
   text-transform:uppercase;
-  letter-spacing:.8px;
+  white-space:nowrap;
+  display:inline-block;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
 }
-.match-winner{
-  margin-top:14px;
-  text-align:center;
-  color:var(--blue);
-  font-weight:950;
+
+.download-fixture-btn:hover{
+  background:var(--lime);
+  color:var(--dark);
 }
-.admin-mobile-note{
-  background:#eaf2ff;
-  border-left:7px solid var(--blue);
-  padding:15px;
-  border-radius:16px;
+
+.edit-note{
+  background:#fff9d8;
+  border-left:7px solid var(--lime);
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:28px;
   font-family:'Segoe UI',Arial,sans-serif;
   color:#374151;
   font-weight:750;
-  margin-bottom:18px;
 }
-.set-input-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
+
+@media(max-width:760px){
+  .fixture-row{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .download-fixture-btn{
+    width:100%;
+    text-align:center;
+  }
 }
-@media(max-width:800px){
-  .score-board{grid-template-columns:1fr}
-  .score-vs{width:90px;margin:auto}
-  .set-input-grid{grid-template-columns:1fr}
-  .match-card-pro{padding:20px}
-}
+
 </style>
 </head>
+
 <body>
 <header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
-<section class="section">
+
+<section class="fixture-page">
+
   <div class="title">
-    <small>Championship Centre</small>
-    <h2>Fixtures</h2>
-    <p class="muted">Official match schedule with category, court and match timing.</p>
+    <small>Official Fixtures</small>
+    <h2>Category-wise Fixtures</h2>
+    <p class="muted">Click the download button beside each category to download the official fixture PDF.</p>
   </div>
-  <div id="fixtures" class="grid2"><div class="card">Loading...</div></div>
+
+  <div class="edit-note">
+    Replace the placeholder Drive links in this file with your actual public PDF links.
+  </div>
+
+  <div class="fixture-list">
+
+    <div class="fixture-row">
+      <div>
+        <h3>U-14 Boys</h3>
+        <p>Official fixture for the Boys U-14 category.</p>
+      </div>
+      <a class="download-fixture-btn"
+         href="PASTE_U14_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE"
+         target="_blank">
+         Click here to download fixture
+      </a>
+    </div>
+
+    <div class="fixture-row">
+      <div>
+        <h3>U-17 Boys</h3>
+        <p>Official fixture for the Boys U-17 category.</p>
+      </div>
+      <a class="download-fixture-btn"
+         href="PASTE_U17_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE"
+         target="_blank">
+         Click here to download fixture
+      </a>
+    </div>
+
+    <div class="fixture-row">
+      <div>
+        <h3>U-19 Boys</h3>
+        <p>Official fixture for the Boys U-19 category.</p>
+      </div>
+      <a class="download-fixture-btn"
+         href="PASTE_U19_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE"
+         target="_blank">
+         Click here to download fixture
+      </a>
+    </div>
+
+  </div>
+
 </section>
-<footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
-<script>
-const API="https://script.google.com/macros/s/AKfycbzopk8FtUzxLSngOjRvkJE4FLAX0hWRGddRSmaqLzQpFFvfGGTMP5wwPcmuS7qqtKMgmA/exec";
-function statusClass(s){return String(s||'').toLowerCase()==='live'?'live':''}
-function renderMatch(m){
-  const isLive = String(m.status||'').toLowerCase()==='live';
-  const sets = [m.set1,m.set2,m.set3,m.set4,m.set5].filter(Boolean).map((s,i)=>`<span class="set-pill">Set ${i+1}: ${s}</span>`).join('');
-  return `<article class="match-card-pro ${isLive?'live':''}">
-    <div class="match-head-pro">
-      <span class="match-label">${m.category||''}</span>
-      <span class="match-status ${statusClass(m.status)}">${isLive?'<span class="live-dot"></span>':''}${m.status||'Scheduled'}</span>
-    </div>
-    <div class="match-meta-pro">${m.date||''} · ${m.time||''} · ${m.court||''}</div>
-    <div class="score-board">
-      <div class="score-team"><h3>${m.teamA||''}</h3><strong>${m.scoreA||'0'}</strong></div>
-      <div class="score-vs">VS</div>
-      <div class="score-team"><h3>${m.teamB||''}</h3><strong>${m.scoreB||'0'}</strong></div>
-    </div>
-    <div class="set-strip">${sets || '<span class="set-pill">Set scores to be updated</span>'}</div>
-    ${m.currentSet?`<div class="current-set">Current Set: ${m.currentSet}</div>`:''}
-    <div class="match-winner">Winner: ${m.winner||'To be updated'}</div>
-  </article>`;
-}
-async function load(){
-  const box=document.getElementById("fixtures");
-  try{
-    const r=await fetch(API+"?action=fixtures&cache="+Date.now());
-    const d=await r.json();
-    const data=d["fixtures"]||[];
-    box.innerHTML=data.map(renderMatch).join("") || '<div class="card">No records published yet.</div>';
-  }catch(e){box.innerHTML='<div class="card">Unable to load data.</div>';}
-}
-load(); setInterval(load,30000);
-</script>
+
+<footer class="footer">
+  CBSE UAE Cluster Boys Volleyball Championship 2026–27
+</footer>
+
 </body>
 </html>
