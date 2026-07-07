@@ -1,17 +1,12 @@
 /*
 CBSE UAE Cluster Boys Volleyball Championship Portal
-PHASE 3 - CENTRAL CONFIGURATION FILE
+CENTRAL CONFIGURATION FILE
 
-Next year, change only this file for:
-- event title
-- year
-- dates
-- registration URL
-- Apps Script URL
-- fixture PDF links
-- downloads
-- venue/map link
-- contact details
+Every year, change ONLY this file for:
+- event title, year, dates
+- registration URL / Apps Script URL
+- fixture PDF links, downloads, venue/map link, contact details
+- which sections are open to the public (phase toggles)
 */
 
 const SITE_CONFIG = {
@@ -19,14 +14,23 @@ const SITE_CONFIG = {
   eventYear: "2026–27",
   hostedBy: "Credence High School, Dubai",
   categoriesText: "Boys U-14 | U-17 | U-19",
+  heroImage: "images/cover.png",
 
   championshipStart: "September 19, 2026 07:00:00",
   championshipDatesText: "Saturday, September 19th & Sunday, September 20th 2026",
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
 
-  apiUrl: "https://script.google.com/macros/s/AKfycbzVFW61dLvxXU4T0tJkAL6M4BmYLwF5kVsMdQr-_bMtmcj_xST4CrtlXZn28VdgP_WW_w/exec",
+  // IMPORTANT: paste your deployed Google Apps Script Web App URL here (see Code.gs)
+  apiUrl: "https://script.google.com/macros/s/AKfycbzR0-gaRmeL9iJs9p3XbG06atHiqFN_xHHbmVY43Uk_pNnLLIv222Sg3L-gkPpqONxAGg/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
+
+  // Turn each section on once it's ready — controls the Home page tiles
+  phase: {
+    fixturesOpen: false,
+    liveOpen: false,
+    standingsOpen: false
+  },
 
   overview: {
     participatingSchools: "00",
@@ -42,42 +46,12 @@ const SITE_CONFIG = {
   },
 
   downloads: [
-    {
-      icon: "📩",
-      title: "Invitation",
-      note: "Click to download invitation",
-      url: "PASTE_INVITATION_PDF_DRIVE_LINK_HERE"
-    },
-    {
-      icon: "📝",
-      title: "Step by Step Guideline to Team Registration Portal",
-      note: "Open registration portal",
-      url: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec"
-    },
-    {
-      icon: "📘",
-      title: "Instructions and Guidelines of the Competition",
-      note: "Click to download guidelines",
-      url: "PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE"
-    },
-    {
-      icon: "🌐",
-      title: "FIVB Website",
-      note: "Official international volleyball website",
-      url: "https://www.fivb.com/"
-    },
-    {
-      icon: "🇮🇳",
-      title: "VFI Website",
-      note: "Volleyball Federation of India",
-      url: "https://volleyballindia.com/"
-    },
-    {
-      icon: "📖",
-      title: "FIVB Rules",
-      note: "Official rules of the game",
-      url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/"
-    }
+    { icon: "📩", title: "Invitation", note: "Click to download invitation", url: "PASTE_INVITATION_PDF_DRIVE_LINK_HERE" },
+    { icon: "📝", title: "Step by Step Guideline to Team Registration Portal", note: "Open registration portal", url: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec" },
+    { icon: "📘", title: "Instructions and Guidelines of the Competition", note: "Click to download guidelines", url: "PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE" },
+    { icon: "🌐", title: "FIVB Website", note: "Official international volleyball website", url: "https://www.fivb.com/" },
+    { icon: "🇮🇳", title: "VFI Website", note: "Volleyball Federation of India", url: "https://volleyballindia.com/" },
+    { icon: "📖", title: "FIVB Rules", note: "Official rules of the game", url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/" }
   ],
 
   venue: {
