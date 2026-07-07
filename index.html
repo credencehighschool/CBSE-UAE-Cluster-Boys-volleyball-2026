@@ -1,396 +1,352 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CBSE UAE Cluster Boys Volleyball Championship 2026–27</title>
-<style>
-
-:root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft);color:var(--navy)}
-.header{background:var(--dark);color:white;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.28)}
-.brand{display:flex;align-items:center;gap:12px}.brand-icon{background:var(--lime);color:var(--dark);width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px}.brand strong{display:block;font-size:18px}.brand span{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:#dce9ff;font-weight:700}
-.nav a{color:white;text-decoration:none;margin-left:14px;font-size:12px;text-transform:uppercase;font-weight:950}.nav a:hover{color:var(--lime)}
-.hero{background:var(--dark)}.hero img{width:100%;height:auto;display:block}
-.news{display:flex;background:linear-gradient(90deg,var(--dark),var(--blue),var(--dark));color:white}.news-title{background:var(--lime);color:var(--dark);padding:14px 24px;white-space:nowrap;text-transform:uppercase;font-weight:950}.news marquee{padding:14px 0;font-weight:900}.news strong{color:var(--lime)}
-.section{max-width:1250px;margin:auto;padding:60px 22px}.title{text-align:center;margin-bottom:30px}.title small,.small-title{color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;font-size:13px;font-weight:950}.title h2{font-size:38px;margin-top:8px}
-.card{background:white;border-radius:26px;padding:26px;box-shadow:0 8px 24px rgba(0,0,0,.09)}
-.btn{display:inline-block;background:var(--lime);color:var(--dark);text-decoration:none;padding:13px 24px;border-radius:14px;font-weight:950;text-transform:uppercase;box-shadow:0 8px 20px rgba(0,0,0,.18);border:none;cursor:pointer}.btn:hover{background:var(--blue);color:white}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.quick-info{max-width:1250px;margin:28px auto 0;padding:28px;background:linear-gradient(135deg,var(--blue),#002b9c);border-radius:30px;color:white;display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:center;box-shadow:0 15px 35px rgba(0,87,255,.28)}.quick-info p{color:var(--lime);font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}.quick-info h2{font-size:27px}
-.registration{max-width:1250px;margin:28px auto 0;padding:32px;background:white;border-radius:30px;display:flex;align-items:center;justify-content:space-between;gap:25px;box-shadow:0 12px 32px rgba(0,0,0,.12);border-left:10px solid var(--lime)}.registration small{color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;font-weight:950}.registration h1{font-size:34px;margin:8px 0}.registration p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.countdown{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}.count-box{min-width:135px;padding:24px 16px;background:linear-gradient(180deg,var(--navy),var(--dark));border-radius:24px;color:white;text-align:center;border-bottom:6px solid var(--lime);box-shadow:0 10px 26px rgba(0,0,0,.22)}.count-box strong{display:block;color:var(--lime);font-size:45px;line-height:1;margin-bottom:8px}
-.tile{display:block;text-decoration:none;color:var(--navy);text-align:center;border-top:7px solid var(--blue);transition:.25s}.tile:hover{transform:translateY(-5px)}.tile.featured{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}.tile span{font-size:42px;display:block;margin-bottom:12px}.tile strong{display:block;font-size:18px;margin-bottom:8px}.tile small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.match{border-top:7px solid var(--blue)}.match-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:16px}.pill{background:var(--blue);color:white;padding:8px 14px;border-radius:40px;font-size:12px;font-weight:950}.status{background:var(--lime);color:var(--dark)}.meta,.sets,.winner,.muted{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;line-height:1.55}.teams{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;text-align:center}.team strong{font-size:18px}.team span{display:block;margin-top:8px;font-size:42px;color:var(--blue)}.vs{background:var(--dark);color:var(--lime);border-radius:16px;padding:12px 16px;font-weight:950}
-.table{width:100%;border-collapse:collapse;background:white;border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.09);font-family:'Segoe UI',Arial,sans-serif;font-weight:750}.table th{background:var(--dark);color:white;text-align:left;padding:14px}.table td{padding:13px;border-bottom:1px solid #e6edf8}.table tr:last-child td{border-bottom:none}
-.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}label{display:block;color:var(--blue);font-size:12px;text-transform:uppercase;font-weight:950;margin-bottom:6px}input,select,textarea{width:100%;padding:12px;border:1px solid #d7e0ee;border-radius:12px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}.full{grid-column:1/-1}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.tab{background:white;border:2px solid var(--blue);color:var(--blue);padding:10px 16px;border-radius:12px;font-weight:950;cursor:pointer}.tab.active{background:var(--blue);color:white}.panel{display:none}.panel.active{display:block}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.gallery-img{height:220px;border-radius:24px;background:#fff;display:grid;place-items:center;text-align:center;padding:20px;border:2px dashed rgba(0,87,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.08)}.gallery-img img{max-width:100%;max-height:100%;border-radius:18px}
-.contact{background:linear-gradient(135deg,var(--dark),var(--blue));padding:70px 24px}.contact-card{max-width:820px;margin:auto;text-align:center;border-top:8px solid var(--lime)}.contact-card h2{font-size:34px;margin:8px 0}.contact-card h3{color:var(--blue);font-size:26px}.contact-card p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin:8px 0}.contact-card a{color:var(--blue);font-weight:950}
-.footer{background:var(--dark);color:white;text-align:center;padding:28px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}
-@media(max-width:900px){.header{flex-direction:column;text-align:center}.nav a{margin:0 6px;font-size:11px}.news{display:block}.news-title{text-align:center}.grid3,.grid2,.quick-info,.gallery-grid{grid-template-columns:1fr}.registration{flex-direction:column;text-align:center;margin-left:16px;margin-right:16px}.quick-info{margin-left:16px;margin-right:16px}.teams{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.btn{width:100%;text-align:center}.title h2{font-size:29px}}
-
-
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-.stat-card{
-  background:linear-gradient(135deg,var(--navy),var(--dark));
-  color:white;
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 10px 28px rgba(0,0,0,.18);
-  border-bottom:7px solid var(--lime);
-}
-.stat-card strong{
-  display:block;
-  color:var(--lime);
-  font-size:42px;
-  margin-bottom:8px;
-}
-.stat-card span{
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:800;
-  text-transform:uppercase;
-  font-size:13px;
-  letter-spacing:.5px;
-}
-.fixture-category{
-  background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 10px 28px rgba(0,0,0,.10);
-  border-left:9px solid var(--lime);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-.fixture-category h3{
-  font-size:28px;
-  color:var(--navy);
-  margin-bottom:8px;
-}
-.fixture-category p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:700;
-}
-.fixture-btn{
-  display:inline-block;
-  background:var(--blue);
-  color:white;
-  text-decoration:none;
-  padding:14px 26px;
-  border-radius:14px;
-  font-weight:950;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-.fixture-btn:hover{
-  background:var(--lime);
-  color:var(--dark);
-}
-.direct-note{
-  background:#fff9d8;
-  border-left:7px solid var(--lime);
-  padding:18px;
-  border-radius:18px;
-  margin-bottom:26px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:#374151;
-  font-weight:700;
-}
-@media(max-width:900px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .fixture-category{flex-direction:column;text-align:center}
-}
-@media(max-width:560px){
-  .stats-grid{grid-template-columns:1fr}
-}
-
-
-.locked-tile{
-  opacity:.95;
-  cursor:not-allowed;
-  border-top-color:var(--lime)!important;
-  background:linear-gradient(180deg,#ffffff,#f7fbff);
-}
-.locked-tile:hover{
-  transform:none!important;
-}
-.locked-tile span{
-  color:var(--blue);
-}
-
-.phase2-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.phase2-card{
-  background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 10px 28px rgba(0,0,0,.10);
-  text-align:center;
-  text-decoration:none;
-  color:var(--navy);
-  border-top:8px solid var(--blue);
-  transition:.25s;
-}
-.phase2-card:hover{transform:translateY(-5px)}
-.phase2-card.gold{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}
-.phase2-card span{font-size:48px;display:block;margin-bottom:14px}
-.phase2-card strong{font-size:21px;display:block;margin-bottom:8px}
-.phase2-card small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.bracket-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  align-items:start;
-}
-.bracket-column h3{
-  background:var(--dark);
-  color:white;
-  border-radius:16px;
-  padding:14px;
-  text-align:center;
-  margin-bottom:16px;
-}
-.bracket-match{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 8px 22px rgba(0,0,0,.10);
-  border-left:7px solid var(--lime);
-  margin-bottom:18px;
-}
-.bracket-match small{
-  color:var(--blue);
-  font-weight:950;
-  text-transform:uppercase;
-}
-.bracket-team{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:12px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:850;
-  color:var(--navy);
-}
-.bracket-score{
-  background:var(--blue);
-  color:white;
-  border-radius:10px;
-  padding:4px 10px;
-}
-.medal-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.medal-card{
-  background:white;
-  border-radius:30px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-}
-.medal-card .medal{
-  font-size:64px;
-  display:block;
-  margin-bottom:12px;
-}
-.medal-card h3{
-  color:var(--blue);
-  font-size:26px;
-  margin-bottom:8px;
-}
-.medal-card p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:800;
-}
-.awards-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.award-card{
-  background:white;
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,.10);
-  border-top:7px solid var(--lime);
-}
-.award-card span{
-  display:block;
-  font-size:44px;
-  margin-bottom:12px;
-}
-.award-card h3{
-  color:var(--navy);
-  font-size:21px;
-  margin-bottom:8px;
-}
-.award-card p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:750;
-  line-height:1.5;
-}
-@media(max-width:900px){
-  .phase2-grid,.bracket-grid,.medal-grid,.awards-grid{grid-template-columns:1fr}
-}
-
-</style>
+<title>CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="style.css">
 <script src="config.js"></script>
 </head>
+
 <body>
-<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
 
-<main id="home">
-<section class="hero"><img src="images/cover.png" alt="CBSE UAE Cluster Boys Volleyball Championship"></section>
-
-<section class="news">
-  <div class="news-title">Latest Update</div>
-  <marquee id="ticker">🏆 Important updates will appear here.</marquee>
-</section>
-
-<section class="quick-info">
-  <div><p>Hosted by</p><h2>Credence High School, Dubai</h2></div>
-  <div><p>Categories</p><h2>Boys U-14 | U-17 | U-19</h2></div>
-</section>
-
-
-
-<section class="registration">
-  <div>
-    <small>Official Registration Portal</small>
-    <h1>Register Your School for the Championship</h1>
-    <p>Schools willing to participate may complete the online registration process.</p>
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-icon">🏐</div>
+    <div>
+      <strong id="brandTitle">CBSE UAE Cluster</strong>
+      <span id="brandSubtitle">Boys Volleyball Championship</span>
+    </div>
   </div>
-  <a class="btn" href="#" id="registrationBtn" target="_blank">Register Your School</a>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <nav id="mainNav" class="nav">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('fixtures')">Fixtures</button>
+    <button onclick="showPage('live')">Live Scores</button>
+    <button onclick="showPage('standings')">Standings</button>
+    <button onclick="showPage('results')">Results</button>
+    <button onclick="showPage('bracket')">Bracket</button>
+    <button onclick="showPage('medals')">Medals</button>
+    <button onclick="showPage('awards')">Awards</button>
+    <button onclick="showPage('gallery')">Gallery</button>
+    <button onclick="showPage('admin')">Admin</button>
+  </nav>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+  <section class="hero">
+    <img src="images/cover.png" alt="Championship Cover">
+  </section>
+
+  <section class="news">
+    <div class="news-label">Latest Update</div>
+    <marquee id="ticker">Loading updates...</marquee>
+  </section>
+
+  <section class="quick-info">
+    <div>
+      <p>Hosted by</p>
+      <h2 id="hostedBy"></h2>
+    </div>
+    <div>
+      <p>Categories</p>
+      <h2 id="categoriesText"></h2>
+    </div>
+  </section>
+
+  <section class="registration">
+    <div>
+      <small>Official Registration Portal</small>
+      <h1>Register Your School for the Championship</h1>
+      <p>Schools willing to participate may complete the online registration process.</p>
+    </div>
+    <a id="registrationBtn" class="btn" target="_blank">Register Your School</a>
+  </section>
+
+  <section class="section">
+    <div class="title">
+      <small>Championship Countdown</small>
+      <h2 id="countdownTitle"></h2>
+    </div>
+    <div class="countdown" id="timer">
+      <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
+      <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
+      <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
+      <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="title">
+      <small>Championship Centre</small>
+      <h2>Fixtures, Live Scores & Results</h2>
+    </div>
+    <div class="grid3">
+      <button class="card tile" onclick="showPage('fixtures')"><span>📅</span><strong>Fixtures</strong><small>Category-wise fixture PDFs</small></button>
+      <button class="card tile featured" onclick="showPage('live')"><span>🏐</span><strong>Live Scores</strong><small>Live match scorecards</small></button>
+      <button class="card tile" onclick="showPage('standings')"><span>📊</span><strong>Standings</strong><small>Automatic points table</small></button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="title">
+      <small>Official Documents</small>
+      <h2>Downloads & Quick Links</h2>
+    </div>
+    <div id="downloadsGrid" class="grid3"></div>
+  </section>
+
+  <section class="section">
+    <div class="title"><small>Venue</small><h2>Championship Venue</h2></div>
+    <div id="venueBox" class="card"></div>
+  </section>
+
+  <section class="contact">
+    <div class="card contact-card">
+      <small class="small-title">Need Assistance?</small>
+      <h2>Contact Coordinator</h2>
+      <h3 id="contactName"></h3>
+      <p id="contactRole"></p>
+      <p>Email: <a id="contactEmail"></a></p>
+      <p>Mobile: <a id="contactMobile"></a></p>
+    </div>
+  </section>
 </section>
 
-<section class="section">
-  <div class="title"><small>Championship Countdown</small><h2>September 19–20, 2026</h2></div>
-  <div class="countdown" id="timer">
-    <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
-    <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
-    <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
-    <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+<section id="fixtures" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Official Fixtures</small>
+      <h2>Category-wise Fixtures</h2>
+      <p class="muted">Download official fixture PDFs for each category.</p>
+    </div>
+
+    <div class="fixture-list">
+      <div class="fixture-row">
+        <div><h3>U-14 Boys</h3><p>Official U-14 Boys fixture PDF.</p></div>
+        <a id="u14Fixture" class="fixture-btn" target="_blank">Click here to download fixture</a>
+      </div>
+      <div class="fixture-row">
+        <div><h3>U-17 Boys</h3><p>Official U-17 Boys fixture PDF.</p></div>
+        <a id="u17Fixture" class="fixture-btn" target="_blank">Click here to download fixture</a>
+      </div>
+      <div class="fixture-row">
+        <div><h3>U-19 Boys</h3><p>Official U-19 Boys fixture PDF.</p></div>
+        <a id="u19Fixture" class="fixture-btn" target="_blank">Click here to download fixture</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section id="live" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Live Centre</small>
+      <h2>Live Scores</h2>
+      <p class="muted">Live scores update automatically from the admin dashboard.</p>
+    </div>
+    <div id="liveGrid" class="grid2"><div class="card">Loading...</div></div>
+  </section>
+</section>
+
+<section id="standings" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Automatic Standings</small>
+      <h2>Points Table</h2>
+      <p class="muted">Calculated from completed matches.</p>
+    </div>
+    <div id="standingsBox"><div class="card">Loading...</div></div>
+  </section>
+</section>
+
+<section id="results" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Results</small>
+      <h2>Completed Matches</h2>
+      <p class="muted">Set-by-set match results.</p>
+    </div>
+    <div id="resultsGrid" class="grid2"><div class="card">Loading...</div></div>
+  </section>
+</section>
+
+<section id="bracket" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Knockout Stage</small>
+      <h2>Semi-finals & Finals Bracket</h2>
+    </div>
+    <div id="bracketGrid" class="bracket-grid"><div class="card">Loading bracket...</div></div>
+  </section>
+</section>
+
+<section id="medals" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Champions</small>
+      <h2>Medal Tally</h2>
+    </div>
+    <div id="medalGrid" class="medal-grid"><div class="card">Loading medals...</div></div>
+  </section>
+</section>
+
+<section id="awards" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Special Awards</small>
+      <h2>Individual Awards</h2>
+    </div>
+    <div id="awardsGrid" class="awards-grid"><div class="card">Loading awards...</div></div>
+  </section>
+</section>
+
+<section id="gallery" class="page">
+  <section class="section">
+    <div class="title">
+      <small>Championship Gallery</small>
+      <h2>Moments from the Championship</h2>
+    </div>
+    <div id="galleryGrid" class="gallery-grid"><div class="gallery-img">Loading gallery...</div></div>
+  </section>
+</section>
+
+<section id="admin" class="page">
+  <div id="loginScreen" class="login-wrap">
+    <div class="login-card">
+      <small class="small-title">Private Owner Access</small>
+      <h1>Admin Login</h1>
+      <p>Enter owner username and password.</p>
+      <label>Username</label>
+      <input id="loginUser" type="text" placeholder="Enter username">
+      <label>Password</label>
+      <input id="loginPass" type="password" placeholder="Enter password">
+      <button class="btn" onclick="login()">Login</button>
+      <div id="loginMsg" class="login-error"></div>
+    </div>
+  </div>
+
+  <div id="dashboard" class="dashboard">
+    <section class="section">
+      <div class="title">
+        <small>Private Owner Dashboard</small>
+        <h2>Championship Control Panel</h2>
+      </div>
+
+      <div class="admin-note">
+        Use this mobile-friendly dashboard to update live scores, results, standings, notices, bracket, medals, awards and gallery.
+        <button class="btn logout-btn" onclick="logout()">Logout</button>
+      </div>
+
+      <div class="card">
+        <label>Admin Password</label>
+        <input id="password" type="password" placeholder="Enter owner password again for saving changes">
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="showAdminPanel('match',event)">Match Score</button>
+        <button class="tab" onclick="showAdminPanel('notice',event)">Notice</button>
+        <button class="tab" onclick="showAdminPanel('galleryp',event)">Gallery</button>
+        <button class="tab" onclick="showAdminPanel('bracketp',event)">Bracket</button>
+        <button class="tab" onclick="showAdminPanel('medalp',event)">Medal Tally</button>
+        <button class="tab" onclick="showAdminPanel('awardp',event)">Awards</button>
+      </div>
+
+      <div id="match" class="admin-panel active card">
+        <div class="admin-form">
+          <div><label>Match ID</label><input id="matchId" placeholder="M001"></div>
+          <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Semi Final</option><option>Boys U-17 Semi Final</option><option>Boys U-19 Semi Final</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
+          <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div>
+          <div><label>Current Set</label><select id="currentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select></div>
+          <div><label>Date</label><input id="date" placeholder="Saturday, 19 September 2026"></div>
+          <div><label>Time</label><input id="time" placeholder="8:30 AM"></div>
+          <div><label>Court</label><input id="court" placeholder="Court 1"></div>
+          <div><label>Team A</label><input id="teamA"></div>
+          <div><label>Team B</label><input id="teamB"></div>
+          <div><label>Sets Won Team A</label><input id="scoreA" placeholder="0"></div>
+          <div><label>Sets Won Team B</label><input id="scoreB" placeholder="0"></div>
+          <div class="full">
+            <label>Set-by-set Scores</label>
+            <div class="set-input-grid">
+              <input id="set1" placeholder="Set 1: 25-18">
+              <input id="set2" placeholder="Set 2: 22-25">
+              <input id="set3" placeholder="Set 3: 25-20">
+              <input id="set4" placeholder="Set 4">
+              <input id="set5" placeholder="Set 5">
+            </div>
+          </div>
+          <div class="full"><label>Winner</label><input id="winner"></div>
+        </div>
+        <br><button class="btn" onclick="save('saveMatchPhase1')">Save Match</button>
+      </div>
+
+      <div id="notice" class="admin-panel card">
+        <div class="admin-form">
+          <div><label>Notice ID</label><input id="nId" placeholder="N001"></div>
+          <div><label>Title</label><input id="nTitle"></div>
+          <div class="full"><label>Message</label><textarea id="nMessage"></textarea></div>
+        </div>
+        <br><button class="btn" onclick="save('saveNotice')">Save Notice</button>
+      </div>
+
+      <div id="galleryp" class="admin-panel card">
+        <div class="admin-form">
+          <div><label>Gallery ID</label><input id="gId" placeholder="G001"></div>
+          <div><label>Image URL</label><input id="gUrl"></div>
+          <div class="full"><label>Caption</label><input id="gCaption"></div>
+        </div>
+        <br><button class="btn" onclick="save('saveGallery')">Save Gallery</button>
+      </div>
+
+      <div id="bracketp" class="admin-panel card">
+        <div class="admin-form">
+          <div><label>Bracket Match ID</label><input id="bId" placeholder="SF-U14-1"></div>
+          <div><label>Category</label><select id="bCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+          <div><label>Stage</label><select id="bStage"><option>Semi Final</option><option>Final</option><option>Third Place</option></select></div>
+          <div><label>Team A</label><input id="bTeamA"></div>
+          <div><label>Score A</label><input id="bScoreA" placeholder="0"></div>
+          <div><label>Team B</label><input id="bTeamB"></div>
+          <div><label>Score B</label><input id="bScoreB" placeholder="0"></div>
+          <div><label>Winner</label><input id="bWinner"></div>
+        </div>
+        <br><button class="btn" onclick="save('saveBracket')">Save Bracket Match</button>
+      </div>
+
+      <div id="medalp" class="admin-panel card">
+        <div class="admin-form">
+          <div><label>Medal ID</label><input id="mId" placeholder="U14-GOLD"></div>
+          <div><label>Category</label><select id="mCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+          <div><label>Position</label><select id="mPosition"><option>Champion</option><option>Runner-up</option><option>Third Place</option></select></div>
+          <div><label>School</label><input id="mSchool"></div>
+        </div>
+        <br><button class="btn" onclick="save('saveMedal')">Save Medal</button>
+      </div>
+
+      <div id="awardp" class="admin-panel card">
+        <div class="admin-form">
+          <div><label>Award ID</label><input id="aId" placeholder="BEST-PLAYER-U14"></div>
+          <div><label>Icon</label><input id="aIcon" placeholder="⭐"></div>
+          <div><label>Award Name</label><input id="aAward" placeholder="Best Player"></div>
+          <div><label>Student Name</label><input id="aStudent"></div>
+          <div><label>School</label><input id="aSchool"></div>
+          <div><label>Category</label><select id="aCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Overall</option></select></div>
+        </div>
+        <br><button class="btn" onclick="save('saveAward')">Save Award</button>
+      </div>
+
+      <p id="msg" class="muted admin-msg"></p>
+    </section>
   </div>
 </section>
 
-
-<section class="section">
-  <div class="title"><small>Championship Centre</small><h2>Fixtures, Live Scores & Standings</h2></div>
-  <div class="grid3">
-    <div class="card tile locked-tile"><span>🔒</span><strong>Fixtures Locked</strong><small>Fixtures will be opened by the owner once finalized.</small></div>
-    <div class="card tile locked-tile"><span>🔒</span><strong>Live Scores Locked</strong><small>Live scores will be opened during the championship.</small></div>
-    <div class="card tile locked-tile"><span>🔒</span><strong>Standings Locked</strong><small>Standings will be opened once matches begin.</small></div>
-  </div>
-</section>
-<section class="section">
-  <div class="title"><small>Phase 2</small><h2>Knockout, Medals & Awards</h2></div>
-  <div class="phase2-grid">
-    <a class="phase2-card" href="bracket.html"><span>🏆</span><strong>Knockout Bracket</strong><small>Semi-finals and finals pathway</small></a>
-    <a class="phase2-card gold" href="medal-tally.html"><span>🥇</span><strong>Medal Tally</strong><small>Champion, Runner-up and Third Place</small></a>
-    <a class="phase2-card" href="awards.html"><span>⭐</span><strong>Individual Awards</strong><small>Best player, setter, libero and more</small></a>
-  </div>
-</section>
-
-
-
-<section class="section">
-  <div class="title"><small>Official Documents</small><h2>Downloads & Quick Links</h2></div>
-  <div id="downloads" class="grid3"></div>
-</section>
-
-<section class="section">
-  <div class="title"><small>Venue</small><h2>Championship Venue</h2></div>
-  <div id="venue" class="card">Loading venue...</div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="card contact-card">
-    <small class="small-title">Need Assistance?</small>
-    <h2>Contact Coordinator</h2>
-    <h3>Mr. Vijesh V</h3>
-    <p>Head of Department – Physical Education</p>
-    <p>Email: <a href="mailto:physicaleducation@credencehighschool.com">physicaleducation@credencehighschool.com</a></p>
-    <p>Mobile: <a href="tel:+971563692429">+971 56 369 2429</a></p>
-  </div>
-</section>
 </main>
 
-<footer class="footer">© 2026 Credence High School, Dubai · CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
+<footer class="footer">© 2026 Credence High School, Dubai · CBSE UAE Cluster Boys Volleyball Championship</footer>
 
-<script>
-const API=getApiUrl();
-
-/* Phase 3: values are now loaded from config.js */
-
-const targetDate = new Date(SITE_CONFIG.championshipStart).getTime();
-
-function tick(){
-  const n=Date.now(),d=targetDate-n;
-  if(d<=0)return;
-  days.innerText=String(Math.floor(d/(1000*60*60*24))).padStart(2,'0');
-  hours.innerText=String(Math.floor((d%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
-  minutes.innerText=String(Math.floor((d%(1000*60*60))/(1000*60))).padStart(2,'0');
-  seconds.innerText=String(Math.floor((d%(1000*60))/1000)).padStart(2,'0');
-}
-tick();
-setInterval(tick,1000);
-
-function loadDirectContent(){
-  const regBtn = document.getElementById("registrationBtn");
-  if(regBtn) regBtn.href = SITE_CONFIG.registrationUrl;
-
-  const links = document.querySelectorAll('a[href*="AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA"]');
-  links.forEach(a => a.href = SITE_CONFIG.registrationUrl);
-
-  if(document.getElementById("downloads")){
-    downloads.innerHTML = SITE_CONFIG.downloads.map(d=>`
-      <a class="card tile" href="${d.url}" target="_blank">
-        <span>${d.icon}</span>
-        <strong>${d.title}</strong>
-        <small>${d.note}</small>
-      </a>
-    `).join("");
-  }
-
-  if(document.getElementById("venue")){
-    venue.innerHTML = `
-      <h2>${SITE_CONFIG.venue.title}</h2>
-      <p class="muted">${SITE_CONFIG.venue.details}</p>
-      <br>
-      <a class="btn" href="${SITE_CONFIG.venue.mapUrl}" target="_blank">Open Location Map</a>
-    `;
-  }
-}
-loadDirectContent();
-
-async function loadNotices(){
-  if(API.includes("PASTE")) return;
-  try{
-    const r=await fetch(API+"?action=all&cache="+Date.now());
-    const data=await r.json();
-    ticker.innerHTML=(data.notices||[]).map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ") || `🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
-  }catch(e){
-    ticker.innerHTML=`🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
-  }
-}
-loadNotices();
-</script>
+<script src="app.js"></script>
 </body>
 </html>

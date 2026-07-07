@@ -1,281 +1,148 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Individual Awards</title>
-<style>
+const ADMIN_PASSWORD = "CHANGE_THIS_PASSWORD";
 
-:root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft);color:var(--navy)}
-.header{background:var(--dark);color:white;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.28)}
-.brand{display:flex;align-items:center;gap:12px}.brand-icon{background:var(--lime);color:var(--dark);width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px}.brand strong{display:block;font-size:18px}.brand span{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:#dce9ff;font-weight:700}
-.nav a{color:white;text-decoration:none;margin-left:14px;font-size:12px;text-transform:uppercase;font-weight:950}.nav a:hover{color:var(--lime)}
-.hero{background:var(--dark)}.hero img{width:100%;height:auto;display:block}
-.news{display:flex;background:linear-gradient(90deg,var(--dark),var(--blue),var(--dark));color:white}.news-title{background:var(--lime);color:var(--dark);padding:14px 24px;white-space:nowrap;text-transform:uppercase;font-weight:950}.news marquee{padding:14px 0;font-weight:900}.news strong{color:var(--lime)}
-.section{max-width:1250px;margin:auto;padding:60px 22px}.title{text-align:center;margin-bottom:30px}.title small,.small-title{color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;font-size:13px;font-weight:950}.title h2{font-size:38px;margin-top:8px}
-.card{background:white;border-radius:26px;padding:26px;box-shadow:0 8px 24px rgba(0,0,0,.09)}
-.btn{display:inline-block;background:var(--lime);color:var(--dark);text-decoration:none;padding:13px 24px;border-radius:14px;font-weight:950;text-transform:uppercase;box-shadow:0 8px 20px rgba(0,0,0,.18);border:none;cursor:pointer}.btn:hover{background:var(--blue);color:white}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.quick-info{max-width:1250px;margin:28px auto 0;padding:28px;background:linear-gradient(135deg,var(--blue),#002b9c);border-radius:30px;color:white;display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:center;box-shadow:0 15px 35px rgba(0,87,255,.28)}.quick-info p{color:var(--lime);font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}.quick-info h2{font-size:27px}
-.registration{max-width:1250px;margin:28px auto 0;padding:32px;background:white;border-radius:30px;display:flex;align-items:center;justify-content:space-between;gap:25px;box-shadow:0 12px 32px rgba(0,0,0,.12);border-left:10px solid var(--lime)}.registration small{color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;font-weight:950}.registration h1{font-size:34px;margin:8px 0}.registration p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.countdown{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}.count-box{min-width:135px;padding:24px 16px;background:linear-gradient(180deg,var(--navy),var(--dark));border-radius:24px;color:white;text-align:center;border-bottom:6px solid var(--lime);box-shadow:0 10px 26px rgba(0,0,0,.22)}.count-box strong{display:block;color:var(--lime);font-size:45px;line-height:1;margin-bottom:8px}
-.tile{display:block;text-decoration:none;color:var(--navy);text-align:center;border-top:7px solid var(--blue);transition:.25s}.tile:hover{transform:translateY(-5px)}.tile.featured{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}.tile span{font-size:42px;display:block;margin-bottom:12px}.tile strong{display:block;font-size:18px;margin-bottom:8px}.tile small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.match{border-top:7px solid var(--blue)}.match-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:16px}.pill{background:var(--blue);color:white;padding:8px 14px;border-radius:40px;font-size:12px;font-weight:950}.status{background:var(--lime);color:var(--dark)}.meta,.sets,.winner,.muted{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;line-height:1.55}.teams{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;text-align:center}.team strong{font-size:18px}.team span{display:block;margin-top:8px;font-size:42px;color:var(--blue)}.vs{background:var(--dark);color:var(--lime);border-radius:16px;padding:12px 16px;font-weight:950}
-.table{width:100%;border-collapse:collapse;background:white;border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.09);font-family:'Segoe UI',Arial,sans-serif;font-weight:750}.table th{background:var(--dark);color:white;text-align:left;padding:14px}.table td{padding:13px;border-bottom:1px solid #e6edf8}.table tr:last-child td{border-bottom:none}
-.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}label{display:block;color:var(--blue);font-size:12px;text-transform:uppercase;font-weight:950;margin-bottom:6px}input,select,textarea{width:100%;padding:12px;border:1px solid #d7e0ee;border-radius:12px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}.full{grid-column:1/-1}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.tab{background:white;border:2px solid var(--blue);color:var(--blue);padding:10px 16px;border-radius:12px;font-weight:950;cursor:pointer}.tab.active{background:var(--blue);color:white}.panel{display:none}.panel.active{display:block}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.gallery-img{height:220px;border-radius:24px;background:#fff;display:grid;place-items:center;text-align:center;padding:20px;border:2px dashed rgba(0,87,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.08)}.gallery-img img{max-width:100%;max-height:100%;border-radius:18px}
-.contact{background:linear-gradient(135deg,var(--dark),var(--blue));padding:70px 24px}.contact-card{max-width:820px;margin:auto;text-align:center;border-top:8px solid var(--lime)}.contact-card h2{font-size:34px;margin:8px 0}.contact-card h3{color:var(--blue);font-size:26px}.contact-card p{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700;margin:8px 0}.contact-card a{color:var(--blue);font-weight:950}
-.footer{background:var(--dark);color:white;text-align:center;padding:28px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700}
-@media(max-width:900px){.header{flex-direction:column;text-align:center}.nav a{margin:0 6px;font-size:11px}.news{display:block}.news-title{text-align:center}.grid3,.grid2,.quick-info,.gallery-grid{grid-template-columns:1fr}.registration{flex-direction:column;text-align:center;margin-left:16px;margin-right:16px}.quick-info{margin-left:16px;margin-right:16px}.teams{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.btn{width:100%;text-align:center}.title h2{font-size:29px}}
+function setupSheets(){
+  const ss=SpreadsheetApp.getActive();
 
+  let sh=ss.getSheetByName("Matches")||ss.insertSheet("Matches");
+  sh.clear();
+  sh.getRange(1,1,1,17).setValues([[
+    "Match ID","Category","Status","Date","Time","Court",
+    "Team A","Sets Won A","Team B","Sets Won B",
+    "Set 1","Set 2","Set 3","Set 4","Set 5",
+    "Current Set","Winner"
+  ]]);
+  sh.getRange(2,1,3,17).setValues([
+    ["M001","Boys U-14","Scheduled","Saturday, 19 September 2026","8:30 AM","Court 1","School A","0","School B","0","","","","","","",""],
+    ["M002","Boys U-17","Scheduled","Saturday, 19 September 2026","9:30 AM","Court 2","School C","0","School D","0","","","","","","",""],
+    ["M003","Boys U-19","Scheduled","Sunday, 20 September 2026","10:30 AM","Court 1","School E","0","School F","0","","","","","","",""]
+  ]);
 
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-.stat-card{
-  background:linear-gradient(135deg,var(--navy),var(--dark));
-  color:white;
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 10px 28px rgba(0,0,0,.18);
-  border-bottom:7px solid var(--lime);
-}
-.stat-card strong{
-  display:block;
-  color:var(--lime);
-  font-size:42px;
-  margin-bottom:8px;
-}
-.stat-card span{
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:800;
-  text-transform:uppercase;
-  font-size:13px;
-  letter-spacing:.5px;
-}
-.fixture-category{
-  background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 10px 28px rgba(0,0,0,.10);
-  border-left:9px solid var(--lime);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-.fixture-category h3{
-  font-size:28px;
-  color:var(--navy);
-  margin-bottom:8px;
-}
-.fixture-category p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:700;
-}
-.fixture-btn{
-  display:inline-block;
-  background:var(--blue);
-  color:white;
-  text-decoration:none;
-  padding:14px 26px;
-  border-radius:14px;
-  font-weight:950;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-.fixture-btn:hover{
-  background:var(--lime);
-  color:var(--dark);
-}
-.direct-note{
-  background:#fff9d8;
-  border-left:7px solid var(--lime);
-  padding:18px;
-  border-radius:18px;
-  margin-bottom:26px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:#374151;
-  font-weight:700;
-}
-@media(max-width:900px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .fixture-category{flex-direction:column;text-align:center}
-}
-@media(max-width:560px){
-  .stats-grid{grid-template-columns:1fr}
+  let n=ss.getSheetByName("Notices")||ss.insertSheet("Notices");
+  n.clear(); n.getRange(1,1,1,4).setValues([["Notice ID","Title","Message","Last Updated"]]);
+  n.appendRow(["N001","Welcome","Official championship updates will be published here.",new Date()]);
+
+  let g=ss.getSheetByName("Gallery")||ss.insertSheet("Gallery");
+  g.clear(); g.getRange(1,1,1,4).setValues([["Gallery ID","Image URL","Caption","Last Updated"]]);
+
+  let b=ss.getSheetByName("Bracket")||ss.insertSheet("Bracket");
+  b.clear(); b.getRange(1,1,1,9).setValues([["Bracket ID","Category","Stage","Team A","Score A","Team B","Score B","Winner","Last Updated"]]);
+
+  let med=ss.getSheetByName("Medals")||ss.insertSheet("Medals");
+  med.clear(); med.getRange(1,1,1,5).setValues([["Medal ID","Category","Position","School","Last Updated"]]);
+
+  let aw=ss.getSheetByName("Awards")||ss.insertSheet("Awards");
+  aw.clear(); aw.getRange(1,1,1,7).setValues([["Award ID","Icon","Award","Student","School","Category","Last Updated"]]);
+
+  [sh,n,g,b,med,aw].forEach(s=>s.autoResizeColumns(1,s.getLastColumn()));
 }
 
+function doGet(e){
+  const a=e.parameter.action;
+  if(a==="fixtures") return json({fixtures:getMatches().filter(m=>m.status!=="Completed")});
+  if(a==="live") return json({live:getMatches().filter(m=>String(m.status).toLowerCase()==="live")});
+  if(a==="results") return json({results:getMatches().filter(m=>String(m.status).toLowerCase()==="completed")});
+  if(a==="autoStandings") return json({standings:calculateStandings()});
+  if(a==="gallery") return json({gallery:getGallery()});
+  if(a==="bracket") return json({bracket:getBracket()});
+  if(a==="medals") return json({medals:getMedals()});
+  if(a==="awards") return json({awards:getAwards()});
+  if(a==="all") return json({notices:getNotices(),gallery:getGallery(),matches:getMatches()});
+  return json({message:"Phase 4 SPA API running"});
+}
 
-.locked-tile{
-  opacity:.95;
-  cursor:not-allowed;
-  border-top-color:var(--lime)!important;
-  background:linear-gradient(180deg,#ffffff,#f7fbff);
-}
-.locked-tile:hover{
-  transform:none!important;
-}
-.locked-tile span{
-  color:var(--blue);
-}
-
-.phase2-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.phase2-card{
-  background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 10px 28px rgba(0,0,0,.10);
-  text-align:center;
-  text-decoration:none;
-  color:var(--navy);
-  border-top:8px solid var(--blue);
-  transition:.25s;
-}
-.phase2-card:hover{transform:translateY(-5px)}
-.phase2-card.gold{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}
-.phase2-card span{font-size:48px;display:block;margin-bottom:14px}
-.phase2-card strong{font-size:21px;display:block;margin-bottom:8px}
-.phase2-card small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.bracket-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  align-items:start;
-}
-.bracket-column h3{
-  background:var(--dark);
-  color:white;
-  border-radius:16px;
-  padding:14px;
-  text-align:center;
-  margin-bottom:16px;
-}
-.bracket-match{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 8px 22px rgba(0,0,0,.10);
-  border-left:7px solid var(--lime);
-  margin-bottom:18px;
-}
-.bracket-match small{
-  color:var(--blue);
-  font-weight:950;
-  text-transform:uppercase;
-}
-.bracket-team{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:12px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:850;
-  color:var(--navy);
-}
-.bracket-score{
-  background:var(--blue);
-  color:white;
-  border-radius:10px;
-  padding:4px 10px;
-}
-.medal-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.medal-card{
-  background:white;
-  border-radius:30px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-}
-.medal-card .medal{
-  font-size:64px;
-  display:block;
-  margin-bottom:12px;
-}
-.medal-card h3{
-  color:var(--blue);
-  font-size:26px;
-  margin-bottom:8px;
-}
-.medal-card p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:800;
-}
-.awards-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.award-card{
-  background:white;
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,.10);
-  border-top:7px solid var(--lime);
-}
-.award-card span{
-  display:block;
-  font-size:44px;
-  margin-bottom:12px;
-}
-.award-card h3{
-  color:var(--navy);
-  font-size:21px;
-  margin-bottom:8px;
-}
-.award-card p{
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:750;
-  line-height:1.5;
-}
-@media(max-width:900px){
-  .phase2-grid,.bracket-grid,.medal-grid,.awards-grid{grid-template-columns:1fr}
-}
-</style>
-</head>
-<body>
-<header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
-<section class="section">
-  <div class="title"><small>Special Awards</small><h2>Individual Awards</h2><p class="muted">Best performers of the championship.</p></div>
-  <div id="awards" class="awards-grid"><div class="card">Loading awards...</div></div>
-</section>
-<footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
-<script>
-const API="https://script.google.com/macros/s/AKfycbwEdyF69r2abBucFVSNK68SGn6ytFvfu7S-LteRmNv3Oa58IOHCoRiFt3E5KAYp57hrhQ/exec";
-function awardCard(a){
-  return `<div class="award-card">
-    <span>${a.icon||'⭐'}</span>
-    <h3>${a.award||''}</h3>
-    <p><b>${a.student||'To be updated'}</b></p>
-    <p>${a.school||''}</p>
-    <p>${a.category||''}</p>
-  </div>`;
-}
-async function load(){
+function doPost(e){
   try{
-    const r=await fetch(API+"?action=awards&cache="+Date.now());
-    const d=await r.json();
-    awards.innerHTML=(d.awards||[]).map(awardCard).join('')||'<div class="card">Awards will be updated later.</div>';
-  }catch(e){awards.innerHTML='<div class="card">Unable to load awards.</div>';}
+    const d=JSON.parse(e.postData.contents||"{}");
+    if(d.password!==ADMIN_PASSWORD) return json({success:false,message:"Invalid admin password."});
+
+    if(d.action==="saveMatchPhase1" || d.action==="saveMatch"){ saveMatch(d); return json({success:true,message:"Match saved successfully."}); }
+    if(d.action==="saveNotice"){ upsert("Notices",d.id,[d.id,d.title,d.message,new Date()]); return json({success:true,message:"Notice saved successfully."}); }
+    if(d.action==="saveGallery"){ upsert("Gallery",d.id,[d.id,d.url,d.caption,new Date()]); return json({success:true,message:"Gallery item saved successfully."}); }
+    if(d.action==="saveBracket"){ upsert("Bracket",d.id,[d.id,d.category,d.stage,d.teamA,d.scoreA,d.teamB,d.scoreB,d.winner,new Date()]); return json({success:true,message:"Bracket match saved successfully."}); }
+    if(d.action==="saveMedal"){ upsert("Medals",d.id,[d.id,d.category,d.position,d.school,new Date()]); return json({success:true,message:"Medal tally saved successfully."}); }
+    if(d.action==="saveAward"){ upsert("Awards",d.id,[d.id,d.icon,d.award,d.student,d.school,d.category,new Date()]); return json({success:true,message:"Award saved successfully."}); }
+
+    return json({success:false,message:"Unknown action."});
+  }catch(err){ return json({success:false,message:String(err)}); }
 }
-load();setInterval(load,30000);
-</script>
-</body>
-</html>
+
+function saveMatch(d){
+  upsert("Matches",d.matchId,[
+    d.matchId,d.category,d.status,d.date,d.time,d.court,
+    d.teamA,d.scoreA,d.teamB,d.scoreB,
+    d.set1,d.set2,d.set3,d.set4,d.set5,
+    d.currentSet,d.winner
+  ]);
+}
+
+function getMatches(){
+  return getRows("Matches").map(r=>({
+    matchId:r[0],category:r[1],status:r[2],date:r[3],time:r[4],court:r[5],
+    teamA:r[6],scoreA:r[7],teamB:r[8],scoreB:r[9],
+    set1:r[10],set2:r[11],set3:r[12],set4:r[13],set5:r[14],
+    currentSet:r[15],winner:r[16]
+  }));
+}
+
+function calculateStandings(){
+  const completed=getMatches().filter(m=>String(m.status).toLowerCase()==="completed");
+  const table={};
+
+  completed.forEach(m=>{
+    const cat=m.category || "General";
+    if(!table[cat]) table[cat]={};
+
+    [m.teamA,m.teamB].forEach(team=>{
+      if(team && !table[cat][team]) table[cat][team]={category:cat,team,played:0,won:0,lost:0,setsFor:0,setsAgainst:0,points:0};
+    });
+
+    if(!m.teamA || !m.teamB) return;
+
+    const a=table[cat][m.teamA];
+    const b=table[cat][m.teamB];
+    const scoreA=Number(m.scoreA||0);
+    const scoreB=Number(m.scoreB||0);
+
+    a.played++; b.played++;
+    a.setsFor+=scoreA; a.setsAgainst+=scoreB;
+    b.setsFor+=scoreB; b.setsAgainst+=scoreA;
+
+    if(scoreA>scoreB){ a.won++; b.lost++; a.points+=3; }
+    else if(scoreB>scoreA){ b.won++; a.lost++; b.points+=3; }
+  });
+
+  let out=[];
+  Object.keys(table).forEach(cat=>{
+    out=out.concat(Object.values(table[cat]).sort((x,y)=>
+      y.points-x.points || y.won-x.won || (y.setsFor-y.setsAgainst)-(x.setsFor-x.setsAgainst)
+    ));
+  });
+  return out;
+}
+
+function getNotices(){ return getRows("Notices").map(r=>({id:r[0],title:r[1],message:r[2]})); }
+function getGallery(){ return getRows("Gallery").map(r=>({id:r[0],url:r[1],caption:r[2]})); }
+function getBracket(){ return getRows("Bracket").map(r=>({id:r[0],category:r[1],stage:r[2],teamA:r[3],scoreA:r[4],teamB:r[5],scoreB:r[6],winner:r[7]})); }
+function getMedals(){ return getRows("Medals").map(r=>({id:r[0],category:r[1],position:r[2],school:r[3]})); }
+function getAwards(){ return getRows("Awards").map(r=>({id:r[0],icon:r[1],award:r[2],student:r[3],school:r[4],category:r[5]})); }
+
+function getRows(name){
+  const sh=SpreadsheetApp.getActive().getSheetByName(name);
+  if(!sh || sh.getLastRow()<2) return [];
+  return sh.getRange(2,1,sh.getLastRow()-1,sh.getLastColumn()).getValues().filter(r=>r[0]);
+}
+
+function upsert(sheetName,id,row){
+  const sh=SpreadsheetApp.getActive().getSheetByName(sheetName);
+  const vals=sh.getDataRange().getValues();
+  let rowNum=-1;
+  for(let i=1;i<vals.length;i++){
+    if(vals[i][0]===id){ rowNum=i+1; break; }
+  }
+  if(rowNum<0) sh.appendRow(row);
+  else sh.getRange(rowNum,1,1,row.length).setValues([row]);
+}
+
+function json(obj){
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}

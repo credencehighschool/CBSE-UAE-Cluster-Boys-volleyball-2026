@@ -1,19 +1,3 @@
-/*
-CBSE UAE Cluster Boys Volleyball Championship Portal
-PHASE 3 - CENTRAL CONFIGURATION FILE
-
-Next year, change only this file for:
-- event title
-- year
-- dates
-- registration URL
-- Apps Script URL
-- fixture PDF links
-- downloads
-- venue/map link
-- contact details
-*/
-
 const SITE_CONFIG = {
   eventTitle: "CBSE UAE Cluster Boys Volleyball Championship",
   eventYear: "2026–27",
@@ -25,15 +9,10 @@ const SITE_CONFIG = {
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
 
-  apiUrl: "https://script.google.com/macros/s/AKfycbwEdyF69r2abBucFVSNK68SGn6ytFvfu7S-LteRmNv3Oa58IOHCoRiFt3E5KAYp57hrhQ/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbzR0-gaRmeL9iJs9p3XbG06atHiqFN_xHHbmVY43Uk_pNnLLIv222Sg3L-gkPpqONxAGg/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
 
-  overview: {
-    participatingSchools: "00",
-    totalAthletes: "00",
-    totalTeams: "00",
-    championshipCount: "01"
-  },
+  adminUsername: "admin",
 
   fixtures: {
     u14: "PASTE_U14_BOYS_FIXTURE_PDF_DRIVE_LINK_HERE",
@@ -42,66 +21,25 @@ const SITE_CONFIG = {
   },
 
   downloads: [
-    {
-      icon: "📩",
-      title: "Invitation",
-      note: "Click to download invitation",
-      url: "PASTE_INVITATION_PDF_DRIVE_LINK_HERE"
-    },
-    {
-      icon: "📝",
-      title: "Step by Step Guideline to Team Registration Portal",
-      note: "Open registration portal",
-      url: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec"
-    },
-    {
-      icon: "📘",
-      title: "Instructions and Guidelines of the Competition",
-      note: "Click to download guidelines",
-      url: "PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE"
-    },
-    {
-      icon: "🌐",
-      title: "FIVB Website",
-      note: "Official international volleyball website",
-      url: "https://www.fivb.com/"
-    },
-    {
-      icon: "🇮🇳",
-      title: "VFI Website",
-      note: "Volleyball Federation of India",
-      url: "https://volleyballindia.com/"
-    },
-    {
-      icon: "📖",
-      title: "FIVB Rules",
-      note: "Official rules of the game",
-      url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/"
-    }
+    { icon:"📩", title:"Invitation", note:"Click to download invitation", url:"PASTE_INVITATION_PDF_DRIVE_LINK_HERE" },
+    { icon:"📝", title:"Step by Step Guideline to Team Registration Portal", note:"Open registration portal", url:"https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec" },
+    { icon:"📘", title:"Instructions and Guidelines of the Competition", note:"Click to download guidelines", url:"PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE" },
+    { icon:"🌐", title:"FIVB Website", note:"Official international volleyball website", url:"https://www.fivb.com/" },
+    { icon:"🇮🇳", title:"VFI Website", note:"Volleyball Federation of India", url:"https://volleyballindia.com/" },
+    { icon:"📖", title:"FIVB Rules", note:"Official rules of the game", url:"https://www.fivb.com/volleyball/the-game/rules-of-the-game/" }
   ],
 
   venue: {
-    title: "Championship Venue",
-    details: "Indoor stadiums in Dubai Emirate. Final venue details and Google Map location will be updated soon.",
-    mapUrl: "PASTE_GOOGLE_MAP_LOCATION_LINK_HERE"
+    title:"Championship Venue",
+    details:"Indoor stadiums in Dubai Emirate. Final venue details and Google Map location will be updated soon.",
+    mapUrl:"PASTE_GOOGLE_MAP_LOCATION_LINK_HERE"
   },
 
   contact: {
-    name: "Mr. Vijesh V",
-    role: "Head of Department – Physical Education",
-    email: "physicaleducation@credencehighschool.com",
-    mobile: "+971 56 369 2429",
-    mobileLink: "+971563692429"
+    name:"Mr. Vijesh V",
+    role:"Head of Department – Physical Education",
+    email:"physicaleducation@credencehighschool.com",
+    mobile:"+971 56 369 2429",
+    mobileLink:"+971563692429"
   }
 };
-
-function getApiUrl() {
-  return SITE_CONFIG.apiUrl;
-}
-
-function applyCommonConfig() {
-  document.querySelectorAll("[data-event-title]").forEach(el => el.textContent = SITE_CONFIG.eventTitle);
-  document.querySelectorAll("[data-event-year]").forEach(el => el.textContent = SITE_CONFIG.eventYear);
-  document.querySelectorAll("[data-hosted-by]").forEach(el => el.textContent = SITE_CONFIG.hostedBy);
-  document.querySelectorAll("[data-categories]").forEach(el => el.textContent = SITE_CONFIG.categoriesText);
-}

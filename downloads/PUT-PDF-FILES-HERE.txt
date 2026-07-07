@@ -1,1 +1,1 @@
-Upload PDFs here if you want to use GitHub-hosted PDF links.
+Optional: put PDFs here if using GitHub PDF links.
