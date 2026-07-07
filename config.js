@@ -25,7 +25,7 @@ const SITE_CONFIG = {
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
 
-  apiUrl: "https://script.google.com/macros/s/AKfycbzR0-gaRmeL9iJs9p3XbG06atHiqFN_xHHbmVY43Uk_pNnLLIv222Sg3L-gkPpqONxAGg/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbzVFW61dLvxXU4T0tJkAL6M4BmYLwF5kVsMdQr-_bMtmcj_xST4CrtlXZn28VdgP_WW_w/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
 
   overview: {
