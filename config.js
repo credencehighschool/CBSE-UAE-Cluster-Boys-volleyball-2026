@@ -9,7 +9,7 @@ const SITE_CONFIG = {
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
 
-  apiUrl: "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE",
+  apiUrl: "https://script.google.com/macros/s/AKfycbxH95WINCm4zGMBwxFRLGBzT-Y9IQCDYrqPDvXsuDjB8lI1mQ6jXQcyWfnqelRq2CIPog/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
 
   fixtures: {
