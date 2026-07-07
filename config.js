@@ -1,20 +1,38 @@
+/*
+CBSE UAE Cluster Boys Volleyball Championship Portal
+PHASE 3 - CENTRAL CONFIGURATION FILE
+
+Next year, change only this file for:
+- event title
+- year
+- dates
+- registration URL
+- Apps Script URL
+- fixture PDF links
+- downloads
+- venue/map link
+- contact details
+*/
+
 const SITE_CONFIG = {
   eventTitle: "CBSE UAE Cluster Boys Volleyball Championship",
   eventYear: "2026–27",
   hostedBy: "Credence High School, Dubai",
-  categories: "Boys U-14 | U-17 | U-19",
+  categoriesText: "Boys U-14 | U-17 | U-19",
 
   championshipStart: "September 19, 2026 07:00:00",
-  championshipDates: "September 19–20, 2026",
+  championshipDatesText: "Saturday, September 19th & Sunday, September 20th 2026",
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
 
+  apiUrl: "https://script.google.com/macros/s/AKfycbzR0-gaRmeL9iJs9p3XbG06atHiqFN_xHHbmVY43Uk_pNnLLIv222Sg3L-gkPpqONxAGg/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
 
   overview: {
     participatingSchools: "00",
     totalAthletes: "00",
-    totalTeams: "00"
+    totalTeams: "00",
+    championshipCount: "01"
   },
 
   fixtures: {
@@ -25,39 +43,39 @@ const SITE_CONFIG = {
 
   downloads: [
     {
-      title: "Invitation",
-      note: "Download the official championship invitation.",
       icon: "📩",
+      title: "Invitation",
+      note: "Click to download invitation",
       url: "PASTE_INVITATION_PDF_DRIVE_LINK_HERE"
     },
     {
-      title: "Team Registration Portal Guideline",
-      note: "Open the registration portal guideline.",
       icon: "📝",
+      title: "Step by Step Guideline to Team Registration Portal",
+      note: "Open registration portal",
       url: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec"
     },
     {
-      title: "Instructions & Guidelines",
-      note: "Download competition instructions and guidelines.",
       icon: "📘",
+      title: "Instructions and Guidelines of the Competition",
+      note: "Click to download guidelines",
       url: "PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE"
     },
     {
-      title: "FIVB Website",
-      note: "Official international volleyball website.",
       icon: "🌐",
+      title: "FIVB Website",
+      note: "Official international volleyball website",
       url: "https://www.fivb.com/"
     },
     {
-      title: "VFI Website",
-      note: "Volleyball Federation of India.",
       icon: "🇮🇳",
+      title: "VFI Website",
+      note: "Volleyball Federation of India",
       url: "https://volleyballindia.com/"
     },
     {
-      title: "FIVB Rules",
-      note: "Official rules of volleyball.",
       icon: "📖",
+      title: "FIVB Rules",
+      note: "Official rules of the game",
       url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/"
     }
   ],
@@ -73,6 +91,17 @@ const SITE_CONFIG = {
     role: "Head of Department – Physical Education",
     email: "physicaleducation@credencehighschool.com",
     mobile: "+971 56 369 2429",
-    phoneLink: "+971563692429"
+    mobileLink: "+971563692429"
   }
 };
+
+function getApiUrl() {
+  return SITE_CONFIG.apiUrl;
+}
+
+function applyCommonConfig() {
+  document.querySelectorAll("[data-event-title]").forEach(el => el.textContent = SITE_CONFIG.eventTitle);
+  document.querySelectorAll("[data-event-year]").forEach(el => el.textContent = SITE_CONFIG.eventYear);
+  document.querySelectorAll("[data-hosted-by]").forEach(el => el.textContent = SITE_CONFIG.hostedBy);
+  document.querySelectorAll("[data-categories]").forEach(el => el.textContent = SITE_CONFIG.categoriesText);
+}

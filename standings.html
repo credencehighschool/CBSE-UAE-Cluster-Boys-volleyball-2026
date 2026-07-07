@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CBSE UAE Cluster Boys Volleyball Championship 2026–27</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Standings</title>
 <style>
 
 :root{--blue:#0057ff;--dark:#020b20;--navy:#061433;--lime:#d7ff00;--soft:#f3f7ff;--muted:#5c6e86}
@@ -114,283 +113,179 @@ body{font-family:'Arial Black','Segoe UI',Arial,sans-serif;background:var(--soft
 }
 
 
-.locked-tile{
-  opacity:.95;
-  cursor:not-allowed;
-  border-top-color:var(--lime)!important;
-  background:linear-gradient(180deg,#ffffff,#f7fbff);
+.live-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#ff1744;
+  border-radius:50%;
+  margin-right:7px;
+  animation:pulse 1s infinite;
 }
-.locked-tile:hover{
-  transform:none!important;
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(255,23,68,.7)}
+  70%{box-shadow:0 0 0 12px rgba(255,23,68,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,23,68,0)}
 }
-.locked-tile span{
-  color:var(--blue);
-}
-
-.phase2-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.phase2-card{
+.match-card-pro{
   background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 10px 28px rgba(0,0,0,.10);
-  text-align:center;
-  text-decoration:none;
-  color:var(--navy);
+  border-radius:30px;
+  padding:28px;
+  box-shadow:0 12px 32px rgba(0,0,0,.10);
   border-top:8px solid var(--blue);
-  transition:.25s;
 }
-.phase2-card:hover{transform:translateY(-5px)}
-.phase2-card.gold{border-top-color:var(--lime);background:linear-gradient(180deg,#fff,#f8ffd9)}
-.phase2-card span{font-size:48px;display:block;margin-bottom:14px}
-.phase2-card strong{font-size:21px;display:block;margin-bottom:8px}
-.phase2-card small{font-family:'Segoe UI',Arial,sans-serif;color:var(--muted);font-weight:700}
-.bracket-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  align-items:start;
+.match-card-pro.live{
+  border-top-color:#ff1744;
 }
-.bracket-column h3{
-  background:var(--dark);
-  color:white;
-  border-radius:16px;
-  padding:14px;
-  text-align:center;
+.match-head-pro{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
   margin-bottom:16px;
+  flex-wrap:wrap;
 }
-.bracket-match{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 8px 22px rgba(0,0,0,.10);
-  border-left:7px solid var(--lime);
-  margin-bottom:18px;
-}
-.bracket-match small{
-  color:var(--blue);
+.match-label{
+  background:var(--blue);
+  color:white;
+  padding:9px 15px;
+  border-radius:40px;
+  font-size:12px;
   font-weight:950;
   text-transform:uppercase;
 }
-.bracket-team{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:12px;
-  font-family:'Segoe UI',Arial,sans-serif;
-  font-weight:850;
-  color:var(--navy);
+.match-status{
+  background:var(--lime);
+  color:var(--dark);
+  padding:9px 15px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:950;
+  text-transform:uppercase;
 }
-.bracket-score{
-  background:var(--blue);
+.match-status.live{
+  background:#ff1744;
   color:white;
-  border-radius:10px;
-  padding:4px 10px;
 }
-.medal-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.medal-card{
-  background:white;
-  border-radius:30px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-}
-.medal-card .medal{
-  font-size:64px;
-  display:block;
-  margin-bottom:12px;
-}
-.medal-card h3{
-  color:var(--blue);
-  font-size:26px;
-  margin-bottom:8px;
-}
-.medal-card p{
+.match-meta-pro{
   font-family:'Segoe UI',Arial,sans-serif;
   color:var(--muted);
   font-weight:800;
+  margin-bottom:18px;
 }
-.awards-grid{
+.score-board{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.award-card{
-  background:white;
-  border-radius:26px;
-  padding:28px;
+  grid-template-columns:1fr auto 1fr;
+  gap:18px;
+  align-items:center;
   text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,.10);
-  border-top:7px solid var(--lime);
 }
-.award-card span{
-  display:block;
-  font-size:44px;
-  margin-bottom:12px;
+.score-team{
+  background:#f7faff;
+  border-radius:22px;
+  padding:18px;
 }
-.award-card h3{
-  color:var(--navy);
+.score-team h3{
   font-size:21px;
-  margin-bottom:8px;
+  color:var(--navy);
+  margin-bottom:10px;
 }
-.award-card p{
+.score-team strong{
+  display:block;
+  color:var(--blue);
+  font-size:54px;
+  line-height:1;
+}
+.score-vs{
+  background:var(--dark);
+  color:var(--lime);
+  padding:16px 18px;
+  border-radius:18px;
+  font-size:24px;
+  font-weight:950;
+}
+.set-strip{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.set-pill{
+  background:#eef4ff;
+  color:var(--navy);
+  border-radius:30px;
+  padding:9px 13px;
   font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--muted);
-  font-weight:750;
-  line-height:1.5;
+  font-size:13px;
+  font-weight:900;
 }
-@media(max-width:900px){
-  .phase2-grid,.bracket-grid,.medal-grid,.awards-grid{grid-template-columns:1fr}
+.current-set{
+  margin-top:16px;
+  text-align:center;
+  color:#ff1744;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.match-winner{
+  margin-top:14px;
+  text-align:center;
+  color:var(--blue);
+  font-weight:950;
+}
+.admin-mobile-note{
+  background:#eaf2ff;
+  border-left:7px solid var(--blue);
+  padding:15px;
+  border-radius:16px;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#374151;
+  font-weight:750;
+  margin-bottom:18px;
+}
+.set-input-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+@media(max-width:800px){
+  .score-board{grid-template-columns:1fr}
+  .score-vs{width:90px;margin:auto}
+  .set-input-grid{grid-template-columns:1fr}
+  .match-card-pro{padding:20px}
 }
 
+.rank1 td{background:#f8ffd9;font-weight:950}
+.qualify{background:var(--lime);color:var(--dark);border-radius:30px;padding:6px 10px;font-weight:950;font-size:12px}
 </style>
 <script src="config.js"></script>
 </head>
 <body>
 <header class="header"><div class="brand"><div class="brand-icon">🏐</div><div><strong>CBSE UAE Cluster</strong><span>Boys Volleyball Championship 2026–27</span></div></div><nav class="nav"><a href="index.html">Home</a><a href="fixtures.html">Fixtures</a><a href="live-scores.html">Live</a><a href="standings.html">Standings</a><a href="results.html">Results</a><a href="bracket.html">Bracket</a><a href="medal-tally.html">Medals</a><a href="awards.html">Awards</a><a href="gallery.html">Gallery</a><a href="admin.html">Admin</a></nav></header>
-
-<main id="home">
-<section class="hero"><img src="images/cover.png" alt="CBSE UAE Cluster Boys Volleyball Championship"></section>
-
-<section class="news">
-  <div class="news-title">Latest Update</div>
-  <marquee id="ticker">🏆 Important updates will appear here.</marquee>
-</section>
-
-<section class="quick-info">
-  <div><p>Hosted by</p><h2>Credence High School, Dubai</h2></div>
-  <div><p>Categories</p><h2>Boys U-14 | U-17 | U-19</h2></div>
-</section>
-
-
-
-<section class="registration">
-  <div>
-    <small>Official Registration Portal</small>
-    <h1>Register Your School for the Championship</h1>
-    <p>Schools willing to participate may complete the online registration process.</p>
-  </div>
-  <a class="btn" href="#" id="registrationBtn" target="_blank">Register Your School</a>
-</section>
-
 <section class="section">
-  <div class="title"><small>Championship Countdown</small><h2>September 19–20, 2026</h2></div>
-  <div class="countdown" id="timer">
-    <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
-    <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
-    <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
-    <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
-  </div>
+  <div class="title"><small>Automatic Standings</small><h2>Points Table</h2><p class="muted">Calculated automatically from completed matches.</p></div>
+  <div id="standings">Loading...</div>
 </section>
-
-
-<section class="section">
-  <div class="title"><small>Championship Centre</small><h2>Fixtures, Live Scores & Standings</h2></div>
-  <div class="grid3">
-    <div class="card tile locked-tile"><span>🔒</span><strong>Fixtures Locked</strong><small>Fixtures will be opened by the owner once finalized.</small></div>
-    <div class="card tile locked-tile"><span>🔒</span><strong>Live Scores Locked</strong><small>Live scores will be opened during the championship.</small></div>
-    <div class="card tile locked-tile"><span>🔒</span><strong>Standings Locked</strong><small>Standings will be opened once matches begin.</small></div>
-  </div>
-</section>
-<section class="section">
-  <div class="title"><small>Phase 2</small><h2>Knockout, Medals & Awards</h2></div>
-  <div class="phase2-grid">
-    <a class="phase2-card" href="bracket.html"><span>🏆</span><strong>Knockout Bracket</strong><small>Semi-finals and finals pathway</small></a>
-    <a class="phase2-card gold" href="medal-tally.html"><span>🥇</span><strong>Medal Tally</strong><small>Champion, Runner-up and Third Place</small></a>
-    <a class="phase2-card" href="awards.html"><span>⭐</span><strong>Individual Awards</strong><small>Best player, setter, libero and more</small></a>
-  </div>
-</section>
-
-
-
-<section class="section">
-  <div class="title"><small>Official Documents</small><h2>Downloads & Quick Links</h2></div>
-  <div id="downloads" class="grid3"></div>
-</section>
-
-<section class="section">
-  <div class="title"><small>Venue</small><h2>Championship Venue</h2></div>
-  <div id="venue" class="card">Loading venue...</div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="card contact-card">
-    <small class="small-title">Need Assistance?</small>
-    <h2>Contact Coordinator</h2>
-    <h3>Mr. Vijesh V</h3>
-    <p>Head of Department – Physical Education</p>
-    <p>Email: <a href="mailto:physicaleducation@credencehighschool.com">physicaleducation@credencehighschool.com</a></p>
-    <p>Mobile: <a href="tel:+971563692429">+971 56 369 2429</a></p>
-  </div>
-</section>
-</main>
-
-<footer class="footer">© 2026 Credence High School, Dubai · CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
-
+<footer class="footer">CBSE UAE Cluster Boys Volleyball Championship 2026–27</footer>
 <script>
 const API=getApiUrl();
-
-/* Phase 3: values are now loaded from config.js */
-
-const targetDate = new Date(SITE_CONFIG.championshipStart).getTime();
-
-function tick(){
-  const n=Date.now(),d=targetDate-n;
-  if(d<=0)return;
-  days.innerText=String(Math.floor(d/(1000*60*60*24))).padStart(2,'0');
-  hours.innerText=String(Math.floor((d%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
-  minutes.innerText=String(Math.floor((d%(1000*60*60))/(1000*60))).padStart(2,'0');
-  seconds.innerText=String(Math.floor((d%(1000*60))/1000)).padStart(2,'0');
-}
-tick();
-setInterval(tick,1000);
-
-function loadDirectContent(){
-  const regBtn = document.getElementById("registrationBtn");
-  if(regBtn) regBtn.href = SITE_CONFIG.registrationUrl;
-
-  const links = document.querySelectorAll('a[href*="AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA"]');
-  links.forEach(a => a.href = SITE_CONFIG.registrationUrl);
-
-  if(document.getElementById("downloads")){
-    downloads.innerHTML = SITE_CONFIG.downloads.map(d=>`
-      <a class="card tile" href="${d.url}" target="_blank">
-        <span>${d.icon}</span>
-        <strong>${d.title}</strong>
-        <small>${d.note}</small>
-      </a>
-    `).join("");
-  }
-
-  if(document.getElementById("venue")){
-    venue.innerHTML = `
-      <h2>${SITE_CONFIG.venue.title}</h2>
-      <p class="muted">${SITE_CONFIG.venue.details}</p>
-      <br>
-      <a class="btn" href="${SITE_CONFIG.venue.mapUrl}" target="_blank">Open Location Map</a>
-    `;
-  }
-}
-loadDirectContent();
-
-async function loadNotices(){
-  if(API.includes("PASTE")) return;
+async function load(){
   try{
-    const r=await fetch(API+"?action=all&cache="+Date.now());
-    const data=await r.json();
-    ticker.innerHTML=(data.notices||[]).map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ") || `🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
-  }catch(e){
-    ticker.innerHTML=`🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
-  }
+    const r=await fetch(API+"?action=autoStandings&cache="+Date.now());
+    const d=await r.json();
+    const rows=d.standings||[];
+    const groups={};
+    rows.forEach(r=>{ if(!groups[r.category]) groups[r.category]=[]; groups[r.category].push(r); });
+    standings.innerHTML=Object.keys(groups).map(cat=>`
+      <h2 style="margin:25px 0 12px">${cat}</h2>
+      <table class="table">
+        <tr><th>Rank</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Sets</th><th>Points</th><th>Status</th></tr>
+        ${groups[cat].map((s,i)=>`<tr class="${i===0?'rank1':''}"><td>${i+1}</td><td>${s.team}</td><td>${s.played}</td><td>${s.won}</td><td>${s.lost}</td><td>${s.setsFor}-${s.setsAgainst}</td><td>${s.points}</td><td>${i<2?'<span class="qualify">Qualification Zone</span>':'-'}</td></tr>`).join('')}
+      </table>`).join("") || '<div class="card">Standings will appear after completed matches.</div>';
+  }catch(e){standings.innerHTML='<div class="card">Unable to load standings.</div>';}
 }
-loadNotices();
+load(); setInterval(load,30000);
 </script>
 </body>
 </html>
