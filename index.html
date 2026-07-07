@@ -7,12 +7,11 @@
   <link rel="stylesheet" href="style.css">
   <script src="config.js"></script>
 </head>
-
 <body>
 
 <header class="topbar">
   <div class="brand">
-    <div class="brand-ball">🏐</div>
+    <div class="brand-icon">🏐</div>
     <div>
       <strong>CBSE UAE Cluster</strong>
       <span id="headerSubtitle">Boys Volleyball Championship</span>
@@ -39,25 +38,27 @@
   <img src="images/cover.png" onerror="this.src='cover.png'" alt="CBSE UAE Cluster Boys Volleyball Championship">
 </section>
 
-<section class="moving-banner">
-  <div class="banner-title">Welcome</div>
-  <marquee id="movingBanner" behavior="scroll" direction="left" scrollamount="5"></marquee>
+<section class="welcome-banner">
+  <div class="banner-label">Welcome</div>
+  <div class="banner-track">
+    <marquee id="movingBanner" behavior="scroll" direction="left" scrollamount="6"></marquee>
+  </div>
 </section>
 
-<section class="host-strip">
-  <div>
-    <small>Hosted by</small>
+<section class="info-strip">
+  <div class="info-box">
+    <span>Hosted by</span>
     <h2 id="hostedBy"></h2>
   </div>
-  <div>
-    <small>Categories</small>
+  <div class="info-box">
+    <span>Categories</span>
     <h2 id="categories"></h2>
   </div>
 </section>
 
 <section id="registration" class="registration-card">
   <div>
-    <small>Official Registration Portal</small>
+    <span class="section-kicker">Official Registration Portal</span>
     <h1>Register Your School</h1>
     <p>Schools willing to participate may complete the online registration process using the button below.</p>
   </div>
@@ -66,43 +67,43 @@
 
 <section id="overview" class="section">
   <div class="section-title">
-    <small>Tournament Overview</small>
+    <span>Tournament Overview</span>
     <h2>Championship at a Glance</h2>
   </div>
 
   <div class="stats-grid">
     <article class="stat-card">
       <strong id="participatingSchools">00</strong>
-      <span>Participating Schools</span>
+      <p>Participating Schools</p>
     </article>
     <article class="stat-card">
       <strong id="totalAthletes">00</strong>
-      <span>Total Athletes</span>
+      <p>Total Athletes</p>
     </article>
     <article class="stat-card">
       <strong id="totalTeams">00</strong>
-      <span>Total Teams</span>
+      <p>Total Teams</p>
     </article>
   </div>
 </section>
 
 <section id="countdown" class="section">
   <div class="section-title">
-    <small>Championship Countdown</small>
+    <span>Championship Countdown</span>
     <h2 id="championshipDates"></h2>
   </div>
 
   <div class="countdown-grid">
-    <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
-    <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
-    <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
-    <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+    <div class="count-box"><strong id="days">00</strong><p>Days</p></div>
+    <div class="count-box"><strong id="hours">00</strong><p>Hours</p></div>
+    <div class="count-box"><strong id="minutes">00</strong><p>Minutes</p></div>
+    <div class="count-box"><strong id="seconds">00</strong><p>Seconds</p></div>
   </div>
 </section>
 
-<section id="fixtures" class="section">
+<section id="fixtures" class="section fixtures-section">
   <div class="section-title">
-    <small>Official Fixtures</small>
+    <span>Official Fixtures</span>
     <h2>Download Category-wise Fixtures</h2>
   </div>
 
@@ -113,7 +114,7 @@
         <h3>U-14 Boys</h3>
         <p>Download the official U-14 Boys fixture PDF.</p>
       </div>
-      <a id="fixtureU14" class="primary-btn" target="_blank" rel="noopener">Click here to download fixture</a>
+      <a id="fixtureU14" class="primary-btn" target="_blank" rel="noopener">Download Fixture</a>
     </article>
 
     <article class="fixture-card">
@@ -122,7 +123,7 @@
         <h3>U-17 Boys</h3>
         <p>Download the official U-17 Boys fixture PDF.</p>
       </div>
-      <a id="fixtureU17" class="primary-btn" target="_blank" rel="noopener">Click here to download fixture</a>
+      <a id="fixtureU17" class="primary-btn" target="_blank" rel="noopener">Download Fixture</a>
     </article>
 
     <article class="fixture-card">
@@ -131,23 +132,22 @@
         <h3>U-19 Boys</h3>
         <p>Download the official U-19 Boys fixture PDF.</p>
       </div>
-      <a id="fixtureU19" class="primary-btn" target="_blank" rel="noopener">Click here to download fixture</a>
+      <a id="fixtureU19" class="primary-btn" target="_blank" rel="noopener">Download Fixture</a>
     </article>
   </div>
 </section>
 
 <section id="downloads" class="section">
   <div class="section-title">
-    <small>Important Downloads & Links</small>
+    <span>Important Downloads & Links</span>
     <h2>Official Documents</h2>
   </div>
-
   <div id="downloadsGrid" class="downloads-grid"></div>
 </section>
 
 <section id="venue" class="section">
   <div class="section-title">
-    <small>Venue</small>
+    <span>Venue</span>
     <h2>Championship Venue</h2>
   </div>
 
@@ -162,7 +162,7 @@
 
 <section id="contact" class="contact-section">
   <article class="contact-card">
-    <small>Need Assistance?</small>
+    <span>Need Assistance?</span>
     <h2>Contact Coordinator</h2>
     <h3 id="contactName"></h3>
     <p id="contactRole"></p>
