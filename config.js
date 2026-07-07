@@ -3,7 +3,7 @@ const SITE_CONFIG = {
   eventYear: "2026–27",
   hostedBy: "Credence High School, Dubai",
   categories: "Boys U-14 | U-17 | U-19",
-  championshipStart: "September 19, 2026 07:00:00",
+  championshipStart: "September 19, 2026 08:00:00",
   championshipDates: "Saturday, September 19th & Sunday, September 20th 2026",
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
