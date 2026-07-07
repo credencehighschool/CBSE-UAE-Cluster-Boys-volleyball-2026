@@ -28,16 +28,22 @@
   <div class="title"><small>Mobile Admin Dashboard</small><h2>Match Control</h2></div>
   <div class="admin-mobile-note">Use this panel from your phone during the championship. Tournament Overview is for admin record only. Public Fixtures, Live Scores and Standings stay locked (see <code>config.js → phase</code>) until you open them.</div>
   <div class="card"><label>Admin Password</label><input id="password" type="password" placeholder="Enter owner password again for saving changes"></div><br>
-  <div class="tabs">
+  <div class="tabs" id="mainTabs">
     <button class="tab active" onclick="show('overview')">Overview</button>
-    <button class="tab" onclick="show('match')">Match Score</button>
     <button class="tab" onclick="show('notice')">Notice</button>
     <button class="tab" onclick="show('galleryp')">Gallery</button>
     <button class="tab" onclick="show('bracketp')">Bracket</button>
     <button class="tab" onclick="show('medalp')">Medal Tally</button>
     <button class="tab" onclick="show('awardp')">Awards</button>
+    <button class="tab" onclick="show('manual')">Manual Entry / Fix</button>
     <button class="tab logout-btn" onclick="logout()" style="margin-left:auto">Logout</button>
   </div>
+
+  <div class="court-tabs">
+    <div class="court-tabs-label">Live Court Scoring</div>
+    <div class="tabs" id="courtTabs"></div>
+  </div>
+  <div id="courtPanels"></div>
 
   <div id="overview" class="panel active card">
     <div class="admin-form">
@@ -50,7 +56,8 @@
     <br><button class="btn" onclick="save('saveOverview')">Save Tournament Overview</button>
   </div>
 
-  <div id="match" class="panel card">
+  <div id="manual" class="panel card">
+    <p class="muted" style="margin-bottom:16px">For byes, forfeits, or fixing a mistake after the fact. For normal live scoring, use the Court tabs above instead — they publish here automatically when a match finishes.</p>
     <div class="admin-form">
       <div><label>Match ID</label><input id="matchId" placeholder="M001"></div>
       <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Semi Final</option><option>Boys U-17 Semi Final</option><option>Boys U-19 Semi Final</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
@@ -153,7 +160,7 @@ function login(){
 }
 function logout(){sessionStorage.clear();location.reload()}
 window.addEventListener("load",()=>{if(sessionStorage.getItem("cbseAdminLoggedIn")==="yes"){password.value=sessionStorage.getItem("cbseAdminPass")||"";loginScreen.style.display="none";dashboard.style.display="block";}});
-function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');if(event&&event.target)event.target.classList.add('active')}
 function v(id){return document.getElementById(id).value.trim()}
 async function save(action){
   let data={action,password:v('password')};
@@ -168,6 +175,158 @@ async function save(action){
   try{const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});const res=await r.json();msg.innerText=res.message||'Saved.';}
   catch(e){msg.innerText='Unable to save. Please check Apps Script deployment.';}
 }
+
+/* ===================== LIVE COURT SCORING =====================
+   4 independent panels. Each writes only to its own row on the Courts
+   sheet, so courts can be scored simultaneously from different phones
+   without clashing. ?court=2 in the URL auto-opens just that court's
+   tab — bookmark that link on each scorer's phone. */
+const COURTS = ["Court-1","Court-2","Court-3","Court-4"];
+const CATEGORY_OPTIONS = ["Boys U-14","Boys U-17","Boys U-19","Boys U-14 Semi Final","Boys U-17 Semi Final","Boys U-19 Semi Final","Boys U-14 Final","Boys U-17 Final","Boys U-19 Final"];
+
+function buildCourtUI(){
+  const tabsBox = document.getElementById("courtTabs");
+  const panelsBox = document.getElementById("courtPanels");
+  tabsBox.innerHTML = COURTS.map(c=>`<button class="tab" data-courttab="${c}" onclick="showCourtTab('${c}')">${c}</button>`).join("");
+  panelsBox.innerHTML = COURTS.map(c=>courtPanelHTML(c)).join("");
+}
+
+function courtPanelHTML(court){
+  const safe = court.replace("-","");
+  return `
+  <div class="panel court-panel" id="panel-${safe}" data-court="${court}">
+    <div class="court-panel-head">
+      <h3>🏐 ${court}</h3>
+      <span class="court-status-badge" id="badge-${safe}">Idle</span>
+    </div>
+
+    <div class="court-start-form">
+      <select id="cat-${safe}">${CATEGORY_OPTIONS.map(c=>`<option>${c}</option>`).join("")}</select>
+      <input id="teamA-${safe}" placeholder="Team A school">
+      <input id="teamB-${safe}" placeholder="Team B school">
+      <select id="format-${safe}"><option>Best of 3</option><option>Best of 5</option></select>
+      <input id="date-${safe}" placeholder="Saturday, 19 Sep 2026">
+      <input id="time-${safe}" placeholder="8:30 AM">
+    </div>
+    <button class="btn" onclick="startCourt('${court}')">Start New Match on ${court}</button>
+
+    <div class="live-score-display">
+      <div class="live-score-team">
+        <h4 id="nameA-${safe}">Team A</h4>
+        <div class="live-score-points" id="ptsA-${safe}">0</div>
+        <div class="score-btn-row">
+          <button class="score-btn" onclick="point('${court}','A',-1)">−1</button>
+          <button class="score-btn plus" onclick="point('${court}','A',1)">+1</button>
+        </div>
+      </div>
+      <div class="live-score-mid" id="setlabel-${safe}">Set 1</div>
+      <div class="live-score-team">
+        <h4 id="nameB-${safe}">Team B</h4>
+        <div class="live-score-points" id="ptsB-${safe}">0</div>
+        <div class="score-btn-row">
+          <button class="score-btn" onclick="point('${court}','B',-1)">−1</button>
+          <button class="score-btn plus" onclick="point('${court}','B',1)">+1</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="set-history-pills" id="sets-${safe}"></div>
+
+    <div class="court-actions">
+      <button class="btn" onclick="endSetCourt('${court}')">End Set</button>
+      <button class="btn btn-danger" onclick="resetCourtConfirm('${court}')">Clear Court</button>
+    </div>
+    <p class="muted" id="msg-${safe}" style="margin-top:12px"></p>
+  </div>`;
+}
+
+function showCourtTab(court){
+  const safe = court.replace("-","");
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`#courtTabs [data-courttab="${court}"]`).classList.add('active');
+  document.getElementById('panel-'+safe).classList.add('active');
+}
+
+async function courtAction(action, extra){
+  const data = Object.assign({action, password: v('password')}, extra);
+  try{
+    const r = await fetch(API,{method:'POST',body:JSON.stringify(data)});
+    return await r.json();
+  }catch(e){
+    return {message:'Network error — check connection and try again.'};
+  }
+}
+
+async function startCourt(court){
+  const safe = court.replace("-","");
+  const res = await courtAction('startCourtMatch', {
+    court, category: v('cat-'+safe), teamA: v('teamA-'+safe), teamB: v('teamB-'+safe),
+    format: document.getElementById('format-'+safe).value, date: v('date-'+safe), time: v('time-'+safe)
+  });
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  refreshCourts();
+}
+
+async function point(court, team, dir){
+  const safe = court.replace("-","");
+  // optimistic UI: bump the number immediately, then reconcile on next poll
+  const el = document.getElementById((team==='A'?'ptsA-':'ptsB-')+safe);
+  el.innerText = Math.max(0, (Number(el.innerText)||0) + dir);
+  const res = await courtAction(dir>0 ? 'addPoint' : 'removePoint', {court, team});
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  refreshCourts();
+}
+
+async function endSetCourt(court){
+  const safe = court.replace("-","");
+  const res = await courtAction('endSet', {court});
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  refreshCourts();
+}
+
+async function resetCourtConfirm(court){
+  if(!confirm(`Clear all live data on ${court}? This does not delete anything already published to Results.`)) return;
+  const safe = court.replace("-","");
+  const res = await courtAction('resetCourt', {court});
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  ["cat","teamA","teamB","date","time"].forEach(f=>{const el=document.getElementById(f+'-'+safe); if(el) el.value="";});
+  refreshCourts();
+}
+
+async function refreshCourts(){
+  try{
+    const r = await fetch(API+"?action=courts&cache="+Date.now());
+    const d = await r.json();
+    (d.courts||[]).forEach(c=>{
+      const safe = String(c.court).replace("-","");
+      const badge = document.getElementById('badge-'+safe);
+      if(!badge) return;
+      badge.innerText = c.status || 'Idle';
+      badge.className = 'court-status-badge ' + (String(c.status).toLowerCase()==='live'?'live':(String(c.status).toLowerCase()==='completed'?'completed':''));
+      document.getElementById('nameA-'+safe).innerText = c.teamA || 'Team A';
+      document.getElementById('nameB-'+safe).innerText = c.teamB || 'Team B';
+      document.getElementById('ptsA-'+safe).innerText = c.pointsA || 0;
+      document.getElementById('ptsB-'+safe).innerText = c.pointsB || 0;
+      document.getElementById('setlabel-'+safe).innerText = c.status==='Completed' ? ('Winner: '+(c.winner||'—')) : ('Set '+(c.currentSet||1)+' · '+(c.setsWonA||0)+'-'+(c.setsWonB||0)+' sets');
+      const sets = [c.set1,c.set2,c.set3,c.set4,c.set5].filter(Boolean).map((s,i)=>`<span class="set-pill">Set ${i+1}: ${s}</span>`).join("");
+      document.getElementById('sets-'+safe).innerHTML = sets;
+      document.getElementById('panel-'+safe).classList.toggle('is-live', String(c.status).toLowerCase()==='live');
+    });
+  }catch(e){ /* silent — next poll will retry */ }
+}
+
+buildCourtUI();
+window.addEventListener("load", ()=>{
+  refreshCourts();
+  setInterval(refreshCourts, 4000);
+  const params = new URLSearchParams(location.search);
+  const deepLinkCourt = params.get('court');
+  if(deepLinkCourt){
+    const name = 'Court-'+deepLinkCourt;
+    if(COURTS.includes(name)){ show('overview'); /* ensure dashboard tab state sane */ setTimeout(()=>showCourtTab(name),50); }
+  }
+});
 </script>
 </body>
 </html>
