@@ -16,4 +16,22 @@ function loginAdmin(){if(loginUser.value.trim()!==SITE_CONFIG.adminUsername){log
 function showTab(id,e){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));document.getElementById(id).classList.add("active");e.target.classList.add("active")}
 function v(id){return document.getElementById(id).value.trim()}
 async function save(action){let data={action,password:v("password")};if(action==="saveTeam")Object.assign(data,{category:v("teamCategory"),team:v("teamName")});if(action==="generateFixtures")Object.assign(data,{category:v("teamCategory")});if(action==="saveMatch")Object.assign(data,{matchId:v("matchId"),category:v("category"),status:v("status"),timerStart:v("timerStart"),currentSet:v("currentSet"),date:v("date"),time:v("time"),court:v("court"),teamA:v("teamA"),teamB:v("teamB"),scoreA:v("scoreA"),scoreB:v("scoreB"),set1:v("set1"),set2:v("set2"),set3:v("set3"),set4:v("set4"),set5:v("set5"),winner:v("winner")});if(action==="saveNotice")Object.assign(data,{id:v("newsId"),title:v("newsTitle"),message:v("newsMessage")});if(action==="saveGallery")Object.assign(data,{id:v("galleryId"),url:v("galleryUrl"),caption:v("galleryCaption")});msg.textContent="Saving...";try{let r=await fetch(API,{method:"POST",body:JSON.stringify(data)}),res=await r.json();msg.textContent=res.message||"Saved"}catch(e){msg.textContent="Unable to save. Check Apps Script deployment."}}
+
+async function saveTeamsList(){
+  const teams=[];
+  document.querySelectorAll(".team-row").forEach(row=>{
+    const category=row.dataset.category;
+    const school=row.querySelector(".team-school").value.trim();
+    const emirate=row.querySelector(".team-emirate").value.trim();
+    if(school){teams.push({category,school,emirate});}
+  });
+  if(teams.length===0){msg.textContent="Please enter at least one school name.";return;}
+  msg.textContent="Saving teams...";
+  try{
+    let r=await fetch(API,{method:"POST",body:JSON.stringify({action:"saveTeamsBulk",password:v("password"),teams})});
+    let res=await r.json();
+    msg.textContent=res.message||"Teams saved.";
+  }catch(e){msg.textContent="Unable to save teams. Check Apps Script deployment.";}
+}
+
 window.onload=()=>{init();if(sessionStorage.getItem("logged")==="yes"){password.value=sessionStorage.getItem("pass")||"";loginBox.style.display="none";dashboard.style.display="block"}setInterval(loadLive,10000);setInterval(loadNews,30000)}

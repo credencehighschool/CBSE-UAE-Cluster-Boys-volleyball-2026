@@ -153,16 +153,827 @@
     </div>
 
     <div id="teamPanel" class="panel active card">
-      <h3>Team Entry & Fixture Generator</h3>
-      <label>Category</label>
-      <select id="teamCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select>
-      <label>Team / School Name</label>
-      <input id="teamName">
-      <button class="btn" onclick="save('saveTeam')">Save Team</button>
-      <button class="btn blue" onclick="save('generateFixtures')">Generate League Fixtures</button>
-    </div>
+      <h3>Teams for the Championship</h3>
+      <p class="muted">Enter school names vertically and select the Emirate for each school.</p>
 
-    <div id="matchPanel" class="panel card">
+      <div class="team-category-box">
+        <h4>U-14 Boys</h4>
+        <div class="team-header"><span>Sl No</span><span>Name of the School</span><span>Emirate</span></div>
+        <div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">1</span>
+  <input class="team-school" placeholder="Name of the School 1">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">2</span>
+  <input class="team-school" placeholder="Name of the School 2">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">3</span>
+  <input class="team-school" placeholder="Name of the School 3">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">4</span>
+  <input class="team-school" placeholder="Name of the School 4">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">5</span>
+  <input class="team-school" placeholder="Name of the School 5">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">6</span>
+  <input class="team-school" placeholder="Name of the School 6">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">7</span>
+  <input class="team-school" placeholder="Name of the School 7">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">8</span>
+  <input class="team-school" placeholder="Name of the School 8">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">9</span>
+  <input class="team-school" placeholder="Name of the School 9">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">10</span>
+  <input class="team-school" placeholder="Name of the School 10">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">11</span>
+  <input class="team-school" placeholder="Name of the School 11">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">12</span>
+  <input class="team-school" placeholder="Name of the School 12">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">13</span>
+  <input class="team-school" placeholder="Name of the School 13">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">14</span>
+  <input class="team-school" placeholder="Name of the School 14">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">15</span>
+  <input class="team-school" placeholder="Name of the School 15">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">16</span>
+  <input class="team-school" placeholder="Name of the School 16">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">17</span>
+  <input class="team-school" placeholder="Name of the School 17">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">18</span>
+  <input class="team-school" placeholder="Name of the School 18">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">19</span>
+  <input class="team-school" placeholder="Name of the School 19">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-14">
+  <span class="team-sl">20</span>
+  <input class="team-school" placeholder="Name of the School 20">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+      </div>
+
+      <div class="team-category-box">
+        <h4>U-17 Boys</h4>
+        <div class="team-header"><span>Sl No</span><span>Name of the School</span><span>Emirate</span></div>
+        <div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">1</span>
+  <input class="team-school" placeholder="Name of the School 1">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">2</span>
+  <input class="team-school" placeholder="Name of the School 2">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">3</span>
+  <input class="team-school" placeholder="Name of the School 3">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">4</span>
+  <input class="team-school" placeholder="Name of the School 4">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">5</span>
+  <input class="team-school" placeholder="Name of the School 5">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">6</span>
+  <input class="team-school" placeholder="Name of the School 6">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">7</span>
+  <input class="team-school" placeholder="Name of the School 7">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">8</span>
+  <input class="team-school" placeholder="Name of the School 8">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">9</span>
+  <input class="team-school" placeholder="Name of the School 9">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">10</span>
+  <input class="team-school" placeholder="Name of the School 10">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">11</span>
+  <input class="team-school" placeholder="Name of the School 11">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">12</span>
+  <input class="team-school" placeholder="Name of the School 12">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">13</span>
+  <input class="team-school" placeholder="Name of the School 13">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">14</span>
+  <input class="team-school" placeholder="Name of the School 14">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">15</span>
+  <input class="team-school" placeholder="Name of the School 15">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">16</span>
+  <input class="team-school" placeholder="Name of the School 16">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">17</span>
+  <input class="team-school" placeholder="Name of the School 17">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">18</span>
+  <input class="team-school" placeholder="Name of the School 18">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">19</span>
+  <input class="team-school" placeholder="Name of the School 19">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">20</span>
+  <input class="team-school" placeholder="Name of the School 20">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">21</span>
+  <input class="team-school" placeholder="Name of the School 21">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">22</span>
+  <input class="team-school" placeholder="Name of the School 22">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">23</span>
+  <input class="team-school" placeholder="Name of the School 23">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">24</span>
+  <input class="team-school" placeholder="Name of the School 24">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">25</span>
+  <input class="team-school" placeholder="Name of the School 25">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">26</span>
+  <input class="team-school" placeholder="Name of the School 26">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">27</span>
+  <input class="team-school" placeholder="Name of the School 27">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">28</span>
+  <input class="team-school" placeholder="Name of the School 28">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">29</span>
+  <input class="team-school" placeholder="Name of the School 29">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-17">
+  <span class="team-sl">30</span>
+  <input class="team-school" placeholder="Name of the School 30">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+      </div>
+
+      <div class="team-category-box">
+        <h4>U-19 Boys</h4>
+        <div class="team-header"><span>Sl No</span><span>Name of the School</span><span>Emirate</span></div>
+        <div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">1</span>
+  <input class="team-school" placeholder="Name of the School 1">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">2</span>
+  <input class="team-school" placeholder="Name of the School 2">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">3</span>
+  <input class="team-school" placeholder="Name of the School 3">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">4</span>
+  <input class="team-school" placeholder="Name of the School 4">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">5</span>
+  <input class="team-school" placeholder="Name of the School 5">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">6</span>
+  <input class="team-school" placeholder="Name of the School 6">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">7</span>
+  <input class="team-school" placeholder="Name of the School 7">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">8</span>
+  <input class="team-school" placeholder="Name of the School 8">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">9</span>
+  <input class="team-school" placeholder="Name of the School 9">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">10</span>
+  <input class="team-school" placeholder="Name of the School 10">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">11</span>
+  <input class="team-school" placeholder="Name of the School 11">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">12</span>
+  <input class="team-school" placeholder="Name of the School 12">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">13</span>
+  <input class="team-school" placeholder="Name of the School 13">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">14</span>
+  <input class="team-school" placeholder="Name of the School 14">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">15</span>
+  <input class="team-school" placeholder="Name of the School 15">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">16</span>
+  <input class="team-school" placeholder="Name of the School 16">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">17</span>
+  <input class="team-school" placeholder="Name of the School 17">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">18</span>
+  <input class="team-school" placeholder="Name of the School 18">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">19</span>
+  <input class="team-school" placeholder="Name of the School 19">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">20</span>
+  <input class="team-school" placeholder="Name of the School 20">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">21</span>
+  <input class="team-school" placeholder="Name of the School 21">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">22</span>
+  <input class="team-school" placeholder="Name of the School 22">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">23</span>
+  <input class="team-school" placeholder="Name of the School 23">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">24</span>
+  <input class="team-school" placeholder="Name of the School 24">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">25</span>
+  <input class="team-school" placeholder="Name of the School 25">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">26</span>
+  <input class="team-school" placeholder="Name of the School 26">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">27</span>
+  <input class="team-school" placeholder="Name of the School 27">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">28</span>
+  <input class="team-school" placeholder="Name of the School 28">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">29</span>
+  <input class="team-school" placeholder="Name of the School 29">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+<div class="team-row" data-category="Boys U-19">
+  <span class="team-sl">30</span>
+  <input class="team-school" placeholder="Name of the School 30">
+  <select class="team-emirate">
+  <option value="">Select Emirate</option>
+  <option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option>
+  <option>Ajman</option><option>Umm Al Quwain</option>
+  <option>Ras Al Khaimah</option><option>Fujairah</option>
+</select>
+</div>
+      </div>
+
+      <button class="btn" onclick="saveTeamsList()">Save Teams</button>
+    </div>
+<div id="matchPanel" class="panel card">
       <h3>Live Match Control</h3>
       <div class="formGrid">
         <div><label>Match ID</label><input id="matchId"></div>

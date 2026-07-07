@@ -19,3 +19,12 @@ body{font-family:Arial Black,Segoe UI,Arial,sans-serif;background:var(--soft);co
 .loginWrap{min-height:70vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--dark),var(--blue));padding:30px}.loginCard{background:white;border-radius:26px;padding:30px;max-width:460px;width:100%;border-top:8px solid var(--lime)}label{display:block;color:var(--blue);font-size:12px;font-weight:900;text-transform:uppercase;margin:10px 0 5px}input,select,textarea{width:100%;padding:11px;border:1px solid #d7e0ee;border-radius:10px;font-family:Segoe UI;font-weight:700}.dashboard{display:none}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tabs button{border:2px solid var(--blue);background:white;color:var(--blue);padding:10px;border-radius:10px;font-weight:900}.tabs .active{background:var(--blue);color:white}.panel{display:none}.panel.active{display:block}.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}#msg{font-family:Segoe UI;color:var(--blue);font-weight:900;margin-top:15px}
 footer{background:var(--dark);color:white;text-align:center;padding:25px;font-family:Segoe UI;font-weight:700}
 @media(max-width:900px){.menu{display:block}nav{display:none;width:100%}nav.open{display:flex}.topbar{flex-wrap:wrap}.quick,.grid3,.grid2,.galleryGrid{grid-template-columns:1fr}.register,.fixtureRow{flex-direction:column;text-align:center;margin-left:15px;margin-right:15px}.score{grid-template-columns:1fr}.formGrid{grid-template-columns:1fr}.ticker{display:block}.ticker b{display:block;text-align:center}.btn{width:100%;text-align:center}}
+
+.team-category-box{margin-top:26px;padding:22px;background:#f7faff;border-radius:22px;border-left:8px solid var(--lime)}
+.team-category-box h4{font-size:24px;color:var(--navy);margin-bottom:14px}
+.team-header,.team-row{display:grid;grid-template-columns:70px 1fr 240px;gap:12px;align-items:center}
+.team-header{font-family:Segoe UI,Arial,sans-serif;font-weight:900;color:var(--blue);text-transform:uppercase;font-size:12px;margin-bottom:8px}
+.team-row{margin-bottom:10px}
+.team-sl{background:var(--blue);color:white;border-radius:10px;padding:10px;text-align:center;font-family:Segoe UI,Arial,sans-serif;font-weight:900}
+.team-school,.team-emirate{margin:0!important}
+@media(max-width:900px){.team-header{display:none}.team-row{grid-template-columns:1fr;background:white;padding:14px;border-radius:16px}.team-sl{width:60px}}
