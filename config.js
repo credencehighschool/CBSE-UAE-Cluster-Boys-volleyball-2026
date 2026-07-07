@@ -7,7 +7,7 @@ const SITE_CONFIG = {
   championshipDates: "Saturday, September 19th & Sunday, September 20th 2026",
   acceptanceDeadline: "Monday, June 8th 2026",
   entryDeadline: "Friday, June 12th 2026",
-  apiUrl: "https://script.google.com/macros/s/AKfycbzOe0E7-RASccMRLrciP5lB4Vp0z3EHPEB0v5xtzFJVKN2A0Su6TOFsBFclLYyxWETu6Q/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbx_6XME-hFK8oWVFqnb4komCWQbdnwiifoP3mNxXf6cPmYf1DiY-CENDTx-YpziI3HHeQ/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
   adminUsername: "admin",
   fixtures: {
