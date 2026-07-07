@@ -975,30 +975,325 @@
     </div>
 <div id="matchPanel" class="panel card">
       <h3>Live Match Control</h3>
-      <div class="formGrid">
-        <div><label>Match ID</label><input id="matchId"></div>
-        <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
-        <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option></select></div>
-        <div><label>Timer Start</label><input id="timerStart" placeholder="2026-09-19T08:30:00"></div>
-        <div><label>Date</label><input id="date"></div>
-        <div><label>Time</label><input id="time"></div>
-        <div><label>Court</label><input id="court"></div>
-        <div><label>Current Set</label><select id="currentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select></div>
-        <div><label>Team A</label><input id="teamA"></div>
-        <div><label>Team B</label><input id="teamB"></div>
-        <div><label>Sets A</label><input id="scoreA"></div>
-        <div><label>Sets B</label><input id="scoreB"></div>
-        <div><label>Set 1</label><input id="set1"></div>
-        <div><label>Set 2</label><input id="set2"></div>
-        <div><label>Set 3</label><input id="set3"></div>
-        <div><label>Set 4</label><input id="set4"></div>
-        <div><label>Set 5</label><input id="set5"></div>
-        <div><label>Winner</label><input id="winner"></div>
-      </div>
-      <button class="btn" onclick="save('saveMatch')">Save Match</button>
-    </div>
+      <p class="muted">Update live match details separately for Court 1, Court 2, Court 3 and Court 4.</p>
+      
+      <div class="court-control" data-court="Court 1">
+        <h4>Live Match Control – Court 1</h4>
 
-    <div id="newsPanel" class="panel card">
+        <div class="formGrid">
+          <div>
+            <label>Match ID</label>
+            <input id="c1MatchId" placeholder="001">
+          </div>
+
+          <div>
+            <label>Category</label>
+            <select id="c1Category"><option>U-14</option><option>U-17</option><option>U-19</option></select>
+          </div>
+
+          <div>
+            <label>Status</label>
+            <select id="c1Status"><option>Scheduled</option><option>Live</option><option>Completed</option></select>
+          </div>
+
+          <div>
+            <label>Date</label>
+            <input id="c1Date" type="date">
+          </div>
+
+          <div>
+            <label>Time</label>
+            <input id="c1Time" type="time">
+          </div>
+
+          <div>
+            <label>Current Set</label>
+            <select id="c1CurrentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select>
+          </div>
+
+          <div>
+            <label>Name of Team A</label>
+            <input id="c1TeamA" placeholder="Team A">
+          </div>
+
+          <div>
+            <label>Name of Team B</label>
+            <input id="c1TeamB" placeholder="Team B">
+          </div>
+
+          <div>
+            <label>Set 1</label>
+            <input id="c1Set1" placeholder="25-18">
+          </div>
+
+          <div>
+            <label>Set 2</label>
+            <input id="c1Set2" placeholder="22-25">
+          </div>
+
+          <div>
+            <label>Set 3</label>
+            <input id="c1Set3" placeholder="25-20">
+          </div>
+
+          <div>
+            <label>Set 4</label>
+            <input id="c1Set4" placeholder="Set 4">
+          </div>
+
+          <div>
+            <label>Set 5</label>
+            <input id="c1Set5" placeholder="Set 5">
+          </div>
+
+          <div>
+            <label>Match Won By</label>
+            <input id="c1Winner" placeholder="Winning Team">
+          </div>
+        </div>
+
+        <button class="btn" onclick="saveCourtMatch(1)">Save Court 1 Match</button>
+      </div>
+    
+      
+      <div class="court-control" data-court="Court 2">
+        <h4>Live Match Control – Court 2</h4>
+
+        <div class="formGrid">
+          <div>
+            <label>Match ID</label>
+            <input id="c2MatchId" placeholder="001">
+          </div>
+
+          <div>
+            <label>Category</label>
+            <select id="c2Category"><option>U-14</option><option>U-17</option><option>U-19</option></select>
+          </div>
+
+          <div>
+            <label>Status</label>
+            <select id="c2Status"><option>Scheduled</option><option>Live</option><option>Completed</option></select>
+          </div>
+
+          <div>
+            <label>Date</label>
+            <input id="c2Date" type="date">
+          </div>
+
+          <div>
+            <label>Time</label>
+            <input id="c2Time" type="time">
+          </div>
+
+          <div>
+            <label>Current Set</label>
+            <select id="c2CurrentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select>
+          </div>
+
+          <div>
+            <label>Name of Team A</label>
+            <input id="c2TeamA" placeholder="Team A">
+          </div>
+
+          <div>
+            <label>Name of Team B</label>
+            <input id="c2TeamB" placeholder="Team B">
+          </div>
+
+          <div>
+            <label>Set 1</label>
+            <input id="c2Set1" placeholder="25-18">
+          </div>
+
+          <div>
+            <label>Set 2</label>
+            <input id="c2Set2" placeholder="22-25">
+          </div>
+
+          <div>
+            <label>Set 3</label>
+            <input id="c2Set3" placeholder="25-20">
+          </div>
+
+          <div>
+            <label>Set 4</label>
+            <input id="c2Set4" placeholder="Set 4">
+          </div>
+
+          <div>
+            <label>Set 5</label>
+            <input id="c2Set5" placeholder="Set 5">
+          </div>
+
+          <div>
+            <label>Match Won By</label>
+            <input id="c2Winner" placeholder="Winning Team">
+          </div>
+        </div>
+
+        <button class="btn" onclick="saveCourtMatch(2)">Save Court 2 Match</button>
+      </div>
+    
+      
+      <div class="court-control" data-court="Court 3">
+        <h4>Live Match Control – Court 3</h4>
+
+        <div class="formGrid">
+          <div>
+            <label>Match ID</label>
+            <input id="c3MatchId" placeholder="001">
+          </div>
+
+          <div>
+            <label>Category</label>
+            <select id="c3Category"><option>U-14</option><option>U-17</option><option>U-19</option></select>
+          </div>
+
+          <div>
+            <label>Status</label>
+            <select id="c3Status"><option>Scheduled</option><option>Live</option><option>Completed</option></select>
+          </div>
+
+          <div>
+            <label>Date</label>
+            <input id="c3Date" type="date">
+          </div>
+
+          <div>
+            <label>Time</label>
+            <input id="c3Time" type="time">
+          </div>
+
+          <div>
+            <label>Current Set</label>
+            <select id="c3CurrentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select>
+          </div>
+
+          <div>
+            <label>Name of Team A</label>
+            <input id="c3TeamA" placeholder="Team A">
+          </div>
+
+          <div>
+            <label>Name of Team B</label>
+            <input id="c3TeamB" placeholder="Team B">
+          </div>
+
+          <div>
+            <label>Set 1</label>
+            <input id="c3Set1" placeholder="25-18">
+          </div>
+
+          <div>
+            <label>Set 2</label>
+            <input id="c3Set2" placeholder="22-25">
+          </div>
+
+          <div>
+            <label>Set 3</label>
+            <input id="c3Set3" placeholder="25-20">
+          </div>
+
+          <div>
+            <label>Set 4</label>
+            <input id="c3Set4" placeholder="Set 4">
+          </div>
+
+          <div>
+            <label>Set 5</label>
+            <input id="c3Set5" placeholder="Set 5">
+          </div>
+
+          <div>
+            <label>Match Won By</label>
+            <input id="c3Winner" placeholder="Winning Team">
+          </div>
+        </div>
+
+        <button class="btn" onclick="saveCourtMatch(3)">Save Court 3 Match</button>
+      </div>
+    
+      
+      <div class="court-control" data-court="Court 4">
+        <h4>Live Match Control – Court 4</h4>
+
+        <div class="formGrid">
+          <div>
+            <label>Match ID</label>
+            <input id="c4MatchId" placeholder="001">
+          </div>
+
+          <div>
+            <label>Category</label>
+            <select id="c4Category"><option>U-14</option><option>U-17</option><option>U-19</option></select>
+          </div>
+
+          <div>
+            <label>Status</label>
+            <select id="c4Status"><option>Scheduled</option><option>Live</option><option>Completed</option></select>
+          </div>
+
+          <div>
+            <label>Date</label>
+            <input id="c4Date" type="date">
+          </div>
+
+          <div>
+            <label>Time</label>
+            <input id="c4Time" type="time">
+          </div>
+
+          <div>
+            <label>Current Set</label>
+            <select id="c4CurrentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select>
+          </div>
+
+          <div>
+            <label>Name of Team A</label>
+            <input id="c4TeamA" placeholder="Team A">
+          </div>
+
+          <div>
+            <label>Name of Team B</label>
+            <input id="c4TeamB" placeholder="Team B">
+          </div>
+
+          <div>
+            <label>Set 1</label>
+            <input id="c4Set1" placeholder="25-18">
+          </div>
+
+          <div>
+            <label>Set 2</label>
+            <input id="c4Set2" placeholder="22-25">
+          </div>
+
+          <div>
+            <label>Set 3</label>
+            <input id="c4Set3" placeholder="25-20">
+          </div>
+
+          <div>
+            <label>Set 4</label>
+            <input id="c4Set4" placeholder="Set 4">
+          </div>
+
+          <div>
+            <label>Set 5</label>
+            <input id="c4Set5" placeholder="Set 5">
+          </div>
+
+          <div>
+            <label>Match Won By</label>
+            <input id="c4Winner" placeholder="Winning Team">
+          </div>
+        </div>
+
+        <button class="btn" onclick="saveCourtMatch(4)">Save Court 4 Match</button>
+      </div>
+    
+    </div>
+<div id="newsPanel" class="panel card">
       <h3>News & Announcements</h3>
       <label>News ID</label><input id="newsId">
       <label>Title</label><input id="newsTitle">

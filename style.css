@@ -28,3 +28,19 @@ footer{background:var(--dark);color:white;text-align:center;padding:25px;font-fa
 .team-sl{background:var(--blue);color:white;border-radius:10px;padding:10px;text-align:center;font-family:Segoe UI,Arial,sans-serif;font-weight:900}
 .team-school,.team-emirate{margin:0!important}
 @media(max-width:900px){.team-header{display:none}.team-row{grid-template-columns:1fr;background:white;padding:14px;border-radius:16px}.team-sl{width:60px}}
+
+.court-control{
+  margin-top:26px;
+  padding:24px;
+  background:#f7faff;
+  border-radius:24px;
+  border-left:9px solid var(--lime);
+}
+.court-control h4{
+  font-size:24px;
+  margin-bottom:16px;
+  color:var(--navy);
+}
+.court-control .btn{
+  margin-top:14px;
+}

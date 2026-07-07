@@ -34,4 +34,70 @@ async function saveTeamsList(){
   }catch(e){msg.textContent="Unable to save teams. Check Apps Script deployment.";}
 }
 
+
+function calculateSetsWon(setValues){
+  let a=0,b=0;
+  setValues.forEach(s=>{
+    if(!s) return;
+    const parts=s.replace(/\s/g,"").split("-");
+    if(parts.length!==2) return;
+    const x=Number(parts[0]), y=Number(parts[1]);
+    if(isNaN(x)||isNaN(y)) return;
+    if(x>y) a++;
+    else if(y>x) b++;
+  });
+  return {a,b};
+}
+
+async function saveCourtMatch(courtNo){
+  const p="c"+courtNo;
+  const setValues=[
+    document.getElementById(p+"Set1").value.trim(),
+    document.getElementById(p+"Set2").value.trim(),
+    document.getElementById(p+"Set3").value.trim(),
+    document.getElementById(p+"Set4").value.trim(),
+    document.getElementById(p+"Set5").value.trim()
+  ];
+
+  const setsWon=calculateSetsWon(setValues);
+
+  const data={
+    action:"saveMatch",
+    password:v("password"),
+    matchId:document.getElementById(p+"MatchId").value.trim(),
+    category:document.getElementById(p+"Category").value.trim(),
+    status:document.getElementById(p+"Status").value.trim(),
+    date:document.getElementById(p+"Date").value.trim(),
+    time:document.getElementById(p+"Time").value.trim(),
+    court:"Court "+courtNo,
+    teamA:document.getElementById(p+"TeamA").value.trim(),
+    teamB:document.getElementById(p+"TeamB").value.trim(),
+    scoreA:String(setsWon.a),
+    scoreB:String(setsWon.b),
+    set1:setValues[0],
+    set2:setValues[1],
+    set3:setValues[2],
+    set4:setValues[3],
+    set5:setValues[4],
+    currentSet:document.getElementById(p+"CurrentSet").value.trim(),
+    winner:document.getElementById(p+"Winner").value.trim(),
+    timerStart:""
+  };
+
+  if(!data.matchId){
+    msg.textContent="Please enter Match ID for Court "+courtNo+".";
+    return;
+  }
+
+  msg.textContent="Saving Court "+courtNo+" match...";
+
+  try{
+    let r=await fetch(API,{method:"POST",body:JSON.stringify(data)});
+    let res=await r.json();
+    msg.textContent=res.message||"Court "+courtNo+" match saved.";
+  }catch(e){
+    msg.textContent="Unable to save Court "+courtNo+" match. Check Apps Script deployment.";
+  }
+}
+
 window.onload=()=>{init();if(sessionStorage.getItem("logged")==="yes"){password.value=sessionStorage.getItem("pass")||"";loginBox.style.display="none";dashboard.style.display="block"}setInterval(loadLive,10000);setInterval(loadNews,30000)}
