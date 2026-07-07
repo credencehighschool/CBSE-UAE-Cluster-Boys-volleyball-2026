@@ -1,19 +1,10 @@
-READY TO UPLOAD
+SIMPLE PROFESSIONAL CBSE UAE VOLLEYBALL SITE
 
-Upload to GitHub root:
-index.html
-style.css
-app.js
-config.js
-images folder
-downloads folder
+Upload to GitHub:
+index.html, style.css, app.js, config.js, images folder, downloads folder
 
-IMPORTANT:
-Do not upload cover.png in root.
-It must be inside images/cover.png.
+Apps Script:
+Paste Code.gs, change ADMIN_PASSWORD, run setupSheet, deploy as Web App, paste URL in config.js.
 
-Code.gs goes only to Google Apps Script.
-
-Admin:
-Username: admin
-Password: set in Code.gs
+Removed:
+Live scores, standings, generated fixtures, complex match controls.
