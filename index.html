@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>CBSE UAE Cluster Boys Volleyball Championship</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-ball">🏐</div>
+    <div>
+      <strong>CBSE UAE Cluster</strong>
+      <span id="headerSubtitle">Boys Volleyball Championship</span>
+    </div>
+  </div>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#registration">Registration</a>
+    <a href="#overview">Overview</a>
+    <a href="#countdown">Countdown</a>
+    <a href="#fixtures">Fixtures</a>
+    <a href="#downloads">Downloads</a>
+    <a href="#venue">Venue</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+  <img src="images/cover.png" onerror="this.src='cover.png'" alt="CBSE UAE Cluster Boys Volleyball Championship">
+</section>
+
+<section class="moving-banner">
+  <div class="banner-title">Welcome</div>
+  <marquee id="movingBanner" behavior="scroll" direction="left" scrollamount="5"></marquee>
+</section>
+
+<section class="host-strip">
+  <div>
+    <small>Hosted by</small>
+    <h2 id="hostedBy"></h2>
+  </div>
+  <div>
+    <small>Categories</small>
+    <h2 id="categories"></h2>
+  </div>
+</section>
+
+<section id="registration" class="registration-card">
+  <div>
+    <small>Official Registration Portal</small>
+    <h1>Register Your School</h1>
+    <p>Schools willing to participate may complete the online registration process using the button below.</p>
+  </div>
+  <a id="registrationLink" class="primary-btn" target="_blank" rel="noopener">Open Registration Portal</a>
+</section>
+
+<section id="overview" class="section">
+  <div class="section-title">
+    <small>Tournament Overview</small>
+    <h2>Championship at a Glance</h2>
+  </div>
+
+  <div class="stats-grid">
+    <article class="stat-card">
+      <strong id="participatingSchools">00</strong>
+      <span>Participating Schools</span>
+    </article>
+    <article class="stat-card">
+      <strong id="totalAthletes">00</strong>
+      <span>Total Athletes</span>
+    </article>
+    <article class="stat-card">
+      <strong id="totalTeams">00</strong>
+      <span>Total Teams</span>
+    </article>
+  </div>
+</section>
+
+<section id="countdown" class="section">
+  <div class="section-title">
+    <small>Championship Countdown</small>
+    <h2 id="championshipDates"></h2>
+  </div>
+
+  <div class="countdown-grid">
+    <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
+    <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
+    <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
+    <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+  </div>
+</section>
+
+<section id="fixtures" class="section">
+  <div class="section-title">
+    <small>Official Fixtures</small>
+    <h2>Download Category-wise Fixtures</h2>
+  </div>
+
+  <div class="fixtures-list">
+    <article class="fixture-card">
+      <div>
+        <span class="fixture-icon">📅</span>
+        <h3>U-14 Boys</h3>
+        <p>Download the official U-14 Boys fixture PDF.</p>
+      </div>
+      <a id="fixtureU14" class="primary-btn" target="_blank" rel="noopener">Click here to download fixture</a>
+    </article>
+
+    <article class="fixture-card">
+      <div>
+        <span class="fixture-icon">📅</span>
+        <h3>U-17 Boys</h3>
+        <p>Download the official U-17 Boys fixture PDF.</p>
+      </div>
+      <a id="fixtureU17" class="primary-btn" target="_blank" rel="noopener">Click here to download fixture</a>
+    </article>
+
+    <article class="fixture-card">
+      <div>
+        <span class="fixture-icon">📅</span>
+        <h3>U-19 Boys</h3>
+        <p>Download the official U-19 Boys fixture PDF.</p>
+      </div>
+      <a id="fixtureU19" class="primary-btn" target="_blank" rel="noopener">Click here to download fixture</a>
+    </article>
+  </div>
+</section>
+
+<section id="downloads" class="section">
+  <div class="section-title">
+    <small>Important Downloads & Links</small>
+    <h2>Official Documents</h2>
+  </div>
+
+  <div id="downloadsGrid" class="downloads-grid"></div>
+</section>
+
+<section id="venue" class="section">
+  <div class="section-title">
+    <small>Venue</small>
+    <h2>Championship Venue</h2>
+  </div>
+
+  <article class="venue-card">
+    <div>
+      <h3 id="venueTitle"></h3>
+      <p id="venueDetails"></p>
+    </div>
+    <a id="venueMapLink" class="primary-btn" target="_blank" rel="noopener">Open Location Map</a>
+  </article>
+</section>
+
+<section id="contact" class="contact-section">
+  <article class="contact-card">
+    <small>Need Assistance?</small>
+    <h2>Contact Coordinator</h2>
+    <h3 id="contactName"></h3>
+    <p id="contactRole"></p>
+    <p>Email: <a id="contactEmail"></a></p>
+    <p>Mobile: <a id="contactMobile"></a></p>
+  </article>
+</section>
+
+</main>
+
+<footer>
+  CBSE UAE Cluster Boys Volleyball Championship 2026–27 · Hosted by Credence High School, Dubai
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
