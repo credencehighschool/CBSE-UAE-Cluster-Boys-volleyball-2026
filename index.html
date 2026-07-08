@@ -13,18 +13,23 @@
 
 <main id="home">
 <section class="hero">
-  <img src="images/cover.png" alt="Boys volleyball action from the CBSE UAE Cluster Championship">
-  <div class="hero-copy">
-    <span class="eyebrow">Boys U-14 · U-17 · U-19</span>
-    <h1 data-event-title>CBSE UAE Cluster Boys Volleyball Championship</h1>
-    <p>Hosted by <span data-hosted-by>Credence High School, Dubai</span> — the official home for fixtures, live scores, standings and results.</p>
+  <img src="images/cover.png" alt="CBSE UAE Cluster Boys Volleyball Championship 2026-27, hosted by Credence High School, Dubai">
+</section>
+
+<section class="hero-bar">
+  <p>The official home for fixtures, live scores, standings and results — hosted by <span data-hosted-by>Credence High School, Dubai</span>.</p>
+  <div class="hero-bar-actions">
+    <a class="btn" href="#" id="heroRegisterBtn" target="_blank">Register Your School</a>
+    <a class="btn btn-quiet" href="#deadlines">View Important Dates</a>
   </div>
 </section>
 
-<section class="news">
+<section class="news" id="deadlines">
   <div class="news-title">Latest Update</div>
   <marquee id="ticker">🏆 Important updates will appear here.</marquee>
 </section>
+
+<section class="updates-strip" id="updatesStrip"></section>
 
 <section class="quick-info">
   <div><p>Hosted by</p><h2 data-hosted-by>Credence High School, Dubai</h2></div>
@@ -55,14 +60,42 @@
 <div class="court-rule"><i></i></div>
 
 <section class="section">
-  <div class="title"><small>Championship Centre</small><h2>Fixtures, Live Scores &amp; Standings</h2></div>
-  <div class="grid3" id="phase1Tiles"></div>
+  <div class="title"><small>Championship Centre</small><h2>Live From The Championship</h2><p class="muted">Real-time updates straight from the courts — pulled automatically from live scoring.</p></div>
+
+  <div class="tabs" id="homeTabs">
+    <button class="tab active" onclick="showHomeTab('hc-overview',this)">Overview</button>
+    <button class="tab" onclick="showHomeTab('hc-fixtures',this)">Fixtures</button>
+    <button class="tab" onclick="showHomeTab('hc-live',this)">Live Now</button>
+    <button class="tab" onclick="showHomeTab('hc-upcoming',this)">Upcoming</button>
+    <button class="tab" onclick="showHomeTab('hc-completed',this)">Completed</button>
+  </div>
+
+  <div id="hc-overview" class="panel active">
+    <div class="stats-grid" id="overviewStats"></div>
+    <p class="muted" id="overviewNote" style="text-align:center;margin-top:18px"></p>
+  </div>
+
+  <div id="hc-fixtures" class="panel"><div id="hcFixturesBox" class="grid3"></div></div>
+
+  <div id="hc-live" class="panel">
+    <div id="hcLiveBox" class="grid2"><div class="card">Loading...</div></div>
+    <p style="text-align:center;margin-top:18px"><a class="btn btn-quiet-dark" href="live-scores.html">Open Full Live Scores →</a></p>
+  </div>
+
+  <div id="hc-upcoming" class="panel">
+    <div id="hcUpcomingBox" class="grid2"><div class="card">Loading...</div></div>
+  </div>
+
+  <div id="hc-completed" class="panel">
+    <div id="hcCompletedBox" class="grid2"><div class="card">Loading...</div></div>
+    <p style="text-align:center;margin-top:18px"><a class="btn btn-quiet-dark" href="results.html">View All Results →</a> <a class="btn btn-quiet-dark" href="standings.html">View Standings →</a></p>
+  </div>
 </section>
 
 <section class="section">
   <div class="title"><small>Phase 2</small><h2>Knockout, Medals &amp; Awards</h2></div>
   <div class="phase2-grid">
-    <a class="phase2-card" href="bracket.html"><span>🏆</span><strong>Knockout Bracket</strong><small>Semi-finals and finals pathway</small></a>
+    <a class="phase2-card" href="bracket.html"><span>🏆</span><strong>Knockout Bracket</strong><small>Full draw, round by round to the Final</small></a>
     <a class="phase2-card gold" href="medal-tally.html"><span>🥇</span><strong>Medal Tally</strong><small>Champion, Runner-up and Third Place</small></a>
     <a class="phase2-card" href="awards.html"><span>⭐</span><strong>Individual Awards</strong><small>Best player, setter, libero and more</small></a>
   </div>
@@ -108,18 +141,109 @@ function tick(){
 }
 tick(); setInterval(tick,1000);
 
-function phase1Tile(open,label,icon,href,lockedNote){
-  if(open) return `<a class="card tile" href="${href}"><span>${icon}</span><strong>${label}</strong><small>Open now — tap to view</small></a>`;
-  return `<div class="card tile locked-tile"><span>🔒</span><strong>${label} Locked</strong><small>${lockedNote}</small></div>`;
+function showHomeTab(id, btn){
+  document.querySelectorAll('#homeTabs .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#home > .section .panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
 }
-phase1Tiles.innerHTML =
-  phase1Tile(SITE_CONFIG.phase.fixturesOpen,"Fixtures","📋","fixtures.html","Fixtures will be opened by the owner once finalized.") +
-  phase1Tile(SITE_CONFIG.phase.liveOpen,"Live Scores","🔴","live-scores.html","Live scores will be opened during the championship.") +
-  phase1Tile(SITE_CONFIG.phase.standingsOpen,"Standings","📊","standings.html","Standings will be opened once matches begin.");
+
+function lockedNote(msg){ return `<div class="card" style="text-align:center;color:var(--ink-soft)">🔒 ${msg}</div>`; }
+
+async function loadOverviewTab(){
+  let ov = SITE_CONFIG.overview;
+  try{
+    const r = await fetch(API+"?action=overview&cache="+Date.now());
+    const d = await r.json();
+    if(d.overview && Object.keys(d.overview).length) ov = d.overview;
+  }catch(e){}
+  overviewStats.innerHTML = `
+    <div class="stat-card"><strong>${ov.participatingSchools||'00'}</strong><span>Participating Schools</span></div>
+    <div class="stat-card"><strong>${ov.totalAthletes||'00'}</strong><span>Total Athletes</span></div>
+    <div class="stat-card"><strong>${ov.totalTeams||'00'}</strong><span>Total Teams</span></div>
+    <div class="stat-card"><strong>${ov.championshipCount||'01'}</strong><span>Championships Hosted</span></div>`;
+  overviewNote.innerText = ov.overviewNote || "Join schools from across the UAE cluster in this year's championship — full results, live action and standings all in one place.";
+}
+
+function loadFixturesTab(){
+  if(!SITE_CONFIG.phase.fixturesOpen){ hcFixturesBox.innerHTML = lockedNote("Fixtures will be published here once finalized."); return; }
+  hcFixturesBox.innerHTML = ["u14","u17","u19"].map(k=>`
+    <a class="card tile" href="${SITE_CONFIG.fixtures[k]}" target="_blank">
+      <span>📋</span><strong>${k.toUpperCase()} Boys</strong><small>Download fixture PDF</small>
+    </a>`).join("");
+}
+
+function courtMiniCard(c){
+  const isLive = String(c.status).toLowerCase()==='live';
+  if(!isLive) return "";
+  const sets = [c.set1,c.set2,c.set3,c.set4,c.set5].filter(Boolean).map((s,i)=>`<span class="set-pill">Set ${i+1}: ${s}</span>`).join("");
+  return `<article class="match-card-pro live">
+    <div class="match-head-pro"><span class="match-label">${c.court} · ${c.category||''}</span><span class="match-status live"><span class="live-dot"></span>Live</span></div>
+    <div class="match-meta-pro">Set ${c.currentSet||1} · Sets ${c.setsWonA||0}-${c.setsWonB||0}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${c.teamA||'Team A'}</h3><strong>${c.pointsA||0}</strong></div>
+      <div class="score-vs">VS</div>
+      <div class="score-team"><h3>${c.teamB||'Team B'}</h3><strong>${c.pointsB||0}</strong></div>
+    </div>
+    <div class="set-strip">${sets || '<span class="set-pill">Set in progress</span>'}</div>
+  </article>`;
+}
+
+async function loadLiveTab(){
+  if(!SITE_CONFIG.phase.liveOpen){ hcLiveBox.innerHTML = lockedNote("Live scores will open once the championship begins."); return; }
+  try{
+    const r = await fetch(API+"?action=courts&cache="+Date.now());
+    const d = await r.json();
+    const cards = (d.courts||[]).map(courtMiniCard).filter(Boolean).join("");
+    hcLiveBox.innerHTML = cards || '<div class="card">No court is live right now — check back soon.</div>';
+  }catch(e){ hcLiveBox.innerHTML = '<div class="card">Unable to load live scores.</div>'; }
+}
+
+function simpleMatchCard(m, showScore){
+  return `<article class="match-card-pro">
+    <div class="match-head-pro"><span class="match-label">${m.category||''}</span><span class="match-status">${m.status||''}</span></div>
+    <div class="match-meta-pro">${m.date||''} · ${m.time||''} · ${m.court||''}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${m.teamA||''}</h3>${showScore?`<strong>${m.scoreA??''}</strong>`:''}</div>
+      <div class="score-vs">VS</div>
+      <div class="score-team"><h3>${m.teamB||''}</h3>${showScore?`<strong>${m.scoreB??''}</strong>`:''}</div>
+    </div>
+    ${showScore && m.winner ? `<div class="match-winner">Winner: ${m.winner}</div>` : ''}
+  </article>`;
+}
+
+async function loadUpcomingTab(){
+  if(!SITE_CONFIG.phase.fixturesOpen){ hcUpcomingBox.innerHTML = lockedNote("Schedule will be published closer to the championship."); return; }
+  try{
+    const r = await fetch(API+"?action=scheduled&cache="+Date.now());
+    const d = await r.json();
+    const rows = (d.scheduled||[]).slice(0,6);
+    hcUpcomingBox.innerHTML = rows.length ? rows.map(m=>simpleMatchCard(m,false)).join("") : '<div class="card">No upcoming matches published yet.</div>';
+  }catch(e){ hcUpcomingBox.innerHTML = '<div class="card">Unable to load schedule.</div>'; }
+}
+
+async function loadCompletedTab(){
+  if(!SITE_CONFIG.phase.standingsOpen){ hcCompletedBox.innerHTML = lockedNote("Results will appear here once matches are completed."); return; }
+  try{
+    const r = await fetch(API+"?action=results&cache="+Date.now());
+    const d = await r.json();
+    const rows = (d.results||[]).slice(-6).reverse();
+    hcCompletedBox.innerHTML = rows.length ? rows.map(m=>simpleMatchCard(m,true)).join("") : '<div class="card">No completed matches yet.</div>';
+  }catch(e){ hcCompletedBox.innerHTML = '<div class="card">Unable to load results.</div>'; }
+}
+
+loadOverviewTab();
+loadFixturesTab();
+loadLiveTab();
+loadUpcomingTab();
+loadCompletedTab();
+setInterval(loadLiveTab, 15000);
 
 function loadDirectContent(){
   const regBtn = document.getElementById("registrationBtn");
   if(regBtn) regBtn.href = SITE_CONFIG.registrationUrl;
+  const heroRegBtn = document.getElementById("heroRegisterBtn");
+  if(heroRegBtn) heroRegBtn.href = SITE_CONFIG.registrationUrl;
 
   downloads.innerHTML = SITE_CONFIG.downloads.map(d=>`
     <a class="card tile" href="${d.url}" target="_blank">
@@ -138,14 +262,27 @@ function loadDirectContent(){
 loadDirectContent();
 
 async function loadNotices(){
-  if(API.includes("PASTE")) return;
-  try{
-    const r=await fetch(API+"?action=all&cache="+Date.now());
-    const data=await r.json();
-    ticker.innerHTML=(data.notices||[]).map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ") || `🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
-  }catch(e){
-    ticker.innerHTML=`🏆 Important Deadlines | Acceptance Form: <strong>${SITE_CONFIG.acceptanceDeadline}</strong> | Entry Form: <strong>${SITE_CONFIG.entryDeadline}</strong> | Championship: <strong>${SITE_CONFIG.championshipDatesText}</strong>`;
+  const fallback = [
+    {title:"Acceptance Form Deadline", message: SITE_CONFIG.acceptanceDeadline},
+    {title:"Entry Form Deadline", message: SITE_CONFIG.entryDeadline},
+    {title:"Championship Dates", message: SITE_CONFIG.championshipDatesText}
+  ];
+  let notices = fallback;
+  if(!API.includes("PASTE")){
+    try{
+      const r=await fetch(API+"?action=all&cache="+Date.now());
+      const data=await r.json();
+      if(data.notices && data.notices.length) notices = data.notices;
+    }catch(e){ /* keep fallback */ }
   }
+  ticker.innerHTML = notices.map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ");
+  updatesStrip.innerHTML = `
+    <div class="updates-strip-inner">
+      <h3>📢 Latest Updates</h3>
+      <div class="updates-list">
+        ${notices.map(n=>`<div class="update-item"><strong>${n.title}</strong><span>${n.message}</span></div>`).join("")}
+      </div>
+    </div>`;
 }
 loadNotices();
 </script>

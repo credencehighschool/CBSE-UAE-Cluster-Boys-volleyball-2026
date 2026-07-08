@@ -11,7 +11,7 @@
 <header class="header" id="site-header"></header>
 
 <section class="section">
-  <div class="title"><small>Phase 2</small><h2>Knockout Bracket</h2><p class="muted">Semi-finals, finals and third place — pathway to the podium.</p></div>
+  <div class="title"><small>Straight Knockout</small><h2>Knockout Bracket</h2><p class="muted">Every round, from the round of many down to the Final — scroll sideways to follow the draw.</p></div>
   <div class="tabs" id="categoryTabs"></div>
   <div id="bracketPanels"></div>
 </section>
@@ -21,23 +21,26 @@
 <script>
 renderLayout('bracket');
 const API=getApiUrl();
-const STAGES=["Semi Final","Final","Third Place"];
 
 function matchCard(m){
   const aWin = m.winner && m.winner.trim() && m.winner.trim()===m.teamA;
   const bWin = m.winner && m.winner.trim() && m.winner.trim()===m.teamB;
   return `<div class="bracket-match">
     <small>${m.id||''}</small>
-    <div class="bracket-team ${aWin?'winner':''}"><span>${m.teamA||'TBD'}</span><span class="bracket-score">${m.scoreA??'-'}</span></div>
-    <div class="bracket-team ${bWin?'winner':''}"><span>${m.teamB||'TBD'}</span><span class="bracket-score">${m.scoreB??'-'}</span></div>
+    <div class="bracket-team ${aWin?'winner':''}"><span>${m.teamA||'TBD'}</span><span class="bracket-score">${m.scoreA===undefined||m.scoreA===''?'-':m.scoreA}</span></div>
+    <div class="bracket-team ${bWin?'winner':''}"><span>${m.teamB||'TBD'}</span><span class="bracket-score">${m.scoreB===undefined||m.scoreB===''?'-':m.scoreB}</span></div>
   </div>`;
 }
 
-function renderCategory(cat, matches){
-  const cols = STAGES.map(stage=>{
-    const items = matches.filter(m=>m.stage===stage);
+function renderCategory(matches){
+  const rounds = [...new Set(matches.map(m=>m.stage))]
+    .map(stage => ({ stage, order: Number((matches.find(m=>m.stage===stage)||{}).roundOrder) || 999 }))
+    .sort((a,b)=>a.order-b.order);
+
+  const cols = rounds.map(r=>{
+    const items = matches.filter(m=>m.stage===r.stage);
     return `<div class="bracket-column">
-      <h3>${stage}</h3>
+      <h3>${r.stage}</h3>
       ${items.map(matchCard).join('') || '<p class="muted" style="text-align:center">To be updated</p>'}
     </div>`;
   }).join('');
@@ -51,11 +54,11 @@ async function load(){
     const r = await fetch(API+"?action=bracket&cache="+Date.now());
     const d = await r.json();
     const rows = d.bracket || [];
-    if(!rows.length){ panels.innerHTML = '<div class="card">Bracket will be published once the league stage concludes.</div>'; return; }
+    if(!rows.length){ panels.innerHTML = '<div class="card">Bracket will be published once the draw is finalized.</div>'; return; }
 
     const categories = [...new Set(rows.map(m=>m.category))];
     tabs.innerHTML = categories.map((c,i)=>`<button class="tab ${i===0?'active':''}" data-cat="${c}" onclick="showCat('${c}',this)">${c}</button>`).join('');
-    panels.innerHTML = categories.map((c,i)=>`<div class="panel ${i===0?'active':''}" id="cat-${c.replace(/\s+/g,'-')}">${renderCategory(c, rows.filter(m=>m.category===c))}</div>`).join('');
+    panels.innerHTML = categories.map((c,i)=>`<div class="panel ${i===0?'active':''}" id="cat-${c.replace(/\s+/g,'-')}">${renderCategory(rows.filter(m=>m.category===c))}</div>`).join('');
   }catch(e){
     panels.innerHTML = '<div class="card">Unable to load bracket.</div>';
   }

@@ -6,19 +6,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap');
 
 :root{
-  /* -- palette, drawn from a match ball: chalk white, ink-blue leather, gold seam, referee-flag red -- */
-  --ink:#0E2038;        /* primary deep court-blue, near-black */
-  --court:#163C6B;      /* secondary blue */
-  --court-soft:#e8eef7; /* pale blue tint for backgrounds */
-  --gold:#F2A63D;       /* signature accent — ball-seam gold, not lime */
+  /* -- palette inspired by FIVB / Volleyball World's broadcast branding:
+     near-black backgrounds, a bold athletic red as the primary accent,
+     clean white, with gold reserved for medals/highlights so it doesn't
+     compete with the red. (Built from FIVB's public site structure and
+     well-known brand colors, not a pixel copy of their stylesheet — tell
+     me if you had specific colors in mind and I'll dial it in further.) -- */
+  --ink:#15161A;        /* near-black, FIVB's nav/footer tone */
+  --court:#D0102B;      /* primary accent — bold volleyball red */
+  --court-soft:#FBEAEC; /* pale red tint for backgrounds */
+  --gold:#F2A63D;       /* reserved for medals / highlights only */
   --gold-dark:#C97F1E;
-  --live:#E23B3B;       /* scoreboard red, LIVE only */
-  --chalk:#FAF8F2;      /* warm ball-white page background */
+  --live:#FF8A00;       /* vivid orange — kept distinct from brand red so LIVE still pops */
+  --chalk:#F7F7F8;      /* clean neutral page background */
   --white:#FFFFFF;
-  --line:#E4DFD1;       /* hairline on warm bg */
-  --line-cool:#D9E2EE;  /* hairline on blue cards */
-  --ink-soft:#57607A;   /* muted body text */
-  --ink-faint:#8891A6;
+  --line:#E7E7E9;       /* neutral hairline */
+  --line-cool:#F3D9DC;  /* hairline on red-tinted cards */
+  --ink-soft:#55565C;   /* muted body text */
+  --ink-faint:#8A8B92;
 
   --display:'Oswald',Arial Narrow,sans-serif;
   --body:'Inter',Arial,sans-serif;
@@ -26,8 +31,8 @@
 
   --radius:18px;
   --radius-lg:26px;
-  --shadow:0 10px 30px rgba(14,32,56,.08);
-  --shadow-lg:0 20px 50px rgba(14,32,56,.16);
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --shadow-lg:0 20px 50px rgba(0,0,0,.16);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -103,6 +108,8 @@ button{font-family:inherit}
 .hero-bar-actions{display:flex;gap:10px;flex-wrap:wrap}
 .btn-quiet{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.3);box-shadow:none;padding:12.5px 22px}
 .btn-quiet:hover{background:rgba(255,255,255,.1);color:var(--white)}
+.btn-quiet-dark{background:transparent;color:var(--ink);border:1.5px solid var(--line-cool);box-shadow:none;padding:12.5px 22px;display:inline-block;text-decoration:none;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:13.5px;border-radius:12px}
+.btn-quiet-dark:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
 
 /* ================= NEWS TICKER ================= */
 .news{display:flex;align-items:stretch;background:var(--court);color:var(--white)}
@@ -113,6 +120,14 @@ button{font-family:inherit}
 }
 .news marquee{padding:12px 0;font-weight:600;font-size:14px}
 .news strong{color:var(--gold)}
+
+.updates-strip{background:var(--court-soft);border-bottom:1px solid var(--line-cool)}
+.updates-strip-inner{max-width:1280px;margin:0 auto;padding:18px 5%}
+.updates-strip-inner h3{font-family:var(--display);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--court);margin-bottom:10px;font-weight:600}
+.updates-list{display:flex;gap:14px;flex-wrap:wrap}
+.update-item{background:var(--white);border:1px solid var(--line-cool);border-radius:12px;padding:10px 16px;font-size:13.5px;box-shadow:var(--shadow)}
+.update-item strong{color:var(--ink);margin-right:6px}
+.update-item span{color:var(--ink-soft);font-weight:500}
 
 /* ================= LAYOUT ================= */
 .section{max-width:1280px;margin:auto;padding:64px 24px}
@@ -133,7 +148,7 @@ button{font-family:inherit}
   text-transform:uppercase;letter-spacing:.04em;font-size:13.5px;
   box-shadow:0 10px 24px rgba(242,166,61,.35);border:none;cursor:pointer;transition:.15s;
 }
-.btn:hover{background:var(--ink);color:var(--white);box-shadow:0 10px 24px rgba(14,32,56,.28)}
+.btn:hover{background:var(--ink);color:var(--white);box-shadow:0 10px 24px rgba(0,0,0,.28)}
 .btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.4);box-shadow:none}
 .btn-outline:hover{background:var(--white);color:var(--ink)}
 
@@ -196,7 +211,9 @@ button{font-family:inherit}
 }
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
 
-.match-card-pro{background:var(--white);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow);border:1px solid var(--line);border-top:5px solid var(--court)}
+.match-card-pro{background:var(--white);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow);border:1px solid var(--line);border-top:5px solid var(--court);transition:.2s}
+.match-card-pro:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-cool)}
+.match-card-pro.live:hover{box-shadow:0 20px 50px rgba(255,138,0,.2)}
 .match-card-pro.live{border-top-color:var(--live)}
 .match-head-pro{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .match-label{background:var(--court);color:var(--white);padding:7px 13px;border-radius:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-family:var(--display)}
@@ -279,8 +296,9 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-col
 .phase2-card strong{font-family:var(--display);font-size:19px;display:block;margin-bottom:6px;text-transform:uppercase;font-weight:600}
 .phase2-card small{color:var(--ink-soft);font-weight:500}
 
-.bracket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
-.bracket-column h3{background:var(--ink);color:var(--white);border-radius:12px;padding:13px;text-align:center;margin-bottom:16px;font-family:var(--display);font-size:14px;text-transform:uppercase;font-weight:600;letter-spacing:.04em}
+.bracket-grid{display:flex;gap:20px;align-items:flex-start;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.bracket-column{flex:0 0 240px;min-width:240px}
+.bracket-column h3{background:var(--ink);color:var(--white);border-radius:12px;padding:13px;text-align:center;margin-bottom:16px;font-family:var(--display);font-size:13px;text-transform:uppercase;font-weight:600;letter-spacing:.04em;white-space:nowrap}
 .bracket-match{background:var(--white);border-radius:16px;padding:18px;box-shadow:var(--shadow);border:1px solid var(--line);border-left:4px solid var(--gold);margin-bottom:16px}
 .bracket-match small{color:var(--court);font-weight:700;text-transform:uppercase;font-family:var(--display);font-size:11px;letter-spacing:.04em}
 .bracket-team{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-weight:700;color:var(--ink);font-size:14.5px}
@@ -348,6 +366,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-col
 .logout-btn:hover{background:var(--white);color:var(--ink)}
 .admin-mobile-note{background:var(--court-soft);border-left:4px solid var(--court);padding:15px 18px;border-radius:12px;color:var(--court);font-weight:600;margin-bottom:20px;font-size:14px}
 .set-input-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+
+.keyboard-hint{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:6px;font-weight:500}
+.keyboard-hint kbd{background:var(--ink);color:var(--gold);border-radius:5px;padding:2px 7px;font-family:var(--mono);font-size:11.5px;font-weight:700}
+.score-btn:hover{background:var(--court-soft);border-color:var(--court)}
+.score-btn.plus:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:900px){

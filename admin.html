@@ -30,6 +30,7 @@
   <div class="card"><label>Admin Password</label><input id="password" type="password" placeholder="Enter owner password again for saving changes"></div><br>
   <div class="tabs" id="mainTabs">
     <button class="tab active" onclick="show('overview')">Overview</button>
+    <button class="tab" onclick="show('teamsp')">Teams / Attendance</button>
     <button class="tab" onclick="show('notice')">Notice</button>
     <button class="tab" onclick="show('galleryp')">Gallery</button>
     <button class="tab" onclick="show('bracketp')">Bracket</button>
@@ -55,6 +56,27 @@
     </div>
     <br><button class="btn" onclick="save('saveOverview')">Save Tournament Overview</button>
   </div>
+
+  <div id="teamsp" class="panel card">
+    <p class="muted" style="margin-bottom:16px">Mark schools present on the day. Saving a category replaces its whole list — so add every school first, then save. School names entered here also auto-suggest in the Court scoring tabs, keeping names consistent for Standings.</p>
+    <div class="tabs" id="teamCatTabs">
+      <button class="tab active" data-teamcat="Boys U-14" onclick="showTeamCat('Boys U-14',this)">U-14</button>
+      <button class="tab" data-teamcat="Boys U-17" onclick="showTeamCat('Boys U-17',this)">U-17</button>
+      <button class="tab" data-teamcat="Boys U-19" onclick="showTeamCat('Boys U-19',this)">U-19</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="table" id="teamsTable">
+        <tr><th style="width:50px">SL</th><th>School Name</th><th style="width:120px">School Code</th><th style="width:130px">Emirate</th><th style="width:80px">Present</th><th style="width:40px"></th></tr>
+        <tbody id="teamsTbody"></tbody>
+      </table>
+    </div>
+    <br>
+    <button class="btn btn-outline" style="color:var(--ink);border-color:var(--line-cool)" onclick="addTeamRow()">+ Add School Row</button>
+    <button class="btn" onclick="saveTeamsCat()">Save This Category's List</button>
+    <p id="teamsMsg" class="muted" style="margin-top:12px"></p>
+  </div>
+
+  <datalist id="schoolNamesList"></datalist>
 
   <div id="manual" class="panel card">
     <p class="muted" style="margin-bottom:16px">For byes, forfeits, or fixing a mistake after the fact. For normal live scoring, use the Court tabs above instead — they publish here automatically when a match finishes.</p>
@@ -101,16 +123,26 @@
   </div>
 
   <div id="bracketp" class="panel card">
+    <p class="muted" style="margin-bottom:16px">Since this is straight knockout with 20–30 teams a side, use whatever round names fit your draw (Round of 32, Round of 16, Quarterfinal, Semifinal, Final, Third Place Playoff...). <b>Round Order</b> controls left-to-right column order on the public Bracket page — give earlier rounds smaller numbers (e.g. Round of 32 = 1, Round of 16 = 2, Quarterfinal = 3, Semifinal = 4, Final = 5).</p>
     <div class="admin-form">
-      <div><label>Bracket Match ID</label><input id="bId" placeholder="SF-U14-1"></div>
+      <div><label>Bracket Match ID</label><input id="bId" placeholder="R16-U14-1"></div>
       <div><label>Category</label><select id="bCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
-      <div><label>Stage</label><select id="bStage"><option>Semi Final</option><option>Final</option><option>Third Place</option></select></div>
+      <div><label>Round Name</label><input id="bStage" list="roundNames" placeholder="Round of 16"></div>
+      <div><label>Round Order</label><input id="bRoundOrder" type="number" placeholder="2"></div>
       <div><label>Team A</label><input id="bTeamA"></div>
       <div><label>Score A</label><input id="bScoreA" placeholder="0"></div>
       <div><label>Team B</label><input id="bTeamB"></div>
       <div><label>Score B</label><input id="bScoreB" placeholder="0"></div>
-      <div><label>Winner</label><input id="bWinner"></div>
+      <div class="full"><label>Winner</label><input id="bWinner"></div>
     </div>
+    <datalist id="roundNames">
+      <option value="Round of 32">
+      <option value="Round of 16">
+      <option value="Quarterfinal">
+      <option value="Semifinal">
+      <option value="Final">
+      <option value="Third Place Playoff">
+    </datalist>
     <br><button class="btn" onclick="save('saveBracket')">Save Bracket Match</button>
   </div>
 
@@ -168,7 +200,7 @@ async function save(action){
   if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
   if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
   if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
-  if(action==='saveBracket')Object.assign(data,{id:v('bId'),category:v('bCategory'),stage:v('bStage'),teamA:v('bTeamA'),scoreA:v('bScoreA'),teamB:v('bTeamB'),scoreB:v('bScoreB'),winner:v('bWinner')});
+  if(action==='saveBracket')Object.assign(data,{id:v('bId'),category:v('bCategory'),stage:v('bStage'),roundOrder:v('bRoundOrder'),teamA:v('bTeamA'),scoreA:v('bScoreA'),teamB:v('bTeamB'),scoreB:v('bScoreB'),winner:v('bWinner')});
   if(action==='saveMedal')Object.assign(data,{id:v('mId'),category:v('mCategory'),position:v('mPosition'),school:v('mSchool')});
   if(action==='saveAward')Object.assign(data,{id:v('aId'),icon:v('aIcon'),award:v('aAward'),student:v('aStudent'),school:v('aSchool'),category:v('aCategory')});
   msg.innerText='Saving...';
@@ -202,8 +234,8 @@ function courtPanelHTML(court){
 
     <div class="court-start-form">
       <select id="cat-${safe}">${CATEGORY_OPTIONS.map(c=>`<option>${c}</option>`).join("")}</select>
-      <input id="teamA-${safe}" placeholder="Team A school">
-      <input id="teamB-${safe}" placeholder="Team B school">
+      <input id="teamA-${safe}" placeholder="Team A school" list="schoolNamesList">
+      <input id="teamB-${safe}" placeholder="Team B school" list="schoolNamesList">
       <select id="format-${safe}"><option>Best of 3</option><option>Best of 5</option></select>
       <input id="date-${safe}" placeholder="Saturday, 19 Sep 2026">
       <input id="time-${safe}" placeholder="8:30 AM">
@@ -232,6 +264,8 @@ function courtPanelHTML(court){
 
     <div class="set-history-pills" id="sets-${safe}"></div>
 
+    <p class="keyboard-hint">⌨️ While this court's tab is open: <kbd>A</kbd> / <kbd>Z</kbd> = Team A point (add/remove) · <kbd>↑</kbd> / <kbd>↓</kbd> = Team B point (add/remove)</p>
+
     <div class="court-actions">
       <button class="btn" onclick="endSetCourt('${court}')">End Set</button>
       <button class="btn btn-danger" onclick="resetCourtConfirm('${court}')">Clear Court</button>
@@ -240,12 +274,14 @@ function courtPanelHTML(court){
   </div>`;
 }
 
+let activeCourt = COURTS[0];
 function showCourtTab(court){
   const safe = court.replace("-","");
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelector(`#courtTabs [data-courttab="${court}"]`).classList.add('active');
   document.getElementById('panel-'+safe).classList.add('active');
+  activeCourt = court;
 }
 
 async function courtAction(action, extra){
@@ -270,12 +306,16 @@ async function startCourt(court){
 
 async function point(court, team, dir){
   const safe = court.replace("-","");
-  // optimistic UI: bump the number immediately, then reconcile on next poll
+  // optimistic UI: bump the number immediately for instant feedback
   const el = document.getElementById((team==='A'?'ptsA-':'ptsB-')+safe);
   el.innerText = Math.max(0, (Number(el.innerText)||0) + dir);
   const res = await courtAction(dir>0 ? 'addPoint' : 'removePoint', {court, team});
+  // apply the server's authoritative number directly — do NOT trigger another
+  // fetch here, that's what was racing against the background poll and
+  // causing the score to flicker between old and new values.
+  if(res.pointsA!==undefined) document.getElementById('ptsA-'+safe).innerText = res.pointsA;
+  if(res.pointsB!==undefined) document.getElementById('ptsB-'+safe).innerText = res.pointsB;
   document.getElementById('msg-'+safe).innerText = res.message || '';
-  refreshCourts();
 }
 
 async function endSetCourt(court){
@@ -294,10 +334,13 @@ async function resetCourtConfirm(court){
   refreshCourts();
 }
 
+let _refreshSeq = 0;
 async function refreshCourts(){
+  const mySeq = ++_refreshSeq;
   try{
     const r = await fetch(API+"?action=courts&cache="+Date.now());
     const d = await r.json();
+    if(mySeq !== _refreshSeq) return; // a newer refresh already started/finished — discard this stale one
     (d.courts||[]).forEach(c=>{
       const safe = String(c.court).replace("-","");
       const badge = document.getElementById('badge-'+safe);
@@ -317,6 +360,7 @@ async function refreshCourts(){
 }
 
 buildCourtUI();
+showCourtTab(COURTS[0]);
 window.addEventListener("load", ()=>{
   refreshCourts();
   setInterval(refreshCourts, 4000);
@@ -327,6 +371,90 @@ window.addEventListener("load", ()=>{
     if(COURTS.includes(name)){ show('overview'); /* ensure dashboard tab state sane */ setTimeout(()=>showCourtTab(name),50); }
   }
 });
+
+// Keyboard scoring: A/Z = Team A (left), Arrow Up/Down = Team B (right) —
+// only while the dashboard is open and you're not typing in a text field.
+document.addEventListener("keydown", (e)=>{
+  if(document.getElementById("dashboard").style.display !== "block") return;
+  const tag = (document.activeElement.tagName || "").toLowerCase();
+  if(["input","textarea","select"].includes(tag)) return;
+  if(e.key === "ArrowUp"){ e.preventDefault(); point(activeCourt,'B',1); }
+  else if(e.key === "ArrowDown"){ e.preventDefault(); point(activeCourt,'B',-1); }
+  else if(e.key === "a" || e.key === "A"){ point(activeCourt,'A',1); }
+  else if(e.key === "z" || e.key === "Z"){ point(activeCourt,'A',-1); }
+});
+
+/* ----------------------------- TEAMS / ATTENDANCE ----------------------------- */
+let teamCat = "Boys U-14";
+let teamRows = [];
+
+function showTeamCat(cat, btn){
+  teamCat = cat;
+  document.querySelectorAll('#teamCatTabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  loadTeamsCat();
+}
+
+async function loadTeamsCat(){
+  teamsMsg.innerText = "Loading...";
+  try{
+    const r = await fetch(API+"?action=teams&cache="+Date.now());
+    const d = await r.json();
+    teamRows = (d.teams||[]).filter(t=>t.category===teamCat)
+      .map(t=>({schoolName:t.schoolName||"",schoolCode:t.schoolCode||"",emirate:t.emirate||"",present: String(t.present)==="true"||String(t.present)==="TRUE"||t.present===true}));
+    if(!teamRows.length) teamRows = [{schoolName:"",schoolCode:"",emirate:"",present:true}];
+    renderTeamsTable();
+    teamsMsg.innerText = "";
+  }catch(e){
+    teamRows = [{schoolName:"",schoolCode:"",emirate:"",present:true}];
+    renderTeamsTable();
+    teamsMsg.innerText = "Couldn't load saved list (showing a blank row) — check your connection before saving.";
+  }
+}
+
+function renderTeamsTable(){
+  teamsTbody.innerHTML = teamRows.map((t,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><input value="${t.schoolName.replace(/"/g,'&quot;')}" oninput="teamRows[${i}].schoolName=this.value"></td>
+      <td><input value="${t.schoolCode.replace(/"/g,'&quot;')}" oninput="teamRows[${i}].schoolCode=this.value"></td>
+      <td><input value="${t.emirate.replace(/"/g,'&quot;')}" oninput="teamRows[${i}].emirate=this.value"></td>
+      <td style="text-align:center"><input type="checkbox" ${t.present?"checked":""} style="width:20px;height:20px" onchange="teamRows[${i}].present=this.checked"></td>
+      <td><button class="btn btn-outline" style="padding:8px 12px;color:var(--live);border-color:var(--live)" onclick="removeTeamRow(${i})">✕</button></td>
+    </tr>`).join("");
+}
+
+function addTeamRow(){
+  teamRows.push({schoolName:"",schoolCode:"",emirate:"",present:true});
+  renderTeamsTable();
+}
+function removeTeamRow(i){
+  teamRows.splice(i,1);
+  renderTeamsTable();
+}
+
+async function saveTeamsCat(){
+  teamsMsg.innerText = "Saving...";
+  const teams = teamRows.filter(t=>t.schoolName.trim()!=="");
+  try{
+    const r = await fetch(API,{method:'POST',body:JSON.stringify({action:'saveTeams',password:v('password'),category:teamCat,teams})});
+    const res = await r.json();
+    teamsMsg.innerText = res.message || 'Saved.';
+    loadSchoolNamesList();
+  }catch(e){ teamsMsg.innerText = 'Unable to save — check connection.'; }
+}
+
+async function loadSchoolNamesList(){
+  try{
+    const r = await fetch(API+"?action=teams&cache="+Date.now());
+    const d = await r.json();
+    const names = [...new Set((d.teams||[]).filter(t=>t.present).map(t=>t.schoolName).filter(Boolean))];
+    schoolNamesList.innerHTML = names.map(n=>`<option value="${n.replace(/"/g,'&quot;')}">`).join("");
+  }catch(e){ /* non-critical */ }
+}
+
+loadTeamsCat();
+loadSchoolNamesList();
 </script>
 </body>
 </html>

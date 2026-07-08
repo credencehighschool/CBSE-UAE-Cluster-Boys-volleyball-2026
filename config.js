@@ -22,14 +22,14 @@ const SITE_CONFIG = {
   entryDeadline: "Friday, June 12th 2026",
 
   // IMPORTANT: paste your deployed Google Apps Script Web App URL here (see Code.gs)
-  apiUrl: "https://script.google.com/macros/s/AKfycbxIjgY7txxCaDF3fYcP3gZ6LhLKnvDdghURSIaRlx992_anfhthuFVbsrvGfUdH1qST/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbzR0-gaRmeL9iJs9p3XbG06atHiqFN_xHHbmVY43Uk_pNnLLIv222Sg3L-gkPpqONxAGg/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
 
   // Turn each section on once it's ready — controls the Home page tiles
   phase: {
-  fixturesOpen: true,
-  liveOpen: true,
-  standingsOpen: true
+    fixturesOpen: false,
+    liveOpen: false,
+    standingsOpen: false
   },
 
   overview: {
@@ -50,7 +50,7 @@ const SITE_CONFIG = {
     { icon: "📝", title: "Step by Step Guideline to Team Registration Portal", note: "Open registration portal", url: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec" },
     { icon: "📘", title: "Instructions and Guidelines of the Competition", note: "Click to download guidelines", url: "PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE" },
     { icon: "🌐", title: "FIVB Website", note: "Official international volleyball website", url: "https://www.fivb.com/" },
-    { icon: "🌐", title: "VFI Website", note: "Volleyball Federation of India", url: "https://volleyballindia.com/" },
+    { icon: "🇮🇳", title: "VFI Website", note: "Volleyball Federation of India", url: "https://volleyballindia.com/" },
     { icon: "📖", title: "FIVB Rules", note: "Official rules of the game", url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/" }
   ],
 
