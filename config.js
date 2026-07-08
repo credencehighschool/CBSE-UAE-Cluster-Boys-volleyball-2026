@@ -22,7 +22,7 @@ const SITE_CONFIG = {
   entryDeadline: "Friday, June 12th 2026",
 
   // IMPORTANT: paste your deployed Google Apps Script Web App URL here (see Code.gs)
-  apiUrl: "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE",
+  apiUrl: "https://script.google.com/macros/s/AKfycbzzOQikg9rPWT4IJkFPqiReQkanuEG3t78Cr6mLeYAuCsx4EB1u_drf6rn-RvD29aaV/exec",
   registrationUrl: "PASTE_YOUR_REGISTRATION_FORM_URL_HERE",
 
   // Turn each section on once it's ready — controls the Home page tiles
