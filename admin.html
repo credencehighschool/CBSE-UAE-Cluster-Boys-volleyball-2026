@@ -85,8 +85,8 @@
       <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Semi Final</option><option>Boys U-17 Semi Final</option><option>Boys U-19 Semi Final</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
       <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div>
       <div><label>Current Set</label><select id="currentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select></div>
-      <div><label>Date</label><input id="date" placeholder="Saturday, 19 September 2026"></div>
-      <div><label>Time</label><input id="time" placeholder="8:30 AM"></div>
+      <div><label>Date</label><input id="date" type="date"></div>
+      <div><label>Time</label><input id="time" type="time"></div>
       <div><label>Court</label><input id="court" placeholder="Court 1"></div>
       <div><label>Team A</label><input id="teamA"></div>
       <div><label>Team B</label><input id="teamB"></div>
@@ -197,7 +197,7 @@ function v(id){return document.getElementById(id).value.trim()}
 async function save(action){
   let data={action,password:v('password')};
   if(action==='saveOverview')Object.assign(data,{participatingSchools:v('participatingSchools'),totalAthletes:v('totalAthletes'),totalTeams:v('totalTeams'),championshipTitle:v('championshipTitle'),overviewNote:v('overviewNote')});
-  if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:v('date'),time:v('time'),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
+  if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:formatDateDMY(v('date')),time:formatTime12h(v('time')),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
   if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
   if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
   if(action==='saveBracket')Object.assign(data,{id:v('bId'),category:v('bCategory'),stage:v('bStage'),roundOrder:v('bRoundOrder'),teamA:v('bTeamA'),scoreA:v('bScoreA'),teamB:v('bTeamB'),scoreB:v('bScoreB'),winner:v('bWinner')});
@@ -214,7 +214,11 @@ async function save(action){
    without clashing. ?court=2 in the URL auto-opens just that court's
    tab — bookmark that link on each scorer's phone. */
 const COURTS = ["Court-1","Court-2","Court-3","Court-4"];
-const CATEGORY_OPTIONS = ["Boys U-14","Boys U-17","Boys U-19","Boys U-14 Semi Final","Boys U-17 Semi Final","Boys U-19 Semi Final","Boys U-14 Final","Boys U-17 Final","Boys U-19 Final"];
+const CATEGORY_OPTIONS = [
+  "Boys U-14","Boys U-14 Quarterfinal","Boys U-14 Semi Final","Boys U-14 Final",
+  "Boys U-17","Boys U-17 Quarterfinal","Boys U-17 Semi Final","Boys U-17 Final",
+  "Boys U-19","Boys U-19 Quarterfinal","Boys U-19 Semi Final","Boys U-19 Final"
+];
 
 function buildCourtUI(){
   const tabsBox = document.getElementById("courtTabs");
@@ -229,6 +233,7 @@ function courtPanelHTML(court){
   <div class="panel court-panel" id="panel-${safe}" data-court="${court}">
     <div class="court-panel-head">
       <h3>🏐 ${court}</h3>
+      <span class="match-round-badge" id="roundinfo-${safe}"></span>
       <span class="court-status-badge" id="badge-${safe}">Idle</span>
     </div>
 
@@ -236,9 +241,11 @@ function courtPanelHTML(court){
       <select id="cat-${safe}">${CATEGORY_OPTIONS.map(c=>`<option>${c}</option>`).join("")}</select>
       <input id="teamA-${safe}" placeholder="Team A school" list="schoolNamesList">
       <input id="teamB-${safe}" placeholder="Team B school" list="schoolNamesList">
-      <select id="format-${safe}"><option>Best of 3</option><option>Best of 5</option></select>
-      <input id="date-${safe}" placeholder="Saturday, 19 Sep 2026">
-      <input id="time-${safe}" placeholder="8:30 AM">
+      <select id="format-${safe}"><option>Best of 2</option><option>Best of 3</option><option>Best of 5</option></select>
+      <input id="matchNo-${safe}" type="number" min="1" step="1" placeholder="Match No.">
+      <input id="roundNo-${safe}" type="number" min="1" step="1" placeholder="Round No.">
+      <input id="date-${safe}" type="date">
+      <input id="time-${safe}" type="time">
     </div>
     <button class="btn" onclick="startCourt('${court}')">Start New Match on ${court}</button>
 
@@ -294,25 +301,45 @@ async function courtAction(action, extra){
   }
 }
 
+// Native <input type=date> gives yyyy-mm-dd; <input type=time> gives 24h HH:MM.
+// We convert both to plain display strings BEFORE sending to the backend —
+// both so the site shows dd/mm/yyyy consistently, and so Google Sheets never
+// gets a chance to auto-reinterpret the raw value as its own date/time type.
+function formatDateDMY(iso){
+  if(!iso) return "";
+  const [y,m,d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+function formatTime12h(t){
+  if(!t) return "";
+  let [h,min] = t.split(":").map(Number);
+  const ampm = h>=12 ? "PM" : "AM";
+  h = h % 12; if(h===0) h = 12;
+  return `${h}:${String(min).padStart(2,"0")} ${ampm}`;
+}
+
 async function startCourt(court){
   const safe = court.replace("-","");
   const res = await courtAction('startCourtMatch', {
     court, category: v('cat-'+safe), teamA: v('teamA-'+safe), teamB: v('teamB-'+safe),
-    format: document.getElementById('format-'+safe).value, date: v('date-'+safe), time: v('time-'+safe)
+    format: document.getElementById('format-'+safe).value,
+    matchNo: v('matchNo-'+safe), roundNo: v('roundNo-'+safe),
+    date: formatDateDMY(v('date-'+safe)), time: formatTime12h(v('time-'+safe))
   });
   document.getElementById('msg-'+safe).innerText = res.message || '';
   refreshCourts();
 }
 
+let courtSuppressUntil = {}; // court -> timestamp; background poll won't touch pointsA/B for this court until then
+
 async function point(court, team, dir){
   const safe = court.replace("-","");
+  courtSuppressUntil[court] = Date.now() + 3000; // give the round-trip + one poll cycle room to settle
   // optimistic UI: bump the number immediately for instant feedback
   const el = document.getElementById((team==='A'?'ptsA-':'ptsB-')+safe);
   el.innerText = Math.max(0, (Number(el.innerText)||0) + dir);
   const res = await courtAction(dir>0 ? 'addPoint' : 'removePoint', {court, team});
-  // apply the server's authoritative number directly — do NOT trigger another
-  // fetch here, that's what was racing against the background poll and
-  // causing the score to flicker between old and new values.
+  // apply the server's authoritative number directly
   if(res.pointsA!==undefined) document.getElementById('ptsA-'+safe).innerText = res.pointsA;
   if(res.pointsB!==undefined) document.getElementById('ptsB-'+safe).innerText = res.pointsB;
   document.getElementById('msg-'+safe).innerText = res.message || '';
@@ -330,7 +357,7 @@ async function resetCourtConfirm(court){
   const safe = court.replace("-","");
   const res = await courtAction('resetCourt', {court});
   document.getElementById('msg-'+safe).innerText = res.message || '';
-  ["cat","teamA","teamB","date","time"].forEach(f=>{const el=document.getElementById(f+'-'+safe); if(el) el.value="";});
+  ["cat","teamA","teamB","date","time","matchNo","roundNo"].forEach(f=>{const el=document.getElementById(f+'-'+safe); if(el) el.value="";});
   refreshCourts();
 }
 
@@ -349,8 +376,13 @@ async function refreshCourts(){
       badge.className = 'court-status-badge ' + (String(c.status).toLowerCase()==='live'?'live':(String(c.status).toLowerCase()==='completed'?'completed':''));
       document.getElementById('nameA-'+safe).innerText = c.teamA || 'Team A';
       document.getElementById('nameB-'+safe).innerText = c.teamB || 'Team B';
-      document.getElementById('ptsA-'+safe).innerText = c.pointsA || 0;
-      document.getElementById('ptsB-'+safe).innerText = c.pointsB || 0;
+      const suppressed = (courtSuppressUntil[c.court]||0) > Date.now();
+      if(!suppressed){
+        document.getElementById('ptsA-'+safe).innerText = c.pointsA || 0;
+        document.getElementById('ptsB-'+safe).innerText = c.pointsB || 0;
+      }
+      const roundinfo = document.getElementById('roundinfo-'+safe);
+      if(roundinfo) roundinfo.innerText = (c.matchNo?('Match '+c.matchNo):'') + (c.matchNo && c.roundNo?' · ':'') + (c.roundNo?('Round '+c.roundNo):'');
       document.getElementById('setlabel-'+safe).innerText = c.status==='Completed' ? ('Winner: '+(c.winner||'—')) : ('Set '+(c.currentSet||1)+' · '+(c.setsWonA||0)+'-'+(c.setsWonB||0)+' sets');
       const sets = [c.set1,c.set2,c.set3,c.set4,c.set5].filter(Boolean).map((s,i)=>`<span class="set-pill">Set ${i+1}: ${s}</span>`).join("");
       document.getElementById('sets-'+safe).innerHTML = sets;
