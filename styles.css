@@ -101,7 +101,7 @@ button{font-family:inherit}
   background:var(--ink);color:var(--white);
   border-top:1px solid rgba(255,255,255,.08);
   padding:20px 5%;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;
 }
 .hero-bar p{color:#C9D2E3;font-weight:500;max-width:560px;font-size:14.5px}
 .hero-bar p span{color:var(--white);font-weight:700}
