@@ -15,10 +15,10 @@
     <span class="eyebrow">Private Owner Access</span>
     <h1>Admin Login</h1>
     <p>Enter the owner username and password to open the championship dashboard.</p>
-    <label>Username</label><input id="loginUser" type="text" placeholder="Enter username">
-    <label>Password</label><input id="loginPass" type="password" placeholder="Enter password">
+    <label>Username</label><input id="loginUser" type="text" placeholder="Enter username" autocomplete="username">
+    <label>Password</label><input id="loginPass" type="password" placeholder="Enter password" autocomplete="current-password">
     <br><br>
-    <button class="btn" onclick="login()" style="width:100%">Login</button>
+    <button class="btn" id="loginBtn" onclick="login()" style="width:100%">Login</button>
     <div id="loginMsg" class="login-error"></div>
   </div>
 </div>
@@ -27,7 +27,7 @@
 <section class="section">
   <div class="title"><small>Mobile Admin Dashboard</small><h2>Match Control</h2></div>
   <div class="admin-mobile-note">Use this panel from your phone during the championship. Tournament Overview is for admin record only. Public Fixtures, Live Scores and Standings stay locked (see <code>config.js → phase</code>) until you open them.</div>
-  <div class="card"><label>Admin Password</label><input id="password" type="password" placeholder="Enter owner password again for saving changes"></div><br>
+  <div style="display:none"><input id="password" type="password"></div>
   <div class="tabs" id="mainTabs">
     <button class="tab active" onclick="show('overview')">Overview</button>
     <button class="tab" onclick="show('teamsp')">Teams / Attendance</button>
@@ -183,15 +183,50 @@
 renderLayout('admin');
 const API=getApiUrl();
 const OWNER_USERNAME="admin";
-function login(){
+
+async function login(){
   const user=loginUser.value.trim(), pass=loginPass.value.trim();
-  if(user!==OWNER_USERNAME){loginMsg.innerText="Invalid username.";return}
-  if(!pass){loginMsg.innerText="Please enter password.";return}
-  password.value=pass; sessionStorage.setItem("cbseAdminLoggedIn","yes"); sessionStorage.setItem("cbseAdminPass",pass);
-  loginScreen.style.display="none"; dashboard.style.display="block";
+  loginMsg.innerText="";
+  if(user!==OWNER_USERNAME){loginMsg.innerText="Incorrect username or password.";return}
+  if(!pass){loginMsg.innerText="Please enter your password.";return}
+
+  loginBtn.disabled=true; loginBtn.innerText="Checking...";
+  try{
+    const r = await fetch(API,{method:'POST',body:JSON.stringify({action:'checkLogin',password:pass})});
+    const res = await r.json();
+    if(res.ok){
+      enterDashboard(pass);
+    } else {
+      loginMsg.innerText="Incorrect username or password.";
+    }
+  }catch(e){
+    loginMsg.innerText="Couldn't reach the server to verify your password. Check your connection and try again.";
+  }
+  loginBtn.disabled=false; loginBtn.innerText="Login";
 }
+
+// Pressing Enter in either login field submits, like any normal login form.
+loginUser.addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+loginPass.addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+
+function enterDashboard(pass){
+  password.value = pass;
+  sessionStorage.setItem("cbseAdminLoggedIn","yes");
+  sessionStorage.setItem("cbseAdminPass",pass);
+  loginScreen.style.display="none";
+  dashboard.style.display="block";
+}
+
 function logout(){sessionStorage.clear();location.reload()}
-window.addEventListener("load",()=>{if(sessionStorage.getItem("cbseAdminLoggedIn")==="yes"){password.value=sessionStorage.getItem("cbseAdminPass")||"";loginScreen.style.display="none";dashboard.style.display="block";}});
+
+// Refreshing the page keeps you logged in for the rest of this browser tab
+// session (standard behavior) — closing the tab/browser clears it automatically.
+window.addEventListener("load",()=>{
+  if(sessionStorage.getItem("cbseAdminLoggedIn")==="yes"){
+    enterDashboard(sessionStorage.getItem("cbseAdminPass")||"");
+  }
+});
+
 function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');if(event&&event.target)event.target.classList.add('active')}
 function v(id){return document.getElementById(id).value.trim()}
 async function save(action){
