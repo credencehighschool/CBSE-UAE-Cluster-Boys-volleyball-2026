@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Owner Admin | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <span class="eyebrow">Private Owner Access</span>
+    <h1>Admin Login</h1>
+    <p>Enter the owner username and password to open the championship dashboard.</p>
+    <label>Username</label><input id="loginUser" type="text" placeholder="Enter username" autocomplete="username">
+    <label>Password</label><input id="loginPass" type="password" placeholder="Enter password" autocomplete="current-password">
+    <br><br>
+    <button class="btn" id="loginBtn" onclick="login()" style="width:100%">Login</button>
+    <div id="loginMsg" class="login-error"></div>
+  </div>
+</div>
+
+<div id="dashboard">
+<section class="section">
+  <div class="title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;text-align:left;margin-bottom:18px">
+    <div><small>Mobile Admin Dashboard</small><h2 style="margin-top:4px">Match Control</h2></div>
+    <button class="btn btn-danger" style="border:1.5px solid var(--live);background:transparent;color:var(--live)" onclick="logout()">Logout</button>
+  </div>
+  <p id="sessionMsg" class="muted" style="margin-bottom:16px"></p>
+  <div class="admin-mobile-note">Use this panel from your phone during the championship. Tournament Overview is for admin record only. Public Fixtures, Live Scores and Standings stay locked (see <code>config.js → phase</code>) until you open them.</div>
+  <div style="display:none"><input id="password" type="password"></div>
+  <div class="tabs" id="mainTabs">
+    <button class="tab active" onclick="show('overview')">Overview</button>
+    <button class="tab" onclick="show('teamsp')">Teams / Attendance</button>
+    <button class="tab" onclick="show('notice')">Notice</button>
+    <button class="tab" onclick="show('galleryp')">Gallery</button>
+    <button class="tab" onclick="show('medalp')">Medal Tally</button>
+    <button class="tab" onclick="show('awardp')">Awards</button>
+    <button class="tab" onclick="show('manual')">Manual Entry / Fix</button>
+  </div>
+
+  <div class="court-tabs">
+    <div class="court-tabs-label">Live Court Scoring</div>
+    <div class="tabs" id="courtTabs"></div>
+  </div>
+  <div id="courtPanels"></div>
+
+  <div id="overview" class="panel active card">
+    <div class="admin-form">
+      <div><label>Participating Schools</label><input id="participatingSchools" placeholder="Example: 32"></div>
+      <div><label>Total Athletes</label><input id="totalAthletes" placeholder="Example: 384"></div>
+      <div><label>Total Teams</label><input id="totalTeams" placeholder="Example: 96"></div>
+      <div><label>Championship Title</label><input id="championshipTitle" placeholder="CBSE UAE Cluster Boys Volleyball Championship"></div>
+      <div class="full"><label>Short Note</label><textarea id="overviewNote" placeholder="Brief tournament note for admin records"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="save('saveOverview')">Save Tournament Overview</button>
+  </div>
+
+  <div id="teamsp" class="panel card">
+    <p class="muted" style="margin-bottom:16px">Mark schools present on the day. Saving a category replaces its whole list — so add every school first, then save. School names entered here also auto-suggest in the Court scoring tabs, keeping names consistent for Standings.</p>
+    <div class="tabs" id="teamCatTabs">
+      <button class="tab active" data-teamcat="Boys U-14" onclick="showTeamCat('Boys U-14',this)">U-14</button>
+      <button class="tab" data-teamcat="Boys U-17" onclick="showTeamCat('Boys U-17',this)">U-17</button>
+      <button class="tab" data-teamcat="Boys U-19" onclick="showTeamCat('Boys U-19',this)">U-19</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="table" id="teamsTable">
+        <tr><th style="width:50px">SL</th><th>School Name</th><th style="width:120px">School Code</th><th style="width:130px">Emirate</th><th style="width:80px">Present</th><th style="width:40px"></th></tr>
+        <tbody id="teamsTbody"></tbody>
+      </table>
+    </div>
+    <br>
+    <button class="btn btn-outline" style="color:var(--ink);border-color:var(--line-cool)" onclick="addTeamRow()">+ Add School Row</button>
+    <button class="btn" onclick="saveTeamsCat()">Save This Category's List</button>
+    <p id="teamsMsg" class="muted" style="margin-top:12px"></p>
+  </div>
+
+
+  <div id="manual" class="panel card">
+    <p class="muted" style="margin-bottom:16px">For byes, forfeits, or fixing a mistake after the fact. For normal live scoring, use the Court tabs above instead — they publish here automatically when a match finishes.</p>
+    <div class="admin-form">
+      <div><label>Match ID</label><input id="matchId" placeholder="M001"></div>
+      <div><label>Category</label><select id="category"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Boys U-14 Semi Final</option><option>Boys U-17 Semi Final</option><option>Boys U-19 Semi Final</option><option>Boys U-14 Final</option><option>Boys U-17 Final</option><option>Boys U-19 Final</option></select></div>
+      <div><label>Status</label><select id="status"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Postponed</option></select></div>
+      <div><label>Current Set</label><select id="currentSet"><option></option><option>Set 1</option><option>Set 2</option><option>Set 3</option><option>Set 4</option><option>Set 5</option></select></div>
+      <div><label>Date</label><input id="date" type="date"></div>
+      <div><label>Time</label><input id="time" type="time"></div>
+      <div><label>Court</label><input id="court" placeholder="Court 1"></div>
+      <div><label>Team A</label><input id="teamA"></div>
+      <div><label>Team B</label><input id="teamB"></div>
+      <div><label>Sets Won Team A</label><input id="scoreA" placeholder="0"></div>
+      <div><label>Sets Won Team B</label><input id="scoreB" placeholder="0"></div>
+      <div class="full"><label>Set-by-set Scores</label>
+        <div class="set-input-grid">
+          <input id="set1" placeholder="Set 1: 25-18">
+          <input id="set2" placeholder="Set 2: 22-25">
+          <input id="set3" placeholder="Set 3: 25-20">
+          <input id="set4" placeholder="Set 4">
+          <input id="set5" placeholder="Set 5">
+        </div>
+      </div>
+      <div class="full"><label>Winner</label><input id="winner" placeholder="Winning school / To be updated"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveMatchPhase1')">Save Match</button>
+  </div>
+
+  <div id="notice" class="panel card">
+    <div class="admin-form">
+      <div><label>Notice ID</label><input id="nId" placeholder="N001"></div>
+      <div><label>Title</label><input id="nTitle"></div>
+      <div class="full"><label>Message</label><textarea id="nMessage"></textarea></div>
+    </div><br><button class="btn" onclick="save('saveNotice')">Save Notice</button>
+  </div>
+
+  <div id="galleryp" class="panel card">
+    <div class="admin-form">
+      <div><label>Gallery ID</label><input id="gId" placeholder="G001"></div>
+      <div><label>Image URL</label><input id="gUrl"></div>
+      <div class="full"><label>Caption</label><input id="gCaption"></div>
+    </div><br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
+  </div>
+
+  <div id="medalp" class="panel card">
+    <div class="admin-form">
+      <div><label>Medal ID</label><input id="mId" placeholder="U14-GOLD"></div>
+      <div><label>Category</label><select id="mCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option></select></div>
+      <div><label>Position</label><select id="mPosition"><option>Champion</option><option>Runner-up</option><option>Third Place</option></select></div>
+      <div><label>School</label><input id="mSchool"></div>
+    </div>
+    <br><button class="btn" onclick="save('saveMedal')">Save Medal</button>
+  </div>
+
+  <div id="awardp" class="panel card">
+    <div class="admin-form">
+      <div><label>Award ID</label><input id="aId" placeholder="BEST-PLAYER-U14"></div>
+      <div><label>Icon</label><input id="aIcon" placeholder="⭐"></div>
+      <div><label>Award Name</label><input id="aAward" placeholder="Best Player"></div>
+      <div><label>Student Name</label><input id="aStudent"></div>
+      <div><label>School</label><input id="aSchool"></div>
+      <div><label>Category</label><select id="aCategory"><option>Boys U-14</option><option>Boys U-17</option><option>Boys U-19</option><option>Overall</option></select></div>
+    </div>
+    <br><button class="btn" onclick="save('saveAward')">Save Award</button>
+  </div>
+
+  <p id="msg" class="muted" style="margin-top:18px"></p>
+</section>
+</div>
+<footer class="footer">Owner Admin Panel — not linked from public navigation</footer>
+
+<script src="components.js"></script>
+<script>
+/* NOTE: this is a lightweight front-end gate for convenience, not real security —
+   the password is checked against the value you set in Code.gs on the server side
+   (every save() call is verified there too). Don't treat this page as secret;
+   don't link to it from the public nav, and change OWNER_PASSWORD_HINT-less flow
+   in Code.gs if you need stronger protection. */
+renderLayout('admin');
+const API=getApiUrl();
+const OWNER_USERNAME="admin";
+
+async function login(){
+  const user=loginUser.value.trim(), pass=loginPass.value.trim();
+  loginMsg.innerText="";
+  if(user!==OWNER_USERNAME){loginMsg.innerText="Incorrect username or password.";return}
+  if(!pass){loginMsg.innerText="Please enter your password.";return}
+
+  loginBtn.disabled=true; loginBtn.innerText="Checking...";
+  try{
+    const r = await fetch(API,{method:'POST',body:JSON.stringify({action:'checkLogin',password:pass})});
+    const res = await r.json();
+    if(res.ok){
+      enterDashboard(pass);
+    } else {
+      loginMsg.innerText="Incorrect username or password.";
+    }
+  }catch(e){
+    loginMsg.innerText="Couldn't reach the server to verify your password. Check your connection and try again.";
+  }
+  loginBtn.disabled=false; loginBtn.innerText="Login";
+}
+
+// Pressing Enter in either login field submits, like any normal login form.
+loginUser.addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+loginPass.addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+
+function enterDashboard(pass){
+  password.value = pass;
+  sessionStorage.setItem("cbseAdminLoggedIn","yes");
+  sessionStorage.setItem("cbseAdminPass",pass);
+  loginScreen.style.display="none";
+  dashboard.style.display="block";
+  const sm = document.getElementById("sessionMsg");
+  if(sm){ sm.innerText = "✅ Login successful."; setTimeout(()=>{ if(sm.innerText==="✅ Login successful.") sm.innerText=""; }, 4000); }
+}
+
+function logout(){
+  if(!confirm("Log out of the admin dashboard?")) return;
+  alert("✅ Logout successful.");
+  sessionStorage.clear();
+  location.reload();
+}
+
+// Refreshing the page keeps you logged in for the rest of this browser tab
+// session (standard behavior) — closing the tab/browser clears it automatically.
+window.addEventListener("load",()=>{
+  if(sessionStorage.getItem("cbseAdminLoggedIn")==="yes"){
+    enterDashboard(sessionStorage.getItem("cbseAdminPass")||"");
+  }
+});
+
+function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');if(event&&event.target)event.target.classList.add('active')}
+function v(id){return document.getElementById(id).value.trim()}
+async function save(action){
+  let data={action,password:v('password')};
+  if(action==='saveOverview')Object.assign(data,{participatingSchools:v('participatingSchools'),totalAthletes:v('totalAthletes'),totalTeams:v('totalTeams'),championshipTitle:v('championshipTitle'),overviewNote:v('overviewNote')});
+  if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:formatDateDMY(v('date')),time:formatTime12h(v('time')),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
+  if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
+  if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
+  if(action==='saveMedal')Object.assign(data,{id:v('mId'),category:v('mCategory'),position:v('mPosition'),school:v('mSchool')});
+  if(action==='saveAward')Object.assign(data,{id:v('aId'),icon:v('aIcon'),award:v('aAward'),student:v('aStudent'),school:v('aSchool'),category:v('aCategory')});
+  msg.innerText='Saving...';
+  try{const r=await fetch(API,{method:'POST',body:JSON.stringify(data)});const res=await r.json();msg.innerText=res.message||'Saved.';}
+  catch(e){msg.innerText='Unable to save. Please check Apps Script deployment.';}
+}
+
+/* ===================== LIVE COURT SCORING =====================
+   4 independent panels. Each writes only to its own row on the Courts
+   sheet, so courts can be scored simultaneously from different phones
+   without clashing. ?court=2 in the URL auto-opens just that court's
+   tab — bookmark that link on each scorer's phone. */
+const COURTS = ["Court-1","Court-2","Court-3","Court-4"];
+const CATEGORY_OPTIONS = [
+  "Boys U-14","Boys U-14 Quarterfinal","Boys U-14 Semi Final","Boys U-14 Final",
+  "Boys U-17","Boys U-17 Quarterfinal","Boys U-17 Semi Final","Boys U-17 Final",
+  "Boys U-19","Boys U-19 Quarterfinal","Boys U-19 Semi Final","Boys U-19 Final"
+];
+
+function buildCourtUI(){
+  const tabsBox = document.getElementById("courtTabs");
+  const panelsBox = document.getElementById("courtPanels");
+  tabsBox.innerHTML = COURTS.map(c=>`<button class="tab" data-courttab="${c}" onclick="showCourtTab('${c}')">${c}</button>`).join("");
+  panelsBox.innerHTML = COURTS.map(c=>courtPanelHTML(c)).join("");
+}
+
+function courtPanelHTML(court){
+  const safe = court.replace("-","");
+  return `
+  <div class="panel court-panel" id="panel-${safe}" data-court="${court}">
+    <div class="court-panel-head">
+      <h3>🏐 ${court}</h3>
+      <span class="match-round-badge" id="roundinfo-${safe}"></span>
+      <span class="court-status-badge" id="badge-${safe}">Idle</span>
+    </div>
+
+    <div class="court-start-form">
+      <select id="cat-${safe}">${CATEGORY_OPTIONS.map(c=>`<option>${c}</option>`).join("")}</select>
+      <div class="team-autocomplete">
+        <input id="teamA-${safe}" placeholder="Team A school" autocomplete="off" oninput="onTeamInput('${court}','A',this)" onfocus="onTeamInput('${court}','A',this)">
+        <input type="hidden" id="teamACode-${safe}">
+        <div class="team-suggestions" id="teamASuggest-${safe}"></div>
+      </div>
+      <div class="team-autocomplete">
+        <input id="teamB-${safe}" placeholder="Team B school" autocomplete="off" oninput="onTeamInput('${court}','B',this)" onfocus="onTeamInput('${court}','B',this)">
+        <input type="hidden" id="teamBCode-${safe}">
+        <div class="team-suggestions" id="teamBSuggest-${safe}"></div>
+      </div>
+      <select id="format-${safe}"><option>Best of 2</option><option>Best of 3</option><option>Best of 5</option></select>
+      <input id="matchNo-${safe}" type="number" min="1" step="1" placeholder="Match No.">
+      <input id="roundNo-${safe}" type="number" min="1" step="1" placeholder="Round No.">
+      <input id="date-${safe}" type="date">
+      <input id="time-${safe}" type="time">
+    </div>
+    <button class="btn" onclick="startCourt('${court}')">Start New Match on ${court}</button>
+
+    <div class="live-score-display">
+      <div class="live-score-team">
+        <h4 id="nameA-${safe}">Team A</h4>
+        <div class="live-score-points" id="ptsA-${safe}">0</div>
+        <div class="score-btn-row">
+          <button class="score-btn" onclick="point('${court}','A',-1)">−1</button>
+          <button class="score-btn plus" onclick="point('${court}','A',1)">+1</button>
+        </div>
+      </div>
+      <div class="live-score-mid" id="setlabel-${safe}">Set 1</div>
+      <div class="live-score-team">
+        <h4 id="nameB-${safe}">Team B</h4>
+        <div class="live-score-points" id="ptsB-${safe}">0</div>
+        <div class="score-btn-row">
+          <button class="score-btn" onclick="point('${court}','B',-1)">−1</button>
+          <button class="score-btn plus" onclick="point('${court}','B',1)">+1</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="set-history-pills" id="sets-${safe}"></div>
+
+    <p class="keyboard-hint">⌨️ While this court's tab is open: <kbd>A</kbd> / <kbd>Z</kbd> = Team A point (add/remove) · <kbd>↑</kbd> / <kbd>↓</kbd> = Team B point (add/remove)</p>
+
+    <div class="court-actions">
+      <button class="btn" onclick="endSetCourt('${court}')">End Set</button>
+      <button class="btn btn-danger" onclick="resetCourtConfirm('${court}')">Clear Court</button>
+    </div>
+    <p class="muted" id="msg-${safe}" style="margin-top:12px"></p>
+  </div>`;
+}
+
+let activeCourt = COURTS[0];
+function showCourtTab(court){
+  const safe = court.replace("-","");
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`#courtTabs [data-courttab="${court}"]`).classList.add('active');
+  document.getElementById('panel-'+safe).classList.add('active');
+  activeCourt = court;
+}
+
+async function courtAction(action, extra){
+  const data = Object.assign({action, password: v('password')}, extra);
+  try{
+    const r = await fetch(API,{method:'POST',body:JSON.stringify(data)});
+    return await r.json();
+  }catch(e){
+    return {message:'Network error — check connection and try again.'};
+  }
+}
+
+// Native <input type=date> gives yyyy-mm-dd; <input type=time> gives 24h HH:MM.
+// We convert both to plain display strings BEFORE sending to the backend —
+// both so the site shows dd/mm/yyyy consistently, and so Google Sheets never
+// gets a chance to auto-reinterpret the raw value as its own date/time type.
+function formatDateDMY(iso){
+  if(!iso) return "";
+  const [y,m,d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+function formatTime12h(t){
+  if(!t) return "";
+  let [h,min] = t.split(":").map(Number);
+  const ampm = h>=12 ? "PM" : "AM";
+  h = h % 12; if(h===0) h = 12;
+  return `${h}:${String(min).padStart(2,"0")} ${ampm}`;
+}
+
+async function startCourt(court){
+  const safe = court.replace("-","");
+  const fields = [
+    { id:'teamA-'+safe,    label:'Team A school' },
+    { id:'teamB-'+safe,    label:'Team B school' },
+    { id:'matchNo-'+safe,  label:'Match No.' },
+    { id:'roundNo-'+safe,  label:'Round No.' },
+    { id:'date-'+safe,     label:'Date' },
+    { id:'time-'+safe,     label:'Time' }
+  ];
+  const missing = fields.filter(f => !v(f.id)).map(f => f.label);
+  if(missing.length){
+    document.getElementById('msg-'+safe).innerText = "⚠️ Please fill in: " + missing.join(", ");
+    return;
+  }
+  const res = await courtAction('startCourtMatch', {
+    court, category: v('cat-'+safe), teamA: v('teamA-'+safe), teamB: v('teamB-'+safe),
+    teamACode: v('teamACode-'+safe), teamBCode: v('teamBCode-'+safe),
+    format: document.getElementById('format-'+safe).value,
+    matchNo: v('matchNo-'+safe), roundNo: v('roundNo-'+safe),
+    date: formatDateDMY(v('date-'+safe)), time: formatTime12h(v('time-'+safe))
+  });
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  refreshCourts();
+}
+
+let courtSuppressUntil = {}; // court -> timestamp; background poll won't touch pointsA/B for this court until then
+
+async function point(court, team, dir){
+  const safe = court.replace("-","");
+  courtSuppressUntil[court] = Date.now() + 3000; // give the round-trip + one poll cycle room to settle
+  // optimistic UI: bump the number immediately for instant feedback
+  const el = document.getElementById((team==='A'?'ptsA-':'ptsB-')+safe);
+  el.innerText = Math.max(0, (Number(el.innerText)||0) + dir);
+  const res = await courtAction(dir>0 ? 'addPoint' : 'removePoint', {court, team});
+  // apply the server's authoritative number directly
+  if(res.pointsA!==undefined) document.getElementById('ptsA-'+safe).innerText = res.pointsA;
+  if(res.pointsB!==undefined) document.getElementById('ptsB-'+safe).innerText = res.pointsB;
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+}
+
+async function endSetCourt(court){
+  const safe = court.replace("-","");
+  const res = await courtAction('endSet', {court});
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  refreshCourts();
+}
+
+async function resetCourtConfirm(court){
+  if(!confirm(`Clear all live data on ${court}? This does not delete anything already published to Results.`)) return;
+  const safe = court.replace("-","");
+  const res = await courtAction('resetCourt', {court});
+  document.getElementById('msg-'+safe).innerText = res.message || '';
+  ["cat","teamA","teamB","teamACode","teamBCode","date","time","matchNo","roundNo"].forEach(f=>{const el=document.getElementById(f+'-'+safe); if(el) el.value="";});
+  refreshCourts();
+}
+
+let _refreshSeq = 0;
+async function refreshCourts(){
+  const mySeq = ++_refreshSeq;
+  try{
+    const r = await fetch(API+"?action=courts&cache="+Date.now());
+    const d = await r.json();
+    if(mySeq !== _refreshSeq) return; // a newer refresh already started/finished — discard this stale one
+    (d.courts||[]).forEach(c=>{
+      const safe = String(c.court).replace("-","");
+      const badge = document.getElementById('badge-'+safe);
+      if(!badge) return;
+      badge.innerText = c.status || 'Idle';
+      badge.className = 'court-status-badge ' + (String(c.status).toLowerCase()==='live'?'live':(String(c.status).toLowerCase()==='completed'?'completed':''));
+      document.getElementById('nameA-'+safe).innerText = c.teamA ? (c.teamA + (c.teamACode?' ('+c.teamACode+')':'')) : 'Team A';
+      document.getElementById('nameB-'+safe).innerText = c.teamB ? (c.teamB + (c.teamBCode?' ('+c.teamBCode+')':'')) : 'Team B';
+      const suppressed = (courtSuppressUntil[c.court]||0) > Date.now();
+      if(!suppressed){
+        document.getElementById('ptsA-'+safe).innerText = c.pointsA || 0;
+        document.getElementById('ptsB-'+safe).innerText = c.pointsB || 0;
+      }
+      const roundinfo = document.getElementById('roundinfo-'+safe);
+      if(roundinfo) roundinfo.innerText = (c.matchNo?('Match '+c.matchNo):'') + (c.matchNo && c.roundNo?' · ':'') + (c.roundNo?('Round '+c.roundNo):'');
+      document.getElementById('setlabel-'+safe).innerText = c.status==='Completed' ? ('Winner: '+(c.winner||'—')) : ('Set '+(c.currentSet||1)+' · '+(c.setsWonA||0)+'-'+(c.setsWonB||0)+' sets');
+      const sets = [c.set1,c.set2,c.set3,c.set4,c.set5].filter(Boolean).map((s,i)=>`<span class="set-pill">Set ${i+1}: ${s}</span>`).join("");
+      document.getElementById('sets-'+safe).innerHTML = sets;
+      document.getElementById('panel-'+safe).classList.toggle('is-live', String(c.status).toLowerCase()==='live');
+    });
+  }catch(e){ /* silent — next poll will retry */ }
+}
+
+buildCourtUI();
+showCourtTab(COURTS[0]);
+window.addEventListener("load", ()=>{
+  refreshCourts();
+  setInterval(refreshCourts, 4000);
+  const params = new URLSearchParams(location.search);
+  const deepLinkCourt = params.get('court');
+  if(deepLinkCourt){
+    const name = 'Court-'+deepLinkCourt;
+    if(COURTS.includes(name)){ show('overview'); /* ensure dashboard tab state sane */ setTimeout(()=>showCourtTab(name),50); }
+  }
+});
+
+// Keyboard scoring: A/Z = Team A (left), Arrow Up/Down = Team B (right) —
+// only while the dashboard is open and you're not typing in a text field.
+document.addEventListener("keydown", (e)=>{
+  if(document.getElementById("dashboard").style.display !== "block") return;
+  const tag = (document.activeElement.tagName || "").toLowerCase();
+  if(["input","textarea","select"].includes(tag)) return;
+  if(e.key === "ArrowUp"){ e.preventDefault(); point(activeCourt,'B',1); }
+  else if(e.key === "ArrowDown"){ e.preventDefault(); point(activeCourt,'B',-1); }
+  else if(e.key === "a" || e.key === "A"){ point(activeCourt,'A',1); }
+  else if(e.key === "z" || e.key === "Z"){ point(activeCourt,'A',-1); }
+});
+
+/* ----------------------------- TEAMS / ATTENDANCE ----------------------------- */
+let teamCat = "Boys U-14";
+let teamRows = [];
+
+function showTeamCat(cat, btn){
+  teamCat = cat;
+  document.querySelectorAll('#teamCatTabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  loadTeamsCat();
+}
+
+async function loadTeamsCat(){
+  teamsMsg.innerText = "Loading...";
+  try{
+    const r = await fetch(API+"?action=teams&cache="+Date.now());
+    const d = await r.json();
+    teamRows = (d.teams||[]).filter(t=>t.category===teamCat)
+      .map(t=>({schoolName:t.schoolName||"",schoolCode:t.schoolCode||"",emirate:t.emirate||"",present: String(t.present)==="true"||String(t.present)==="TRUE"||t.present===true}));
+    if(!teamRows.length) teamRows = [{schoolName:"",schoolCode:"",emirate:"",present:true}];
+    renderTeamsTable();
+    teamsMsg.innerText = "";
+  }catch(e){
+    teamRows = [{schoolName:"",schoolCode:"",emirate:"",present:true}];
+    renderTeamsTable();
+    teamsMsg.innerText = "Couldn't load saved list (showing a blank row) — check your connection before saving.";
+  }
+}
+
+function renderTeamsTable(){
+  teamsTbody.innerHTML = teamRows.map((t,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><input value="${t.schoolName.replace(/"/g,'&quot;')}" oninput="teamRows[${i}].schoolName=this.value"></td>
+      <td><input value="${t.schoolCode.replace(/"/g,'&quot;')}" oninput="teamRows[${i}].schoolCode=this.value"></td>
+      <td><input value="${t.emirate.replace(/"/g,'&quot;')}" oninput="teamRows[${i}].emirate=this.value"></td>
+      <td style="text-align:center"><input type="checkbox" ${t.present?"checked":""} style="width:20px;height:20px" onchange="teamRows[${i}].present=this.checked"></td>
+      <td><button class="btn btn-outline" style="padding:8px 12px;color:var(--live);border-color:var(--live)" onclick="removeTeamRow(${i})">✕</button></td>
+    </tr>`).join("");
+}
+
+function addTeamRow(){
+  teamRows.push({schoolName:"",schoolCode:"",emirate:"",present:true});
+  renderTeamsTable();
+}
+function removeTeamRow(i){
+  teamRows.splice(i,1);
+  renderTeamsTable();
+}
+
+async function saveTeamsCat(){
+  teamsMsg.innerText = "Saving...";
+  const teams = teamRows.filter(t=>t.schoolName.trim()!=="");
+  try{
+    const r = await fetch(API,{method:'POST',body:JSON.stringify({action:'saveTeams',password:v('password'),category:teamCat,teams})});
+    const res = await r.json();
+    teamsMsg.innerText = res.message || 'Saved.';
+    loadAllTeams();
+  }catch(e){ teamsMsg.innerText = 'Unable to save — check connection.'; }
+}
+
+/* ----------------------------- SCHOOL NAME + CODE AUTOCOMPLETE -----------------------------
+   Team A / Team B inputs on every court search the Teams/Attendance roster as you type,
+   showing the school name and its code side by side. Selecting one fills a hidden
+   field with the code so it carries through to the scoreboard and standings. */
+let ALL_TEAMS = [];
+async function loadAllTeams(){
+  try{
+    const r = await fetch(API+"?action=teams&cache="+Date.now());
+    const d = await r.json();
+    ALL_TEAMS = (d.teams||[]).filter(t=>t.schoolName && t.present);
+  }catch(e){ /* keep whatever we already had */ }
+}
+
+function courtCategoryBase(court){
+  const safe = court.replace("-","");
+  const cat = document.getElementById('cat-'+safe).value;
+  if(cat.indexOf("U-14")!==-1) return "Boys U-14";
+  if(cat.indexOf("U-17")!==-1) return "Boys U-17";
+  if(cat.indexOf("U-19")!==-1) return "Boys U-19";
+  return cat;
+}
+
+function escapeAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
+function onTeamInput(court, side, inputEl){
+  const safe = court.replace("-","");
+  const box = document.getElementById('team'+side+'Suggest-'+safe);
+  const q = inputEl.value.trim().toLowerCase();
+  const cat = courtCategoryBase(court);
+  const matches = ALL_TEAMS.filter(t => t.category===cat && (!q || t.schoolName.toLowerCase().includes(q))).slice(0,8);
+  if(!matches.length){ box.classList.remove('open'); box.innerHTML=''; return; }
+  box.innerHTML = matches.map(t=>
+    `<div class="team-suggestion-item" data-court="${court}" data-side="${side}" data-name="${escapeAttr(t.schoolName)}" data-code="${escapeAttr(t.schoolCode||'')}">
+      <span>${t.schoolName}</span><span class="code">${t.schoolCode||''}</span>
+    </div>`).join("");
+  box.classList.add('open');
+}
+
+document.addEventListener('click', (e)=>{
+  const item = e.target.closest('.team-suggestion-item');
+  if(item){
+    const court=item.dataset.court, side=item.dataset.side, name=item.dataset.name, code=item.dataset.code;
+    const safe = court.replace("-","");
+    document.getElementById('team'+side+'-'+safe).value = name;
+    document.getElementById('team'+side+'Code-'+safe).value = code;
+    document.getElementById('team'+side+'Suggest-'+safe).classList.remove('open');
+    return;
+  }
+  if(!e.target.closest('.team-autocomplete')) document.querySelectorAll('.team-suggestions').forEach(b=>b.classList.remove('open'));
+});
+
+loadTeamsCat();
+loadAllTeams();
+</script>
+</body>
+</html>

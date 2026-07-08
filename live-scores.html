@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Live Scores | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title">
+    <small>Championship Centre</small>
+    <h2>Live Scores</h2>
+    <p class="muted">Point-by-point from all 4 courts, updated every few seconds.</p>
+  </div>
+  <div id="courts" class="grid2"><div class="card">Loading...</div></div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('live');
+const API=getApiUrl();
+
+function courtCard(c){
+  const isLive = String(c.status||'').toLowerCase()==='live';
+  const isCompleted = String(c.status||'').toLowerCase()==='completed';
+  const isIdle = !c.teamA && !c.teamB;
+  const sets = [c.set1,c.set2,c.set3,c.set4,c.set5].filter(Boolean).map((s,i)=>`<span class="set-pill">Set ${i+1}: ${s}</span>`).join('');
+
+  if(isIdle){
+    return `<article class="match-card-pro">
+      <div class="match-head-pro"><span class="match-label">${c.court}</span><span class="match-status">Idle</span></div>
+      <p class="muted" style="text-align:center;padding:20px 0">No match assigned to this court yet.</p>
+    </article>`;
+  }
+
+  return `<article class="match-card-pro ${isLive?'live':''}">
+    <div class="match-head-pro">
+      <span class="match-label">${c.court} · ${c.category||''}</span>
+      <span class="match-status ${isLive?'live':''}">${isLive?'<span class="live-dot"></span>LIVE':(isCompleted?'Completed':(c.status||'Scheduled'))}</span>
+    </div>
+    <div class="match-meta-pro">${c.date||''} · ${c.time||''} · ${c.format||''}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${c.teamA||''}${c.teamACode?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:12px">(${c.teamACode})</span>`:''}</h3><strong>${isCompleted ? (c.setsWonA??0) : (c.pointsA??0)}</strong></div>
+      <div class="score-vs">${isCompleted?'SETS':'VS'}</div>
+      <div class="score-team"><h3>${c.teamB||''}${c.teamBCode?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:12px">(${c.teamBCode})</span>`:''}</h3><strong>${isCompleted ? (c.setsWonB??0) : (c.pointsB??0)}</strong></div>
+    </div>
+    ${isLive?`<div class="current-set">Set ${c.currentSet||1} in progress · ${c.setsWonA||0}-${c.setsWonB||0} sets</div>`:''}
+    <div class="set-strip">${sets || '<span class="set-pill">No sets completed yet</span>'}</div>
+    ${isCompleted?`<div class="match-winner">Winner: ${c.winner||'—'}</div>`:''}
+  </article>`;
+}
+
+async function load(){
+  const box=document.getElementById("courts");
+  try{
+    const r=await fetch(API+"?action=courts&cache="+Date.now());
+    const d=await r.json();
+    const data=d["courts"]||[];
+    box.innerHTML=data.length ? data.map(courtCard).join("") : '<div class="card">No courts configured yet.</div>';
+  }catch(e){box.innerHTML='<div class="card">Unable to load data.</div>';}
+}
+load(); setInterval(load,5000);
+</script>
+</body>
+</html>
