@@ -27,10 +27,10 @@ const SITE_CONFIG = {
 
   // Turn each section on once it's ready — controls the Home page tiles
   phase: {
-    fixturesOpen: false,
-    liveOpen: true,
-    standingsOpen: true
-  },
+  fixturesOpen: false,
+  liveOpen: true,
+  standingsOpen: true
+},
 
   overview: {
     participatingSchools: "00",
