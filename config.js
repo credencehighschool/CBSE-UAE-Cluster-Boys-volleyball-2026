@@ -31,7 +31,6 @@ const SITE_CONFIG = {
     liveOpen: true,
     standingsOpen: true
   },
-
   // Edited here directly for instant loading — no Google Sheet lookup needed.
   // Update these numbers any time; the homepage picks them up immediately.
   overview: {
