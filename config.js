@@ -22,7 +22,7 @@ const SITE_CONFIG = {
   entryDeadline: "Friday, June 12th 2026",
 
   // IMPORTANT: paste your deployed Google Apps Script Web App URL here (see Code.gs)
-  apiUrl: "https://script.google.com/macros/s/AKfycbxEo1cyTn6qhBvJVHxJrRS43pStx29vPmNxlTkJkphNoVM1-0CNbJrX-dbEAmn5tGGi/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbxhmcUy4KzRB74UmkCNzwf3kAbosM74Sb14P3WCIZE1LYyWlC1hD7z9_uhwMEvsED_j/exec",
   registrationUrl: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec",
 
   // Turn each section on once it's ready — controls the Home page tiles
