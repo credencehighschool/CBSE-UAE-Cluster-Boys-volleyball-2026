@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Live Scores | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title">
+    <small>Championship Centre</small>
+    <h2>Live Scores</h2>
+    <p class="muted">Point-by-point from all 4 courts, updated every few seconds.</p>
+  </div>
+  <div class="tabs" id="catTabs">
+    <button class="tab active" onclick="filterCat('All',this)">All</button>
+    <button class="tab" onclick="filterCat('Boys U-14',this)">U-14</button>
+    <button class="tab" onclick="filterCat('Boys U-17',this)">U-17</button>
+    <button class="tab" onclick="filterCat('Boys U-19',this)">U-19</button>
+  </div>
+  <div id="courts" class="grid2"><div class="card">Loading...</div></div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('live');
+const API=getApiUrl();
+const LIVE_LOCKED = phaseGuard('live','Live Scores');
+let allCourts = [];
+let activeCat = 'All';
+
+function courtCard(c){
+  const isLive = String(c.status||'').toLowerCase()==='live';
+  const isCompleted = String(c.status||'').toLowerCase()==='completed';
+  const isIdle = !c.teamA && !c.teamB;
+  const sets = setPillsHTML(c, 'teamACode', 'teamBCode');
+
+  if(isIdle){
+    return `<article class="match-card-pro">
+      <div class="match-head-pro"><span class="match-label">${c.court}</span><span class="match-status">Idle</span></div>
+      <p class="muted" style="text-align:center;padding:20px 0">No match assigned to this court yet.</p>
+    </article>`;
+  }
+
+  return `<article class="match-card-pro ${isLive?'live':''}">
+    <div class="match-head-pro">
+      <span class="match-label">${c.court} · ${c.category||''}</span>
+      <span class="match-status ${isLive?'live':''}">${isLive?'<span class="live-dot"></span>LIVE':(isCompleted?'Completed':(c.status||'Scheduled'))}</span>
+    </div>
+    <div class="match-meta-pro">${c.date?`Date: ${c.date}`:''}${c.time?`   ·   Time: ${c.time}`:''}${c.matchNo?`   ·   Match- ${c.matchNo}`:''}${c.roundNo?`   ·   Round- ${c.roundNo}`:''}${c.format?`   ·   ${c.format}${c.pointsToWin?` (${c.pointsToWin} point sets)`:''}`:''}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${c.teamA||''}${(c.teamACode||c.teamAEmirate)?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:12px">(${[c.teamACode, emirateShort(c.teamAEmirate)].filter(Boolean).join(', ')})</span>`:''}</h3><strong>${isCompleted ? (c.setsWonA??0) : (c.pointsA??0)}</strong></div>
+      <div class="score-vs">${isCompleted?'SETS':'VS'}</div>
+      <div class="score-team"><h3>${c.teamB||''}${(c.teamBCode||c.teamBEmirate)?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:12px">(${[c.teamBCode, emirateShort(c.teamBEmirate)].filter(Boolean).join(', ')})</span>`:''}</h3><strong>${isCompleted ? (c.setsWonB??0) : (c.pointsB??0)}</strong></div>
+    </div>
+    ${isLive?`<div class="current-set">Set ${c.currentSet||1} in progress · ${c.setsWonA||0}-${c.setsWonB||0} sets</div>`:''}
+    <div class="set-strip">${sets || '<span class="set-pill">No sets completed yet</span>'}</div>
+    ${isCompleted?`<div class="match-winner">Winner: ${c.winner||'—'}</div>`:''}
+  </article>`;
+}
+
+function categoryMatches(catValue, filterCat){
+  if(filterCat==='All') return true;
+  const ageGroup = filterCat.replace('Boys ','');
+  return String(catValue||'').indexOf(ageGroup) !== -1;
+}
+function render(){
+  const filtered = allCourts
+    .filter(c=>categoryMatches(c.category, activeCat))
+    .filter(c=>String(c.status||'').toLowerCase()!=='completed');
+  courts.innerHTML = filtered.length ? filtered.map(courtCard).join("") : `<div class="card">No ${activeCat==='All'?'':activeCat+' '}courts live right now.</div>`;
+}
+function filterCat(cat, btn){
+  activeCat = cat;
+  document.querySelectorAll('#catTabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+async function load(){
+  try{
+    const r=await fetch(API+"?action=courts&cache="+Date.now());
+    const d=await r.json();
+    allCourts=d["courts"]||[];
+    render();
+  }catch(e){courts.innerHTML='<div class="card">Unable to load data.</div>';}
+}
+if(!LIVE_LOCKED){ load(); setInterval(load,5000); }
+</script>
+</body>
+</html>
