@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Standings | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title"><small>Automatic Standing</small><h2>Current Standing</h2><p class="muted">Calculated automatically from completed matches — Round is set manually by the owner.</p></div>
+  <div class="tabs" id="catTabs">
+    <button class="tab active" onclick="filterCat('All',this)">All</button>
+    <button class="tab" onclick="filterCat('Boys U-14',this)">U-14</button>
+    <button class="tab" onclick="filterCat('Boys U-17',this)">U-17</button>
+    <button class="tab" onclick="filterCat('Boys U-19',this)">U-19</button>
+  </div>
+  <div id="standings">Loading...</div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('standings');
+const API=getApiUrl();
+const STANDINGS_LOCKED = phaseGuard('standings','Standings');
+let allStandings = [];
+let activeCat = 'All';
+function statusClass(s){ return s==='Qualified for next match' ? 'qualify' : (s==='Not qualified for next match' ? 'not-qualify' : ''); }
+function render(){
+  const rows = activeCat==='All' ? allStandings : allStandings.filter(r=>r.category===activeCat);
+  const groups={};
+  rows.forEach(r=>{ if(!groups[r.category]) groups[r.category]=[]; groups[r.category].push(r); });
+  standings.innerHTML=Object.keys(groups).map(cat=>`
+    <h2 style="font-family:var(--display);text-transform:uppercase;font-size:20px;margin:25px 0 12px">${cat}</h2>
+    <div style="overflow-x:auto">
+    <table class="table">
+      <tr><th>Sl No</th><th>School</th><th>Code</th><th>Emirate</th><th>P</th><th>W</th><th>L</th><th>Summary</th><th>Status</th><th>Round</th></tr>
+      ${groups[cat].map((s,i)=>`<tr class="${i===0?'rank1':''}"><td>${i+1}</td><td>${s.team}</td><td>${s.schoolCode||'-'}</td><td>${s.emirate||'-'}</td><td>${s.played}</td><td>${s.won}</td><td>${s.lost}</td><td style="white-space:nowrap">${s.summary||'-'}</td><td>${s.status?`<span class="qualify-pill ${statusClass(s.status)}">${s.status}</span>`:'-'}</td><td>${s.currentRound||'-'}</td></tr>`).join('')}
+    </table>
+    </div>`).join("") || `<div class="card">No ${activeCat==='All'?'':activeCat+' '}standings yet.</div>`;
+}
+function filterCat(cat, btn){
+  activeCat = cat;
+  document.querySelectorAll('#catTabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+async function load(){
+  try{
+    const r=await fetch(API+"?action=autoStandings&cache="+Date.now());
+    const d=await r.json();
+    allStandings=d.standings||[];
+    render();
+  }catch(e){standings.innerHTML='<div class="card">Unable to load standings.</div>';}
+}
+if(!STANDINGS_LOCKED){ load(); setInterval(load,30000); }
+</script>
+</body>
+</html>
