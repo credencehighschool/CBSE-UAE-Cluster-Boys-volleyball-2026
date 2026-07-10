@@ -27,9 +27,9 @@ const SITE_CONFIG = {
 
   // Turn each section on once it's ready — controls the Home page tiles
   phase: {
-    fixturesOpen: false,
-    liveOpen: false,
-    standingsOpen: false
+    fixturesOpen: true,
+    liveOpen: true,
+    standingsOpen: true
   },
 
   // Edited here directly for instant loading — no Google Sheet lookup needed.
