@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Medal Tally | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title"><small>Champions</small><h2>Medal Tally</h2><p class="muted">Position Secured is set manually by the owner — ties (e.g. two Third Position finishers) are fully supported.</p></div>
+  <div class="tabs" id="catTabs">
+    <button class="tab active" onclick="filterCat('All',this)">All</button>
+    <button class="tab" onclick="filterCat('Boys U-14',this)">U-14</button>
+    <button class="tab" onclick="filterCat('Boys U-17',this)">U-17</button>
+    <button class="tab" onclick="filterCat('Boys U-19',this)">U-19</button>
+  </div>
+  <div id="medals">Loading medals...</div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('medals');
+const API=getApiUrl();
+let allMedals = [];
+let activeCat = 'All';
+const POSITION_ORDER = {"First Position":1,"Second Position":2,"Third Position":3};
+function positionPill(pos){
+  const cls = pos==='First Position' ? 'gold' : (pos==='Second Position' ? 'silver' : 'bronze');
+  return `<span class="position-pill ${cls}">${pos||'-'}</span>`;
+}
+function render(){
+  const rows = activeCat==='All' ? allMedals : allMedals.filter(m=>m.category===activeCat);
+  const groups={};
+  rows.forEach(m=>{ if(!groups[m.category]) groups[m.category]=[]; groups[m.category].push(m); });
+  medals.innerHTML = Object.keys(groups).map(cat=>{
+    const sorted = groups[cat].slice().sort((a,b)=>(POSITION_ORDER[a.position]||9)-(POSITION_ORDER[b.position]||9));
+    return `
+    <h2 style="font-family:var(--display);text-transform:uppercase;font-size:20px;margin:25px 0 12px">${cat}</h2>
+    <div style="overflow-x:auto">
+    <table class="table">
+      <tr><th>Sl No</th><th>School</th><th>Code</th><th>Emirate</th><th>P</th><th>W</th><th>L</th><th>Position Secured</th></tr>
+      ${sorted.map((m,i)=>`<tr><td>${i+1}</td><td>${m.school||'To be updated'}</td><td>${m.schoolCode||'-'}</td><td>${m.emirate||'-'}</td><td>${m.played||'-'}</td><td>${m.won||'-'}</td><td>${m.lost||'-'}</td><td>${positionPill(m.position)}</td></tr>`).join('')}
+    </table>
+    </div>`;
+  }).join('') || '<div class="card">Medal tally will be updated after finals.</div>';
+}
+function filterCat(cat, btn){
+  activeCat = cat;
+  document.querySelectorAll('#catTabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+async function load(){
+  try{
+    const r=await fetch(API+"?action=medals&cache="+Date.now());
+    const d=await r.json();
+    allMedals = d.medals||[];
+    render();
+  }catch(e){medals.innerHTML='<div class="card">Unable to load medal tally.</div>';}
+}
+load();setInterval(load,30000);
+</script>
+</body>
+</html>
