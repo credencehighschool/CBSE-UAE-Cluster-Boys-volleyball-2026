@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CBSE UAE Cluster Boys Volleyball Championship 2026–27</title>
+<meta name="description" content="Official portal for the CBSE UAE Cluster Boys Volleyball Championship, hosted by Credence High School, Dubai. Fixtures, live scores, standings, results and more.">
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<main id="home">
+<section class="hero">
+  <img src="images/cover.png" alt="CBSE UAE Cluster Boys Volleyball Championship 2026-27, hosted by Credence High School, Dubai">
+</section>
+
+<section class="news" id="deadlines">
+  <div class="news-title">Latest Update</div>
+  <marquee id="ticker">🏆 Important updates will appear here.</marquee>
+</section>
+
+<section class="quick-info">
+  <div><p>Hosted by</p><h2 data-hosted-by>Credence High School, Dubai</h2></div>
+  <div><p>Categories</p><h2 data-categories>Boys U-14 | U-17 | U-19</h2></div>
+  <div><p>Championship Dates</p><h2>Sep 19–20, 2026</h2></div>
+  <div><p>Format</p><h2>Knockout</h2></div>
+</section>
+
+<section class="registration">
+  <div>
+    <small>Official Registration Portal</small>
+    <h1>Register Your School</h1>
+    <p>Schools willing to participate may complete the online registration process.</p>
+  </div>
+  <a class="btn" href="#" id="registrationBtn" target="_blank">Register Your School →</a>
+</section>
+
+<section class="section">
+  <div class="title"><small>Tournament Overview</small><h2>Championship at a Glance</h2></div>
+  <div class="stats-grid" id="overviewStats"></div>
+  <p class="muted" id="overviewNote" style="text-align:center;margin-top:18px"></p>
+</section>
+
+<section class="section">
+  <div class="title"><small>Championship Countdown</small><h2>September 19–20, 2026</h2></div>
+  <div class="countdown" id="timer">
+    <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
+    <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
+    <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
+    <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+  </div>
+</section>
+
+<div class="court-rule"><i></i></div>
+
+<section class="section">
+  <div class="title"><small>Championship Centre</small><h2>Live From The Championship</h2><p class="muted">Real-time updates straight from the courts — pulled automatically from live scoring.</p></div>
+
+  <div class="tabs" id="homeTabs">
+    <button class="tab active" onclick="showHomeTab('hc-fixtures',this)">Fixtures</button>
+    <button class="tab" onclick="showHomeTab('hc-live',this)">Live Now</button>
+    <button class="tab" onclick="showHomeTab('hc-upcoming',this)">Upcoming</button>
+    <button class="tab" onclick="showHomeTab('hc-completed',this)">Completed</button>
+  </div>
+
+  <div id="hc-fixtures" class="panel active"><div id="hcFixturesBox" class="grid3"></div></div>
+
+  <div id="hc-live" class="panel">
+    <div id="hcLiveBox" class="carousel-row"><div class="card">Loading...</div></div>
+    <p style="text-align:center;margin-top:18px"><a class="btn btn-quiet-dark" href="live-scores.html">Open Full Live Scores →</a></p>
+  </div>
+
+  <div id="hc-upcoming" class="panel">
+    <div id="hcUpcomingBox" class="carousel-row"><div class="card">Loading...</div></div>
+  </div>
+
+  <div id="hc-completed" class="panel">
+    <div id="hcCompletedBox" class="carousel-row"><div class="card">Loading...</div></div>
+    <p style="text-align:center;margin-top:18px"><a class="btn btn-quiet-dark" href="results.html">View All Results →</a> <a class="btn btn-quiet-dark" href="standings.html">View Standings →</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="title"><small>Championship Gallery</small><h2>Moments From The Championship</h2></div>
+  <div id="hcGalleryBox" class="carousel-row"><div class="card">Loading...</div></div>
+  <p style="text-align:center;margin-top:18px"><a class="btn btn-quiet-dark" href="gallery.html">View Full Gallery →</a></p>
+</section>
+
+<section class="section">
+  <div class="title"><small>Championship Centre</small><h2>Knockout, Medals &amp; Awards</h2></div>
+  <div class="phase2-grid" style="grid-template-columns:repeat(2,1fr)">
+    <a class="phase2-card gold" href="medal-tally.html"><span>🥇</span><strong>Medal Tally</strong><small>Champion, Runner-up and Third Place</small></a>
+    <a class="phase2-card" href="awards.html"><span>⭐</span><strong>Individual Awards</strong><small>Best player, setter, libero and more</small></a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="title"><small>Official Documents</small><h2>Downloads &amp; Quick Links</h2></div>
+  <div id="downloads" class="grid3"></div>
+</section>
+
+<section class="section">
+  <div class="title"><small>Venue</small><h2>Championship Venue</h2></div>
+  <div id="venue" class="card">Loading venue...</div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="card contact-card" style="background:transparent;border:none;box-shadow:none">
+    <span class="eyebrow">Need Assistance?</span>
+    <h2>Contact Coordinator</h2>
+    <h3>Mr. Vijesh V</h3>
+    <p>Head of Department – Physical Education</p>
+    <p>Email: <a href="mailto:physicaleducation@credencehighschool.com">physicaleducation@credencehighschool.com</a></p>
+    <p>Mobile: <a href="tel:+971563692429">+971 56 369 2429</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+
+<script src="components.js"></script>
+<script>
+renderLayout('home');
+const API=getApiUrl();
+
+const targetDate = new Date(SITE_CONFIG.championshipStart).getTime();
+function tick(){
+  const n=Date.now(),d=targetDate-n;
+  if(d<=0)return;
+  days.innerText=String(Math.floor(d/(1000*60*60*24))).padStart(2,'0');
+  hours.innerText=String(Math.floor((d%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+  minutes.innerText=String(Math.floor((d%(1000*60*60))/(1000*60))).padStart(2,'0');
+  seconds.innerText=String(Math.floor((d%(1000*60))/1000)).padStart(2,'0');
+}
+tick(); setInterval(tick,1000);
+
+function showHomeTab(id, btn){
+  document.querySelectorAll('#homeTabs .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#home > .section .panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function lockedNote(msg){ return `<div class="card" style="text-align:center;color:var(--ink-soft)">🔒 ${msg}</div>`; }
+
+function loadOverviewTab(){
+  const ov = SITE_CONFIG.overview;
+  overviewStats.innerHTML = `
+    <div class="stat-card"><strong>${ov.participatingSchools||'00'}</strong><span>Participating Schools</span></div>
+    <div class="stat-card"><strong>${ov.totalTeams||'00'}</strong><span>Total Teams</span></div>
+    <div class="stat-card"><strong>${ov.totalAthletes||'00'}</strong><span>Total Athletes</span></div>`;
+  overviewNote.innerText = ov.overviewNote || "Join schools from across the UAE cluster in this year's championship — full results, live action and standings all in one place.";
+}
+
+function loadFixturesTab(){
+  if(!SITE_CONFIG.phase.fixturesOpen){ hcFixturesBox.innerHTML = lockedNote("Fixtures will be published here once finalized."); return; }
+  hcFixturesBox.innerHTML = ["u14","u17","u19"].map(k=>`
+    <a class="card tile" href="${SITE_CONFIG.fixtures[k]}" target="_blank">
+      <span>📋</span><strong>${k.toUpperCase()} Boys</strong><small>Download fixture PDF</small>
+    </a>`).join("");
+}
+
+function courtMiniCard(c){
+  const isLive = String(c.status).toLowerCase()==='live';
+  if(!isLive) return "";
+  const sets = setPillsHTML(c, 'teamACode', 'teamBCode');
+  return `<article class="match-card-pro live">
+    <div class="match-head-pro"><span class="match-label">${c.court} · ${c.category||''}</span><span class="match-status live"><span class="live-dot"></span>Live</span></div>
+    <div class="match-meta-pro">Set ${c.currentSet||1} · Sets ${c.setsWonA||0}-${c.setsWonB||0}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${c.teamA||'Team A'}${c.teamACode?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:11px">(${c.teamACode})</span>`:''}</h3><strong>${c.pointsA||0}</strong></div>
+      <div class="score-vs">VS</div>
+      <div class="score-team"><h3>${c.teamB||'Team B'}${c.teamBCode?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:11px">(${c.teamBCode})</span>`:''}</h3><strong>${c.pointsB||0}</strong></div>
+    </div>
+    <div class="set-strip">${sets || '<span class="set-pill">Set in progress</span>'}</div>
+  </article>`;
+}
+
+async function loadLiveTab(){
+  if(!SITE_CONFIG.phase.liveOpen){ hcLiveBox.innerHTML = lockedNote("Live scores will open once the championship begins."); return; }
+  try{
+    const r = await fetch(API+"?action=courts&cache="+Date.now());
+    const d = await r.json();
+    const cards = (d.courts||[]).map(courtMiniCard).filter(Boolean).join("");
+    hcLiveBox.innerHTML = cards || '<div class="card">No court is live right now — check back soon.</div>';
+  }catch(e){ hcLiveBox.innerHTML = '<div class="card">Unable to load live scores.</div>'; }
+}
+
+function simpleMatchCard(m, showScore){
+  return `<article class="match-card-pro">
+    <div class="match-head-pro"><span class="match-label">${m.category||''}</span><span class="match-status">${m.status||''}</span></div>
+    <div class="match-meta-pro">${m.date||''} · ${m.time||''} · ${m.court||''}${m.matchNo?` · Match- ${m.matchNo}`:''}${m.roundNo?` · Round- ${m.roundNo}`:''}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${m.teamA||''}${m.teamACode?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:11px">(${m.teamACode})</span>`:''}</h3>${showScore?`<strong>${m.scoreA??''}</strong>`:''}</div>
+      <div class="score-vs">VS</div>
+      <div class="score-team"><h3>${m.teamB||''}${m.teamBCode?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:11px">(${m.teamBCode})</span>`:''}</h3>${showScore?`<strong>${m.scoreB??''}</strong>`:''}</div>
+    </div>
+    ${showScore ? `<div class="set-strip">${setPillsHTML(m,'teamACode','teamBCode')}</div>` : ''}
+    ${showScore && m.winner ? `<div class="match-winner">Winner: ${m.winner}</div>` : ''}
+  </article>`;
+}
+
+async function loadUpcomingTab(){
+  if(!SITE_CONFIG.phase.fixturesOpen){ hcUpcomingBox.innerHTML = lockedNote("Schedule will be published closer to the championship."); return; }
+  try{
+    const r = await fetch(API+"?action=scheduled&cache="+Date.now());
+    const d = await r.json();
+    const rows = (d.scheduled||[]).slice(0,6);
+    hcUpcomingBox.innerHTML = rows.length ? rows.map(m=>simpleMatchCard(m,false)).join("") : '<div class="card">No upcoming matches published yet.</div>';
+  }catch(e){ hcUpcomingBox.innerHTML = '<div class="card">Unable to load schedule.</div>'; }
+}
+
+async function loadCompletedTab(){
+  if(!SITE_CONFIG.phase.standingsOpen){ hcCompletedBox.innerHTML = lockedNote("Results will appear here once matches are completed."); return; }
+  try{
+    const r = await fetch(API+"?action=results&cache="+Date.now());
+    const d = await r.json();
+    const rows = (d.results||[]).slice(-6).reverse();
+    hcCompletedBox.innerHTML = rows.length ? rows.map(m=>simpleMatchCard(m,true)).join("") : '<div class="card">No completed matches yet.</div>';
+  }catch(e){ hcCompletedBox.innerHTML = '<div class="card">Unable to load results.</div>'; }
+}
+
+async function loadGalleryCarousel(){
+  if(API.includes("PASTE")){ hcGalleryBox.innerHTML = '<div class="card">Connect Apps Script URL to show photos here.</div>'; return; }
+  try{
+    const r = await fetch(API+"?action=gallery&cache="+Date.now());
+    const d = await r.json();
+    const rows = (d.gallery||[]).slice(-10).reverse();
+    hcGalleryBox.innerHTML = rows.length ? rows.map(g=>`
+      <div class="gallery-img">${g.url?`<img src="${g.url}" loading="lazy">`:'📸'}<p class="muted">${g.caption||''}</p></div>
+    `).join("") : '<div class="card">Photos will appear here once uploaded.</div>';
+  }catch(e){ hcGalleryBox.innerHTML = '<div class="card">Unable to load gallery.</div>'; }
+}
+
+// Continuous auto-scroll for the homepage carousels — pauses briefly if the
+// visitor is actively touching/hovering it, then resumes on its own.
+function autoScrollCarousel(id, speed){
+  const el = document.getElementById(id);
+  if(!el) return;
+  let paused = false, resumeTimer = null;
+  const pause = ()=>{ paused = true; clearTimeout(resumeTimer); };
+  const resumeSoon = ()=>{ clearTimeout(resumeTimer); resumeTimer = setTimeout(()=>{ paused = false; }, 2500); };
+  ['mouseenter','touchstart','pointerdown'].forEach(evt=>el.addEventListener(evt, pause, {passive:true}));
+  ['mouseleave','touchend','pointerup'].forEach(evt=>el.addEventListener(evt, resumeSoon, {passive:true}));
+  (function step(){
+    if(!paused && el.scrollWidth > el.clientWidth + 2){
+      el.scrollLeft += speed;
+      if(el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) el.scrollLeft = 0;
+    }
+    requestAnimationFrame(step);
+  })();
+}
+["hcLiveBox","hcUpcomingBox","hcCompletedBox","hcGalleryBox"].forEach(id=>autoScrollCarousel(id, 0.6));
+
+loadOverviewTab();
+loadFixturesTab();
+loadLiveTab();
+loadUpcomingTab();
+loadCompletedTab();
+loadGalleryCarousel();
+setInterval(loadLiveTab, 15000);
+
+function loadDirectContent(){
+  const regBtn = document.getElementById("registrationBtn");
+  if(regBtn) regBtn.href = SITE_CONFIG.registrationUrl;
+
+  downloads.innerHTML = SITE_CONFIG.downloads.map(d=>`
+    <a class="card tile" href="${d.url}" target="_blank">
+      <span>${d.icon}</span>
+      <strong>${d.title}</strong>
+      <small>${d.note}</small>
+    </a>
+  `).join("");
+
+  venue.innerHTML = `
+    <h2 style="font-family:var(--display);text-transform:uppercase;font-size:22px;margin-bottom:8px">${SITE_CONFIG.venue.title}</h2>
+    <p class="muted">${SITE_CONFIG.venue.details}</p><br>
+    <a class="btn" href="${SITE_CONFIG.venue.mapUrl}" target="_blank">Open Location Map</a>
+  `;
+}
+loadDirectContent();
+
+async function loadNotices(){
+  const fallback = [
+    {title:"Acceptance Form Deadline", message: SITE_CONFIG.acceptanceDeadline},
+    {title:"Entry Form Deadline", message: SITE_CONFIG.entryDeadline},
+    {title:"Championship Dates", message: SITE_CONFIG.championshipDatesText}
+  ];
+  let notices = fallback;
+  if(!API.includes("PASTE")){
+    try{
+      const r=await fetch(API+"?action=all&cache="+Date.now());
+      const data=await r.json();
+      if(data.notices && data.notices.length) notices = data.notices;
+    }catch(e){ /* keep fallback */ }
+  }
+  ticker.innerHTML = notices.map(n=>"📢 <strong>"+n.title+"</strong>: "+n.message).join(" &nbsp; | &nbsp; ");
+}
+loadNotices();
+</script>
+</body>
+</html>
