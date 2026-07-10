@@ -52,7 +52,7 @@ const SITE_CONFIG = {
     { icon: "📝", title: "Step by Step Guideline to Team Registration Portal", note: "Open registration portal", url: "https://script.google.com/macros/s/AKfycbwqyephi8z4lTx7Mr8FFcMBNz51mfXaVvYl95WeR1pwyDpkr2rOtvI6-WifODrU_kX5cA/exec" },
     { icon: "📘", title: "Instructions and Guidelines of the Competition", note: "Click to download guidelines", url: "PASTE_INSTRUCTIONS_GUIDELINES_PDF_DRIVE_LINK_HERE" },
     { icon: "🌐", title: "FIVB Website", note: "Official international volleyball website", url: "https://www.fivb.com/" },
-    { icon: "🇮🇳", title: "VFI Website", note: "Volleyball Federation of India", url: "https://volleyballindia.com/" },
+    { icon: "🌐", title: "VFI Website", note: "Volleyball Federation of India", url: "https://volleyballindia.com/" },
     { icon: "📖", title: "FIVB Rules", note: "Official rules of the game", url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/" }
   ],
 
@@ -67,7 +67,6 @@ const SITE_CONFIG = {
     role: "Head of Department – Physical Education",
     email: "physicaleducation@credencehighschool.com",
     mobile: "+971 56 369 2429",
-    mobileLink: "+971563692429"
   }
 };
 
