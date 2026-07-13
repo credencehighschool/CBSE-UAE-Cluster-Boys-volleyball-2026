@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Individual Awards | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title"><small>Special Awards</small><h2>Individual Awards</h2><p class="muted">Best performers of the championship.</p></div>
+  <div id="awards" class="awards-grid"><div class="card">Loading awards...</div></div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('awards');
+const API=getApiUrl();
+function awardCard(a){
+  return `<div class="award-card-big">
+    <div class="award-card-photo">${a.photoUrl ? `<img src="${a.photoUrl}" loading="lazy">` : `<span>${a.icon||'⭐'}</span>`}</div>
+    <div class="award-card-content">
+      <span class="award-card-category">${a.category||''}</span>
+      <h3>${a.award||''}</h3>
+      <p class="award-card-student">${a.student||'To be updated'}</p>
+      <p class="award-card-school">${a.school||''}${a.emirate?` <span class="award-card-emirate">(${emirateShort(a.emirate)})</span>`:''}</p>
+    </div>
+  </div>`;
+}
+async function load(){
+  try{
+    const r=await fetch(API+"?action=awards&cache="+Date.now());
+    const d=await r.json();
+    awards.innerHTML=(d.awards||[]).map(awardCard).join('')||'<div class="card">Awards will be updated later.</div>';
+  }catch(e){awards.innerHTML='<div class="card">Unable to load awards.</div>';}
+}
+load();setInterval(load,30000);
+</script>
+</body>
+</html>

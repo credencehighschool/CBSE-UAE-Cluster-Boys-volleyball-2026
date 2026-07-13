@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Upcoming Matches | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title">
+    <small>Championship Centre</small>
+    <h2>Upcoming Matches</h2>
+    <p class="muted">Every scheduled match, in order.</p>
+  </div>
+  <div class="tabs" id="catTabs">
+    <button class="tab active" onclick="filterCat('All',this)">All</button>
+    <button class="tab" onclick="filterCat('Boys U-14',this)">U-14</button>
+    <button class="tab" onclick="filterCat('Boys U-17',this)">U-17</button>
+    <button class="tab" onclick="filterCat('Boys U-19',this)">U-19</button>
+  </div>
+  <div id="upcoming" class="grid2"><div class="card">Loading...</div></div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('upcoming');
+const API=getApiUrl();
+let allUpcoming = [];
+let activeCat = 'All';
+function categoryMatches(catValue, filterCat){
+  if(filterCat==='All') return true;
+  return String(catValue||'').indexOf(filterCat.replace('Boys ','')) !== -1;
+}
+function renderMatch(m){
+  return `<article class="match-card-pro">
+    <div class="match-head-pro">
+      <span class="match-label">${m.category||''}</span>
+      <span class="match-status">Scheduled</span>
+    </div>
+    <div class="match-meta-pro">${m.date?`Date: ${m.date}`:''}${m.time?`   ·   Time: ${m.time}`:''}${m.court?`   ·   ${m.court}`:''}${m.matchNo?`   ·   Match- ${m.matchNo}`:''}${m.roundNo?`   ·   Round- ${m.roundNo}`:''}</div>
+    <div class="score-board">
+      <div class="score-team"><h3>${m.teamA||''}${(m.teamACode||m.teamAEmirate)?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:12px">(${[m.teamACode, emirateShort(m.teamAEmirate)].filter(Boolean).join(', ')})</span>`:''}</h3></div>
+      <div class="score-vs">VS</div>
+      <div class="score-team"><h3>${m.teamB||''}${(m.teamBCode||m.teamBEmirate)?` <span style="color:var(--ink-faint);font-family:var(--mono);font-size:12px">(${[m.teamBCode, emirateShort(m.teamBEmirate)].filter(Boolean).join(', ')})</span>`:''}</h3></div>
+    </div>
+  </article>`;
+}
+function render(){
+  const filtered = allUpcoming.filter(m=>categoryMatches(m.category, activeCat));
+  upcoming.innerHTML = filtered.length ? filtered.map(renderMatch).join("") : `<div class="card">No ${activeCat==='All'?'':activeCat+' '}matches scheduled yet.</div>`;
+}
+function filterCat(cat, btn){
+  activeCat = cat;
+  document.querySelectorAll('#catTabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+async function load(){
+  try{
+    const r=await fetch(API+"?action=scheduled&cache="+Date.now());
+    const d=await r.json();
+    allUpcoming=d["scheduled"]||[];
+    render();
+  }catch(e){upcoming.innerHTML='<div class="card">Unable to load data.</div>';}
+}
+load(); setInterval(load,30000);
+</script>
+</body>
+</html>
