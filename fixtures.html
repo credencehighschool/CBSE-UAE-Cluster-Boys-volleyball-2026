@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fixtures | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title">
+    <small>Official Fixtures</small>
+    <h2>Category-wise Fixtures</h2>
+    <p class="muted">Download the official fixture PDF for each age category.</p>
+  </div>
+  <div id="fixtureBox" class="carousel-row" style="overflow-x:auto"></div>
+  <div id="fixtureDots" class="carousel-dots"></div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('fixtures');
+if(!phaseGuard('fixtures','Fixtures')){
+  const cats = [
+    { label:'U-14 Boys', icon:'🏐', url: SITE_CONFIG.fixtures.u14 },
+    { label:'U-17 Boys', icon:'🏐', url: SITE_CONFIG.fixtures.u17 },
+    { label:'U-19 Boys', icon:'🏐', url: SITE_CONFIG.fixtures.u19 },
+  ];
+  const cards = cats.map(c => `
+    <div class="fixture-card">
+      <div class="fixture-card-badge">${c.icon}</div>
+      <span class="fixture-card-tag">${c.label.split(' ')[0]}</span>
+      <h3>${c.label}</h3>
+      <p>Official fixture for the Boys ${c.label.split(' ')[0]} category.</p>
+      <a class="download-fixture-btn" href="${c.url}" target="_blank">⬇ Download Fixture</a>
+    </div>
+  `).join("");
+  fixtureBox.innerHTML = cards;
+}
+</script>
+</body>
+</html>
