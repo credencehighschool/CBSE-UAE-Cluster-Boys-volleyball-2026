@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Downloads | CBSE UAE Cluster Boys Volleyball Championship</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body>
+<header class="header" id="site-header"></header>
+
+<section class="section">
+  <div class="title">
+    <small>Official Documents</small>
+    <h2>Downloads</h2>
+    <p class="muted">Invitation, registration and competition guidelines.</p>
+  </div>
+  <div id="downloads" class="grid3"></div>
+</section>
+
+<section class="section">
+  <div class="title"><small>External Resources</small><h2>Quick Links</h2></div>
+  <div id="quickLinks" class="grid3"></div>
+</section>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="components.js"></script>
+<script>
+renderLayout('downloads');
+downloads.innerHTML = SITE_CONFIG.downloads.map(d=>`
+  <a class="card tile" href="${d.url}" target="_blank">
+    <span>${d.icon}</span>
+    <strong>${d.title}</strong>
+    <small>${d.note}</small>
+  </a>
+`).join("");
+quickLinks.innerHTML = SITE_CONFIG.quickLinks.map(d=>`
+  <a class="card tile" href="${d.url}" target="_blank">
+    <span>${d.icon}</span>
+    <strong>${d.title}</strong>
+    <small>${d.note}</small>
+  </a>
+`).join("");
+</script>
+</body>
+</html>
