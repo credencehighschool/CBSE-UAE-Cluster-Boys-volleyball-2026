@@ -56,7 +56,7 @@ const SITE_CONFIG = {
   quickLinks: [
     { icon: "🌐", title: "FIVB Website", note: "Official international volleyball website", url: "https://www.fivb.com/" },
     { icon: "🇮🇳", title: "VFI Website", note: "Volleyball Federation of India", url: "https://volleyballindia.com/" },
-    { icon: "📖", title: "FIVB Rules", note: "Official rules of the game", url: "https://www.fivb.com/volleyball/the-game/rules-of-the-game/" }
+    { icon: "📖", title: "FIVB Rules", note: "Official rules of the game", url: "https://www.fivb.com/volleyball/the-game/official-volleyball-rules/" }
   ],
 
   venue: {
