@@ -35,9 +35,9 @@ const SITE_CONFIG = {
   // Edited here directly for instant loading — no Google Sheet lookup needed.
   // Update these numbers any time; the homepage picks them up immediately.
   overview: {
-    participatingSchools: "00",
-    totalTeams: "00",
-    totalAthletes: "00",
+    participatingSchools: "35",
+    totalTeams: "70",
+    totalAthletes: "700",
     overviewNote: "Join schools from across the UAE cluster in this year's championship — full results, live action and standings all in one place."
   },
 
