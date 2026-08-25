@@ -563,6 +563,7 @@ async function startCourt(court){
 
 let courtSuppressUntil = {}; // court -> timestamp; covers the debounce delay before a flush has even been sent yet
 let courtFlushInFlight = {}; // court -> count of bulkAdjustPoints requests currently in flight for it
+let courtFlushSeq = {}; // court -> the most recent flush's own sequence number for it — used to detect and discard a stale, out-of-order response
 let courtAuthoritativeAt = {}; // court -> timestamp of the last flush response we know is correct — a poll whose OWN fetch started before this can't be trusted to overwrite it, even if it arrives later
 
 // Same architecture as the stock register's bulk stock adjustment: every tap
@@ -616,10 +617,19 @@ async function flushPointChanges(){
   // same moment), the suppression stays on for exactly that long, no more,
   // no less.
   const courtsInThisBatch = [...new Set(changes.map(c=>c.court))];
+  // If tapping is fast enough that a SECOND batch starts before this one's
+  // response comes back, whichever response is actually newer must win —
+  // not whichever happens to arrive last. Each court gets its own sequence
+  // number for this flush; if a later flush has already claimed a higher
+  // number for that court by the time this response shows up, this
+  // response is stale and must be ignored.
+  const mySeq = {};
+  courtsInThisBatch.forEach(c => { mySeq[c] = (courtFlushSeq[c] = (courtFlushSeq[c]||0) + 1); });
   courtsInThisBatch.forEach(c => courtFlushInFlight[c] = (courtFlushInFlight[c]||0) + 1);
   try{
     const res = await courtAction('bulkAdjustPoints', {changes});
     (res.courts||[]).forEach(c=>{
+      if(courtFlushSeq[c.court] !== mySeq[c.court]) return; // a newer flush for this court has since started — this response is stale
       const csafe = c.court.replace("-","");
       if(c.pointsA!==undefined) document.getElementById('ptsA-'+csafe).innerText = c.pointsA;
       if(c.pointsB!==undefined) document.getElementById('ptsB-'+csafe).innerText = c.pointsB;
