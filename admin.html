@@ -211,6 +211,8 @@
       <div><label>Image URL</label><input id="gUrl"></div>
       <div class="full"><label>Caption</label><input id="gCaption"></div>
     </div><br><button class="btn" onclick="save('saveGallery')">Save Gallery Item</button>
+    <h3 style="font-family:var(--display);text-transform:uppercase;font-size:14px;margin:24px 0 10px;color:var(--ink-soft)">Current Gallery Photos</h3>
+    <div id="galleryListBox" class="muted">Loading...</div>
   </div>
 
   <div id="medalp" class="panel main-panel card">
@@ -347,6 +349,7 @@ async function save(action){
   if(action==='saveMatchPhase1')Object.assign(data,{matchId:v('matchId'),category:v('category'),status:v('status'),currentSet:v('currentSet'),date:formatDateDMY(v('date')),time:formatTime12h(v('time')),court:v('court'),teamA:v('teamA'),teamB:v('teamB'),scoreA:v('scoreA'),scoreB:v('scoreB'),set1:v('set1'),set2:v('set2'),set3:v('set3'),set4:v('set4'),set5:v('set5'),winner:v('winner')});
   if(action==='saveNotice')Object.assign(data,{id:v('nId'),title:v('nTitle'),message:v('nMessage')});
   if(action==='saveGallery')Object.assign(data,{id:v('gId'),url:v('gUrl'),caption:v('gCaption')});
+  if(action==='saveGallery' && !v('gUrl')){ showAlert("⚠️ Image URL can't be blank — paste a photo link before saving, or use the drag-and-drop upload above instead."); return; }
   if(action==='saveMedal')Object.assign(data,{id:v('mId'),category:v('mCategory'),position:v('mPosition'),school:v('mSchool'),schoolCode:v('mSchoolCode'),emirate:v('mEmirate'),played:v('mPlayed'),won:v('mWon'),lost:v('mLost'),photoUrl:v('mPhotoUrl')});
   if(action==='saveAward')Object.assign(data,{id:v('aId'),icon:v('aIcon'),award:v('aAward'),student:v('aStudent'),school:v('aSchool'),schoolCode:v('aSchoolCode'),emirate:v('aEmirate'),category:v('aCategory'),photoUrl:v('aPhotoUrl')});
   msg.innerText='Saving...';
@@ -357,7 +360,7 @@ async function save(action){
     if(action==='saveNotice'){ loadNoticeList(); ['nTitle','nMessage'].forEach(id=>document.getElementById(id).value=''); nId.value = 'NOTICE-'+Date.now(); }
     if(action==='saveMedal'){ loadMedalList(); ['mSchool','mSchoolCode','mEmirate','mPlayed','mWon','mLost','mPhotoUrl'].forEach(id=>document.getElementById(id).value=''); medalPhotoPreviewBox.innerHTML=''; mId.value = 'MEDAL-'+Date.now(); }
     if(action==='saveAward'){ loadAwardList(); ['aIcon','aAward','aStudent','aSchool','aSchoolCode','aEmirate','aPhotoUrl'].forEach(id=>document.getElementById(id).value=''); awardPhotoPreviewBox.innerHTML=''; aId.value = 'AWARD-'+Date.now(); }
-    if(action==='saveGallery'){ ['gId','gUrl','gCaption'].forEach(id=>document.getElementById(id).value=''); }
+    if(action==='saveGallery'){ ['gId','gUrl','gCaption'].forEach(id=>document.getElementById(id).value=''); loadGalleryList(); }
   }
   catch(e){msg.innerText='Unable to save. Please check Apps Script deployment.';}
 }
@@ -1250,6 +1253,33 @@ function deleteMedal(id){
   });
 }
 
+let allGalleryRows = [];
+async function loadGalleryList(){
+  try{
+    const r = await fetch(API+"?action=gallery&cache="+Date.now());
+    const d = await r.json();
+    allGalleryRows = d.gallery||[];
+    galleryListBox.innerHTML = allGalleryRows.length ? allGalleryRows.map(g=>`
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;padding:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          ${g.url?`<img src="${g.url}" style="width:52px;height:52px;border-radius:8px;object-fit:cover">`:`<span style="font-size:28px">📸</span>`}
+          <div><strong>${g.caption || (g.url?'(no caption)':'⚠️ No photo URL — broken entry')}</strong><br><span class="muted" style="font-size:11px">${g.id}</span></div>
+        </div>
+        <button class="btn btn-outline" style="color:var(--live);border-color:var(--live);padding:8px 14px;white-space:nowrap" onclick="deleteGalleryItem('${g.id}')">Remove</button>
+      </div>`).join("") : '<p class="muted">No photos yet.</p>';
+  }catch(e){ galleryListBox.innerText = "Unable to load."; }
+}
+function deleteGalleryItem(id){
+  showConfirm("Remove this photo from the gallery?", async ()=>{
+    try{
+      const r = await fetch(API,{method:'POST',body:JSON.stringify({action:'deleteGalleryItem', password:v('password'), id})});
+      const res = await r.json();
+      showAlert(res.message || 'Removed.');
+      loadGalleryList();
+    }catch(e){ showAlert('Unable to remove — check connection.'); }
+  });
+}
+
 let allAwardRows = [];
 async function loadAwardList(){
   try{
@@ -1290,6 +1320,7 @@ function deleteAward(id){
 loadNoticeList();
 loadMedalList();
 loadAwardList();
+loadGalleryList();
 if(!nId.value) nId.value = 'NOTICE-'+Date.now();
 if(!mId.value) mId.value = 'MEDAL-'+Date.now();
 if(!aId.value) aId.value = 'AWARD-'+Date.now();
@@ -1358,6 +1389,7 @@ async function syncGalleryFromDrive(){
     const data = await r.json();
     syncMsg.innerText = data.message || 'Done.';
     if(data.folderUrl) driveFolderLink.href = data.folderUrl;
+    loadGalleryList();
   }catch(e){ syncMsg.innerText = 'Sync failed — check connection.'; }
 }
 
@@ -1423,7 +1455,7 @@ function handleFiles(fileList){
           base64: compressed, filename: file.name.replace(/\.[^.]+$/,'')+'.jpg', mimeType:'image/jpeg', caption: ''
         })});
         const data = await res.json();
-        if(data.url){ statusEl.innerText = 'Done'; statusEl.classList.add('done'); }
+        if(data.url){ statusEl.innerText = 'Done'; statusEl.classList.add('done'); loadGalleryList(); }
         else { statusEl.innerText = data.message || 'Failed'; statusEl.classList.add('error'); }
       }catch(e){ statusEl.innerText = 'Upload failed'; statusEl.classList.add('error'); }
     })();
