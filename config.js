@@ -68,7 +68,7 @@ const SITE_CONFIG = {
   },
 
   // Paste your WhatsApp group invite link here (from WhatsApp: Group → Invite via link → Copy link)
-  whatsappGroupUrl: "PASTE_WHATSAPP_GROUP_INVITE_LINK_HERE",
+  whatsappGroupUrl: "https://chat.whatsapp.com/EVawuatcwhII5CvW5FYPly?s=cl&p=a&ilr=0",
 
   contact: {
     name: "Mr. Vijesh V",
