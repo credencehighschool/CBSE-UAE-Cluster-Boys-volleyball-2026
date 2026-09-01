@@ -40,10 +40,10 @@ function renderLayout(activePage) {
         <div class="brand-icon">
           <svg viewBox="0 0 48 48" width="26" height="26" aria-hidden="true">
             <circle cx="24" cy="24" r="21" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
-            <path d="M24 3 C 30 10, 30 20, 24 24 C 18 28, 8 28, 4.5 24" fill="none" stroke="#8C929B" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M24 3 C 18 10, 18 20, 24 24 C 30 28, 40 28, 43.5 24" fill="none" stroke="#8C929B" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M4.5 24 C 10 30, 20 34, 24 45 C 28 34, 38 30, 43.5 24" fill="none" stroke="#8C929B" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M24 24 C 22 32, 22 40, 24 45" fill="none" stroke="#8C929B" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M24 3 C 30 10, 30 20, 24 24 C 18 28, 8 28, 4.5 24" fill="none" stroke="#8A9900" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M24 3 C 18 10, 18 20, 24 24 C 30 28, 40 28, 43.5 24" fill="none" stroke="#8A9900" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M4.5 24 C 10 30, 20 34, 24 45 C 28 34, 38 30, 43.5 24" fill="none" stroke="#8A9900" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M24 24 C 22 32, 22 40, 24 45" fill="none" stroke="#8A9900" stroke-width="2.2" stroke-linecap="round"/>
             <circle cx="24" cy="24" r="21" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
           </svg>
         </div>
