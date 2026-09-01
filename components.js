@@ -38,13 +38,19 @@ function renderLayout(activePage) {
     header.innerHTML = `
       <div class="brand">
         <div class="brand-icon">
-          <svg viewBox="0 0 48 48" width="26" height="26" aria-hidden="true">
-            <circle cx="24" cy="24" r="21" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
-            <path d="M24 3 C 30 10, 30 20, 24 24 C 18 28, 8 28, 4.5 24" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M24 3 C 18 10, 18 20, 24 24 C 30 28, 40 28, 43.5 24" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M4.5 24 C 10 30, 20 34, 24 45 C 28 34, 38 30, 43.5 24" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M24 24 C 22 32, 22 40, 24 45" fill="none" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round"/>
-            <circle cx="24" cy="24" r="21" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+          <svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true">
+            <defs>
+              <radialGradient id="ballShade" cx="38%" cy="32%" r="75%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="70%" stop-color="#FFFFFF"/>
+                <stop offset="100%" stop-color="#D8DCE1"/>
+              </radialGradient>
+            </defs>
+            <circle cx="24" cy="24" r="23" fill="url(#ballShade)" stroke="#1A1A1A" stroke-width="1.6"/>
+            <path d="M24 1.5 C 31 9, 31 20, 24 24 C 17 28, 6 28, 1.8 23" fill="none" stroke="#1A1A1A" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M24 1.5 C 17 9, 17 20, 24 24 C 31 28, 42 28, 46.2 23" fill="none" stroke="#1A1A1A" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M1.8 23 C 8 30, 19 34, 24 46.5 C 29 34, 40 30, 46.2 23" fill="none" stroke="#1A1A1A" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M24 24 C 21.5 33, 21.5 40, 24 46.5" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round"/>
           </svg>
         </div>
         <div>
